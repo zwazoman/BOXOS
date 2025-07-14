@@ -1,0 +1,9 @@
+type of messages to send
+
+every input with  direct visual repercussion
+
+2 separate arms
+
+send and receive messages to the server
+
+ex : attack -> hit(pass the arm through) -> ennemy receives "attacked" -> check if blocked or parried -> if blocked : send "hit blocked" to the received arm -> arm receives and behaves.
