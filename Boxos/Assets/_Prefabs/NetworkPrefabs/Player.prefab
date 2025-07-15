@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1720056076511671672}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.463, z: -0.231}
+  m_LocalPosition: {x: 0, y: 0.463, z: -0.348}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -418,7 +418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8286255995931071131
 Transform:
   m_ObjectHideFlags: 0
@@ -663,6 +663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1954896119918436822}
   - component: {fileID: 4615105653328339482}
+  - component: {fileID: 1341465486721655262}
   - component: {fileID: -8947106308974032101}
   m_Layer: 0
   m_Name: Player
@@ -711,6 +712,37 @@ MonoBehaviour:
   _visitiblityRules: {fileID: 0}
   _body: {fileID: 6406992371960766418}
   _camera: {fileID: 8303467015618133355}
+  _playerInput: {fileID: 0}
+--- !u!114 &1341465486721655262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8336696260497247416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 90c77b12459d49a45aa601352b20ed2c, type: 3}
+  m_NotificationBehavior: 3
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Classic
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!114 &-8947106308974032101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,6 +814,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2851205103003920119}
     m_Modifications:
+    - target: {fileID: 1197276455699501822, guid: 8ad9c191676dba940b51fe8b7a17c28a, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 4615105653328339482}
     - target: {fileID: 1993558088044181828, guid: 8ad9c191676dba940b51fe8b7a17c28a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5159998
@@ -844,6 +880,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2851205103003920119}
     m_Modifications:
+    - target: {fileID: 1197276455699501822, guid: 8ad9c191676dba940b51fe8b7a17c28a, type: 3}
+      propertyPath: _side
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1197276455699501822, guid: 8ad9c191676dba940b51fe8b7a17c28a, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 4615105653328339482}
     - target: {fileID: 1993558088044181828, guid: 8ad9c191676dba940b51fe8b7a17c28a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5159998

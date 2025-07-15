@@ -21,8 +21,12 @@ public class Arm : MonoBehaviour
 
     #endregion
 
+    [SerializeField] ArmSide _side;
     [SerializeField] NetworkAnimator _animator;
     [SerializeField] Player _player;
+
+
+
 
     private void Awake()
     {

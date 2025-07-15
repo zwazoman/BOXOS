@@ -1,17 +1,12 @@
-using UnityEngine;
-
-public class Enums : MonoBehaviour
+public enum ArmSide
 {
-    public enum HitTypes
-    {
-        Left,
-        Right,
-        Kick,
-    }
-
-    public enum HitStrength
-    {
-        Light,
-        Heavy,
-    }
+    Left,
+    Right,
 }
+
+public enum HitStrength
+{
+    Light,
+    Heavy,
+}
+

@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    public Player opponent;
+
     private void Awake()
     {
         if (instance == null || instance == this)
@@ -27,15 +29,4 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this);
     }
-
-    private void Start()
-    {
-        
-    }
-
-    public void StartGame()
-    {
-        // fait spawn les deux joueurs  chacun de leur coté. chacun se voit et voit l'autre différemment (vue fps et vue tps)
-    }
-
 }
