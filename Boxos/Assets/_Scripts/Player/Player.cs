@@ -83,7 +83,7 @@ public class Player : NetworkIdentity
         if (!isOwner)
             return;
 
-        //là faut check pour les inputs spéciaux des sticks genre arc de cercle etc
+        //là faut check pour les inputs spéciaux des sticks genre arc de cercle etc Atan2
 
     }
 
