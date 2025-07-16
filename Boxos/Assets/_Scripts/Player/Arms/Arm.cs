@@ -2,7 +2,7 @@ using PurrNet;
 using System;
 using UnityEngine;
 
-public class Arm : MonoBehaviour
+public class Arm : NetworkIdentity
 {
     #region Events
     public event Action OnPrepAttack;
@@ -20,7 +20,7 @@ public class Arm : MonoBehaviour
     public event Action OnExhaust;
 
     
-    public event Action OnAnimationEnd;
+    public event Action OnAnimationCycle;
 
     #endregion
 
@@ -41,10 +41,18 @@ public class Arm : MonoBehaviour
             TryGetComponent(out stateMachine);
     }
 
-    private void Start()
+    protected override void OnSpawned()
     {
+        base.OnSpawned();
+    }
+
+    private void Update()
+    {
+        if (!isOwner)
+            return;
+
         AnimatorStateInfo currenStateInfo = animator.GetCurrentAnimatorStateInfo(0);
         if (currenStateInfo.normalizedTime >= 1)
-            OnAnimationEnd?.Invoke();
+            OnAnimationCycle?.Invoke();
     }
 }

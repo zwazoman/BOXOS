@@ -9,8 +9,12 @@ public class ArmState : IPackedAuto
 
     public Vector2 armInputDelta;
 
+    protected float exitTimer;
 
-    public virtual void OnEnter() { Debug.Log("coucou"); }
+    public virtual void OnEnter()
+    {
+        exitTimer = 0;
+    }
 
     public virtual void Update() { }
 

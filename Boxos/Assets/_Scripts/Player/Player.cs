@@ -80,7 +80,7 @@ public class Player : NetworkIdentity
 
     public void OnLeftArmControl(InputAction.CallbackContext ctx)
     {
-        leftArmInputDelta = ctx.ReadValue<Vector2>();
+        leftArmInputDelta = new Vector2(ctx.ReadValue<Vector2>().x * -1, ctx.ReadValue<Vector2>().y);
     }
 
     public void OnRightArmControl(InputAction.CallbackContext ctx)

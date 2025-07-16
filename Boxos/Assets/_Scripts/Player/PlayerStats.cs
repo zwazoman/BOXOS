@@ -38,5 +38,7 @@ public static class PlayerStats
     //InputStats
 
     public const float ArmInputMargin = 25;
+    public const float MaxDistanceToNeutral = .8f;
+    public const float MinDistanceToNeutral = .5f;
 
 }

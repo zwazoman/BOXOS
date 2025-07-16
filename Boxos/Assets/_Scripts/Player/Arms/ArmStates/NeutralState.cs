@@ -11,14 +11,12 @@ public class NeutralState : ArmState
 
     public override void Update()
     {
-        float armDegInputValue = InputTools.ArmInputValue(armInputDelta);
-        float armInputDistanceToNeutral = InputTools.DistanceToNeutral(armInputDelta);
-
-        Debug.Log(armDegInputValue + "  " + armInputDistanceToNeutral);
-
-        if (armDegInputValue > -90 - PlayerStats.ArmInputMargin && armDegInputValue < -90 + PlayerStats.ArmInputMargin && armInputDistanceToNeutral > .8f)
-        {
+        //attack prep
+        if (InputTools.CheckInputAngleEnter(-90, armInputDelta))
             stateMachine.AttackPrep();
-        }
+
+        //Block
+        if (InputTools.CheckInputAngleEnter(180, armInputDelta))
+            stateMachine.Block();
     }
 }

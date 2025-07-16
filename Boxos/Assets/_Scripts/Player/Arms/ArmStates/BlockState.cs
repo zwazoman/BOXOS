@@ -4,13 +4,23 @@ public class BlockState : ArmState
 {
     public override void OnEnter()
     {
-        Debug.Log("Block State");
+        base.OnEnter();
         arm.animator.SetTrigger("Block");
     }
 
     public override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            stateMachine.Neutral();
+        if (InputTools.CheckInputAngleEnter(0, armInputDelta))
+            stateMachine.Parry();
+
+        //exit conditions
+        if (InputTools.CheckInputAngleExit(180, armInputDelta))
+        {
+            exitTimer += Time.deltaTime;
+
+            if(exitTimer >= .1f)
+                stateMachine.Neutral();
+        }
+            
     }
 }

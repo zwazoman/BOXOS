@@ -54,8 +54,6 @@ public class ArmStateMachine : NetworkIdentity
         if (!isOwner)
             return;
 
-        print(currentState.GetType().ToString());
-
         currentState.armInputDelta = _arm.player.GetStickVector(_arm.side);
         currentState.Update();
     }

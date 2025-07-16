@@ -14,7 +14,8 @@ public class AttackPrepState : ArmState
 
     public override void Update()
     {
-        if (InputTools.DistanceToNeutral(armInputDelta) <= .2)
+        //Exit Conditions
+        if (InputTools.CheckInputAngleExit(-90, armInputDelta))
             stateMachine.Neutral();
     }
 }
