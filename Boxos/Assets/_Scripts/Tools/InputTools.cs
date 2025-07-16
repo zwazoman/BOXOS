@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class InputTools
 {
-    public static float StickRotationValue(Vector2 stickPos)
+    public static float ArmInputValue(Vector2 stickPos)
     {
         return Mathf.Atan2(stickPos.y, stickPos.x) * Mathf.Rad2Deg;
     }

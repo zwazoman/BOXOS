@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class ParryState : ArmState
+public class HeavyAttackState : ArmState
 {
     public override void OnEnter()
     {
-        arm.animator.SetTrigger("Parry");
+        arm.animator.SetTrigger("HeavyAttack");
         arm.OnAnimationEnd += stateMachine.Neutral;
     }
 

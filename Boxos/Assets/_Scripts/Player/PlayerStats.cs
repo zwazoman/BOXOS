@@ -37,6 +37,6 @@ public static class PlayerStats
 
     //InputStats
 
-    public const float StickInputMargin = 25;
+    public const float ArmInputMargin = 25;
 
 }

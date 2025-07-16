@@ -4,7 +4,7 @@ public class StaggerState : ArmState
 {
     public override void OnEnter()
     {
-        throw new System.NotImplementedException();
+        arm.animator.SetTrigger("Stagger");
     }
 
     public override void OnExit()

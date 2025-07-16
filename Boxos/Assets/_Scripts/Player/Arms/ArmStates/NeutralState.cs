@@ -9,16 +9,16 @@ public class NeutralState : ArmState
         arm.animator.SetTrigger("Idle");
     }
 
-    public override void OnExit()
-    {
-        
-    }
-
     public override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        float armDegInputValue = InputTools.ArmInputValue(armInputDelta);
+        float armInputDistanceToNeutral = InputTools.DistanceToNeutral(armInputDelta);
+
+        Debug.Log(armDegInputValue + "  " + armInputDistanceToNeutral);
+
+        if (armDegInputValue > -90 - PlayerStats.ArmInputMargin && armDegInputValue < -90 + PlayerStats.ArmInputMargin && armInputDistanceToNeutral > .8f)
         {
-            stateMachine.Block();
+            stateMachine.AttackPrep();
         }
     }
 }

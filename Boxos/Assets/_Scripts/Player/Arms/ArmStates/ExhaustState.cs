@@ -4,7 +4,7 @@ public class ExhaustState : ArmState
 {
     public override void OnEnter()
     {
-        throw new System.NotImplementedException();
+        arm.animator.SetTrigger("Exhaust");
     }
 
     public override void OnExit()

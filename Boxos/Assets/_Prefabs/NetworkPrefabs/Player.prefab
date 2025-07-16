@@ -745,7 +745,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4615105653328339482}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnLeftStickMove
+        m_MethodName: OnLeftArmControl
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -777,7 +777,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4615105653328339482}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnRightStickMove
+        m_MethodName: OnRightArmControl
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

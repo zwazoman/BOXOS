@@ -8,11 +8,6 @@ public class BlockState : ArmState
         arm.animator.SetTrigger("Block");
     }
 
-    public override void OnExit()
-    {
-
-    }
-
     public override void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))

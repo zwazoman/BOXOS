@@ -13,7 +13,7 @@ public class ArmStateMachine : NetworkIdentity
     public StaggerState staggerState = new();
     public ExhaustState exhaustState = new();
     public AttackPrepState attackPrepState = new();
-    public AttackState attackState = new();
+    public HeavyAttackState attackState = new();
     public BlockState blockState = new();
     public ParryState parryState = new();
     #endregion
@@ -46,12 +46,6 @@ public class ArmStateMachine : NetworkIdentity
         currentState.stateMachine = this;
         currentState.arm = _arm;
 
-        EnterState();
-    }
-
-    void EnterState()
-    {
-        print("enter");
         currentState.OnEnter();
     }
 
@@ -62,7 +56,7 @@ public class ArmStateMachine : NetworkIdentity
 
         print(currentState.GetType().ToString());
 
-        currentState.stickDelta = _arm.player.GetStickVector(_arm.side);
+        currentState.armInputDelta = _arm.player.GetStickVector(_arm.side);
         currentState.Update();
     }
 

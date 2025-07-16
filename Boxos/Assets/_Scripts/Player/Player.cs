@@ -76,12 +76,6 @@ public class Player : NetworkIdentity
     {
         if (!isOwner)
             return;
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            NeutralState test = new();
-            print(GameManager.Instance.opponent.rightArm.stateMachine.CheckCurrentState(test));
-        }
     }
 
     public void OnLeftArmControl(InputAction.CallbackContext ctx)

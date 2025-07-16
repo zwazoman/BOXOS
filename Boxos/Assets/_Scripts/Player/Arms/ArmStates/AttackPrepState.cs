@@ -4,16 +4,17 @@ public class AttackPrepState : ArmState
 {
     public override void OnEnter()
     {
-        throw new System.NotImplementedException();
+        arm.animator.SetTrigger("PrepAttack");
     }
 
     public override void OnExit()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        if (InputTools.DistanceToNeutral(armInputDelta) <= .2)
+            stateMachine.Neutral();
     }
 }

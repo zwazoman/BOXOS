@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AttackState : ArmState
+public class LightAttackState : ArmState
 {
     public override void OnEnter()
     {
