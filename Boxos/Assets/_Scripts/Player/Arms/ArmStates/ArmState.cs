@@ -1,16 +1,20 @@
+using PurrNet.Packing;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
-public abstract class ArmState
+public class ArmState : IPackedAuto
 {
     public ArmStateMachine stateMachine;
-    public Arm _arm;
+    public Arm arm;
+
+    public Vector2 stickDelta;
 
 
-    public abstract void OnEnter();
+    public virtual void OnEnter() { Debug.Log("coucou"); }
 
-    public abstract void Update();
+    public virtual void Update() { }
 
-    public abstract void OnExit();
+    public virtual void OnExit() { }
 
     #region Transitions
     protected void Neutral()

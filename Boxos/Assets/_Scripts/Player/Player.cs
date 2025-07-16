@@ -30,51 +30,45 @@ public class Player : NetworkIdentity
     [SerializeField] GameObject _body;
     [SerializeField] CinemachineCamera _camera;
 
-    [SerializeField] BoxosInputActions _inputs;
+    [SerializeField] PlayerInput _playerInput;
 
     SyncVar<int> _stamina;
     SyncVar<int> _health;
 
-    InputAction _leftStickMove;
-    InputAction _rightStickMove;
+    [SerializeField] public Arm leftArm;
+    [SerializeField] public Arm rightArm;
+
+    [HideInInspector] public Vector2 leftArmInputDelta = Vector2.zero;
+    [HideInInspector] public Vector2 rightArmInputDelta = Vector2.zero;
 
     bool _regenStamina;
 
     private void Awake()
     {
-        if(_camera == null)
+        if (_camera == null)
             _camera = GetComponentInChildren<CinemachineCamera>();
-        if(_inputs == null)
-            TryGetComponent(out _inputs);
+        if (_playerInput == null)
+            TryGetComponent(out _playerInput);
     }
 
     protected override void OnSpawned()
     {
         base.OnSpawned();
 
-        _stamina.value = PlayerStats.MaxStamina;
-        _health.value = PlayerStats.MaxHealth;
+        //_stamina.value = PlayerStats.MaxStamina;
+        //_health.value = PlayerStats.MaxHealth;
 
         if (isOwner)
         {
             _body.SetActive(false);
             _camera.enabled = true;
-
-            _leftStickMove = _inputs.Boxe.LeftArm;
-            _leftStickMove.Enable();
-
-            _rightStickMove = _inputs.Boxe.RightArm;
-            _rightStickMove.Enable();
-
-            _inputs.Boxe.Kick.performed += KickInput;
-            _inputs.Boxe.ParryRight.performed += ParryRight;
-            _inputs.Boxe.ParryLeft.performed += ParryLeft;
         }
         else
         {
             _body.SetActive(true);
             _camera.enabled = false;
             GameManager.Instance.opponent = this;
+            _playerInput.enabled = false;
         }
     }
 
@@ -83,31 +77,51 @@ public class Player : NetworkIdentity
         if (!isOwner)
             return;
 
-        //là faut check pour les inputs spéciaux des sticks genre arc de cercle etc Atan2
-
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            NeutralState test = new();
+            print(GameManager.Instance.opponent.rightArm.stateMachine.CheckCurrentState(test));
+        }
     }
 
-    void KickInput(InputAction.CallbackContext ctx)
+    public void OnLeftArmControl(InputAction.CallbackContext ctx)
     {
-        OnKick?.Invoke();
+        leftArmInputDelta = ctx.ReadValue<Vector2>();
     }
 
-    void ParryLeft(InputAction.CallbackContext ctx)
+    public void OnRightArmControl(InputAction.CallbackContext ctx)
     {
-        OnParry?.Invoke(ArmSide.Left);
+        rightArmInputDelta = ctx.ReadValue<Vector2>();
     }
 
-    void ParryRight(InputAction.CallbackContext ctx)
+    public Vector2 GetStickVector(ArmSide side)
     {
-        OnParry?.Invoke(ArmSide.Right);
+        if(side == ArmSide.Left)
+            return leftArmInputDelta;
+        else
+            return rightArmInputDelta;
     }
+
+
+    public void OnKickInput(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            OnKick?.Invoke();
+            print("Kick");
+        }
+    }
+
+
+
+
 
     public int TakeDamage(int amount)
     {
         OnTakeDamage?.Invoke();
 
         _health.value -= amount;
-        Mathf.Clamp(_health,0,PlayerStats.MaxHealth);
+        Mathf.Clamp(_health, 0, PlayerStats.MaxHealth);
 
         if (_health == 0)
             Die();
@@ -128,7 +142,7 @@ public class Player : NetworkIdentity
         return _stamina;
     }
 
-    public  void Exhaust()
+    public void Exhaust()
     {
         OnExhaust?.Invoke();
     }

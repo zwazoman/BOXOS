@@ -300,8 +300,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0913335a96070ff479a8c5f8e068e418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 3665566519309167325}
-  _player: {fileID: 0}
+  player: {fileID: 0}
+  side: 0
+  animator: {fileID: 3665566519309167325}
+  stateMachine: {fileID: 1843948664010579805}
 --- !u!114 &1843948664010579805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,6 +316,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc12f46ad6b917e4c934c51720f1bedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _arm: {fileID: 1197276455699501822}
 --- !u!1 &7581468112728295793
 GameObject:

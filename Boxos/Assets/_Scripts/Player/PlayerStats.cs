@@ -2,6 +2,8 @@ using UnityEngine;
 
 public static class PlayerStats
 {
+    //Gameplay Stats
+
     public const int MaxHealth = 10;
     public const int MaxStamina = 20;
 
@@ -33,6 +35,8 @@ public static class PlayerStats
     public const int ParryStaminaCost = 2;
     public const int KickParryStaminaCost = 15;
 
+    //InputStats
 
+    public const float StickInputMargin = 25;
 
 }

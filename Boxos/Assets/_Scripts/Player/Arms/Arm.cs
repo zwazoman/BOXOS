@@ -19,28 +19,32 @@ public class Arm : MonoBehaviour
 
     public event Action OnExhaust;
 
+    
+    public event Action OnAnimationEnd;
+
     #endregion
 
-    [SerializeField] ArmSide _side;
-    [SerializeField] NetworkAnimator _animator;
-    [SerializeField] Player _player;
-
+    [SerializeField] public Player player;
+    [SerializeField] public ArmSide side;
+    [SerializeField] public NetworkAnimator animator;
+    [SerializeField] public ArmStateMachine stateMachine;
 
 
 
     private void Awake()
     {
-        if (_animator == null)
-            TryGetComponent(out _animator);
-        if (_player == null)
+        if (animator == null)
+            TryGetComponent(out animator);
+        if (player == null)
             GetComponentInParent<Player>();
+        if(stateMachine == null)
+            TryGetComponent(out stateMachine);
     }
 
     private void Start()
     {
-        
+        AnimatorStateInfo currenStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (currenStateInfo.normalizedTime >= 1)
+            OnAnimationEnd?.Invoke();
     }
-
-
-
 }

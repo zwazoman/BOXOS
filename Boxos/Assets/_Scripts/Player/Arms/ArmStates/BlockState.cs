@@ -4,16 +4,18 @@ public class BlockState : ArmState
 {
     public override void OnEnter()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Block State");
+        arm.animator.SetTrigger("Block");
     }
 
     public override void OnExit()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        if (Input.GetKeyDown(KeyCode.Space))
+            stateMachine.Neutral();
     }
 }
