@@ -88,15 +88,6 @@ public class Player : NetworkIdentity
         rightArmInputDelta = ctx.ReadValue<Vector2>();
     }
 
-    public Vector2 GetStickVector(ArmSide side)
-    {
-        if(side == ArmSide.Left)
-            return leftArmInputDelta;
-        else
-            return rightArmInputDelta;
-    }
-
-
     public void OnKickInput(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
@@ -106,8 +97,19 @@ public class Player : NetworkIdentity
         }
     }
 
+    public Vector2 GetStickVector(ArmSide side)
+    {
+        if (side == ArmSide.Left)
+            return leftArmInputDelta;
+        return rightArmInputDelta;
+    }
 
-
+    public Arm GetOpposedArm(ArmSide side)
+    {
+        if (side == ArmSide.Left)
+            return leftArm;
+        return rightArm;
+    }
 
 
     public int TakeDamage(int amount)

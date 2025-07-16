@@ -18,7 +18,7 @@ public class BlockState : ArmState
         {
             exitTimer += Time.deltaTime;
 
-            if(exitTimer >= .1f)
+            if(exitTimer >= PlayerStats.InputExitTime)
                 stateMachine.Neutral();
         }
             

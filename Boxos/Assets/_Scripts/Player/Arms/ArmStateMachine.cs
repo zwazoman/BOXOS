@@ -13,7 +13,7 @@ public class ArmStateMachine : NetworkIdentity
     public StaggerState staggerState = new();
     public ExhaustState exhaustState = new();
     public AttackPrepState attackPrepState = new();
-    public HeavyAttackState attackState = new();
+    public AttackState attackState = new();
     public BlockState blockState = new();
     public ParryState parryState = new();
     #endregion
@@ -92,10 +92,12 @@ public class ArmStateMachine : NetworkIdentity
     }
 
     [ObserversRpc]
-    public void Attack()
+    public void Attack(int attackID)
     {
+        attackState.attackID = attackID;
         TransitionTo(attackState);
     }
+
     [ObserversRpc]
     public void Block()
     {

@@ -16,7 +16,7 @@ public class NeutralState : ArmState
             stateMachine.AttackPrep();
 
         //Block
-        if (InputTools.CheckInputAngleEnter(180, armInputDelta))
+        if (InputTools.CheckInputAngleEnter(180, armInputDelta) || InputTools.CheckInputAngleEnter(-180, armInputDelta))
             stateMachine.Block();
     }
 }

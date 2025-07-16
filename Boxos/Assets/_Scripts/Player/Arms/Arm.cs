@@ -5,21 +5,16 @@ using UnityEngine;
 public class Arm : NetworkIdentity
 {
     #region Events
-    public event Action OnPrepAttack;
-
-    public event Action OnLightAttack;
-    public event Action OnHeavyAttack;
-
-    public event Action OnBlockStart;
-    public event Action OnBlockEnd;
-
     public event Action OnParry;
+    public event Action OnParried;
 
-    public event Action<float> OnStagger;
+    public event Action OnBlock;
+    public event Action OnBlocked;
+
+    public event Action OnHit;
 
     public event Action OnExhaust;
 
-    
     public event Action OnAnimationCycle;
 
     #endregion
@@ -44,6 +39,22 @@ public class Arm : NetworkIdentity
     protected override void OnSpawned()
     {
         base.OnSpawned();
+    }
+
+    public void Hit(int hitid)
+    {
+        Arm targetArm = GameManager.Instance.opponent.GetOpposedArm(side);
+
+        targetArm.ReceiveHit(this);
+
+
+
+        //handle baisse de stamina
+    }
+
+    public void ReceiveHit(Arm attackingArm)
+    {
+        OnHit?.Invoke();
     }
 
     private void Update()
