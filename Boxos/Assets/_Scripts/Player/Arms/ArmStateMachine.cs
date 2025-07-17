@@ -40,8 +40,6 @@ public class ArmStateMachine : NetworkIdentity
             currentState.OnExit();
         }
 
-        print(state is NeutralState);
-
         currentState = state;
         currentState.stateMachine = this;
         currentState.arm = _arm;
@@ -70,30 +68,35 @@ public class ArmStateMachine : NetworkIdentity
     [ObserversRpc]
     public void Neutral()
     {
+        print("Neutral");
         TransitionTo(neutralState);
     }
 
     [ObserversRpc]
     public void Stagger()
     {
+        print("Stagger");
         TransitionTo(staggerState);
     }
 
     [ObserversRpc]
     public void Exhaust()
     {
+        print("Exhaust");
         TransitionTo(exhaustState);
     }
 
     [ObserversRpc]
     public void AttackPrep()
     {
+        print("AttackPrep");
         TransitionTo(attackPrepState);
     }
 
     [ObserversRpc]
     public void Attack(int attackID)
     {
+        print("Attack");
         attackState.attackID = attackID;
         TransitionTo(attackState);
     }
@@ -101,12 +104,14 @@ public class ArmStateMachine : NetworkIdentity
     [ObserversRpc]
     public void Block()
     {
+        print("Block");
         TransitionTo(blockState);
     }
 
     [ObserversRpc]
     public void Parry()
     {
+        print("Parry");
         TransitionTo(parryState);
     }
 

@@ -40,6 +40,6 @@ public static class PlayerStats
     public const float ArmInputMargin = 25;
     public const float MaxDistanceToNeutral = .8f;
     public const float MinDistanceToNeutral = .5f;
-    public const float InputExitTime = .2f;
+    public const float InputExitTime = .15f;
 
 }
