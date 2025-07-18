@@ -17,10 +17,14 @@ public class AttackState : ArmState
         }
 
         arm.OnAnimationCycle += stateMachine.Neutral;
+
+        arm.OnReceiveHit += FreeHit;
     }
 
     public override void OnExit()
     {
         arm.OnAnimationCycle -= stateMachine.Neutral;
+
+        arm.OnReceiveHit -= FreeHit;
     }
 }

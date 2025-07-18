@@ -12,6 +12,7 @@ public class Arm : NetworkIdentity
     public event Action OnBlocked;
 
     public event Action OnHit;
+    public event Action<Arm, int> OnReceiveHit;
 
     public event Action OnExhaust;
 
@@ -43,18 +44,25 @@ public class Arm : NetworkIdentity
 
     public void Hit(int hitid)
     {
+        print("han");
+        if (GameManager.Instance.opponent == null)
+        {
+            print("no opponent to hit");
+            return;
+        }
+
         Arm targetArm = GameManager.Instance.opponent.GetOpposedArm(side);
 
-        targetArm.ReceiveHit(this);
-
-
+        targetArm.ReceiveHit(this, hitid);
 
         //handle baisse de stamina
     }
 
-    public void ReceiveHit(Arm attackingArm)
+    [ObserversRpc]
+    public void ReceiveHit(Arm attackingArm,int attackID)
     {
-        OnHit?.Invoke();
+        print("allo " + attackingArm);
+        OnReceiveHit?.Invoke(attackingArm, attackID);
     }
 
     private void Update()

@@ -2,15 +2,10 @@ using UnityEngine;
 
 public class ArmAnimationEventReceiver : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] Arm _arm;
+    
+    public void Hit(int attackID)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _arm.Hit(attackID);
     }
 }

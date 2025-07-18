@@ -11,13 +11,13 @@ public static class PlayerStats
     public const float StaminaRegenDurationOffset = 1;
 
     public const float LightAttackSpeed = 500;
-    public const float LightAttackDamage = 1;
+    public const int LightAttackDamage = 1;
     public const int LightAttackStaminaCost = 1;
     public const int ParriedLightAttackStaminaCost = 8;
     public const float ParriedLightAttackStaggerDuration = 3;
 
     public const float HeavyAttackSpeed = 1000;
-    public const float HeavyAttackDamage = 2;
+    public const int HeavyAttackDamage = 2;
     public const int HeavyAttackStaminaCost = 3;
     public const int ParriedHeavyAttackStaminaCost = 7;
     public const float ParriedHeavyAttackStaggerDuration = 1;

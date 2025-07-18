@@ -6,12 +6,26 @@ public class BlockState : ArmState
     {
         base.OnEnter();
         arm.animator.SetTrigger("Block");
+
+        arm.OnReceiveHit += Block;
+    }
+
+    public override void OnExit()
+    {
+        arm.OnReceiveHit -= Block;
     }
 
     public override void Update()
     {
+        if (!update)
+            return;
+
         if (InputTools.CheckInputAngleEnter(0, armInputDelta))
+        {
             stateMachine.Parry();
+            StopUpdate();
+            return;
+        }
 
         //exit conditions
         if (InputTools.CheckInputAngleExit(180, armInputDelta))
@@ -19,8 +33,16 @@ public class BlockState : ArmState
             exitTimer += Time.deltaTime;
 
             if(exitTimer >= PlayerStats.InputExitTime)
+            {
+                StopUpdate();
                 stateMachine.Neutral();
+            }
         }
-            
     }
+
+    void Block(Arm attackingArm, int attackID)
+    {
+        Debug.Log("Block");
+    }
+
 }

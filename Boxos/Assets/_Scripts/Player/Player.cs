@@ -107,8 +107,8 @@ public class Player : NetworkIdentity
     public Arm GetOpposedArm(ArmSide side)
     {
         if (side == ArmSide.Left)
-            return leftArm;
-        return rightArm;
+            return rightArm;
+        return leftArm;
     }
 
 

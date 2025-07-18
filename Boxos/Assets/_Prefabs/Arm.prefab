@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3388897708273882973}
   - component: {fileID: 4324400996294851404}
   - component: {fileID: 3665566519309167325}
+  - component: {fileID: 1298050744089805896}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -82,6 +83,19 @@ MonoBehaviour:
   _ownerAuth: 1
   _autoSyncParameters: 1
   _dontSyncParameters: []
+--- !u!114 &1298050744089805896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239666991925224087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a25b872b42981849a68d3489ca2c4b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _arm: {fileID: 1197276455699501822}
 --- !u!1 &1925848504560925605
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +314,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0913335a96070ff479a8c5f8e068e418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   player: {fileID: 0}
   side: 0
   animator: {fileID: 3665566519309167325}
