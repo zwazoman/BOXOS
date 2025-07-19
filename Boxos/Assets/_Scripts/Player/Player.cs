@@ -32,8 +32,8 @@ public class Player : NetworkIdentity
 
     [SerializeField] PlayerInput _playerInput;
 
-    SyncVar<int> _stamina;
-    SyncVar<int> _health;
+    public SyncVar<int> stamina = new(initialValue: PlayerStats.MaxStamina, ownerAuth: false);
+    public SyncVar<int> health = new(initialValue: PlayerStats.MaxHealth, ownerAuth: false);
 
     [SerializeField] public Arm leftArm;
     [SerializeField] public Arm rightArm;
@@ -49,6 +49,8 @@ public class Player : NetworkIdentity
             _camera = GetComponentInChildren<CinemachineCamera>();
         if (_playerInput == null)
             TryGetComponent(out _playerInput);
+
+        health.onChanged += HpChanged;
     }
 
     protected override void OnSpawned()
@@ -100,6 +102,8 @@ public class Player : NetworkIdentity
         {
             OnKick?.Invoke();
             print("Kick");
+
+            TakeDamage(2);
         }
     }
 
@@ -117,31 +121,31 @@ public class Player : NetworkIdentity
         return leftArm;
     }
 
-
-    public int TakeDamage(int amount)
+    [ServerRpc]
+    public void TakeDamage(int amount)
     {
         OnTakeDamage?.Invoke();
 
-        _health.value -= amount;
-        Mathf.Clamp(_health, 0, PlayerStats.MaxHealth);
+        health.value = Mathf.Clamp(health - amount, 0, PlayerStats.MaxHealth);
 
-        if (_health == 0)
+        if (health == 0)
             Die();
-
-        return _health;
     }
 
-    public int LoseStamina(int amount)
+    [ServerRpc]
+    public void LoseStamina(int amount)
     {
         OnLoseStamina?.Invoke();
 
-        _stamina.value -= amount;
-        Mathf.Clamp(_stamina, 0, PlayerStats.MaxStamina);
+        stamina.value = Mathf.Clamp(stamina - amount, 0, PlayerStats.MaxStamina);
 
-        if (_stamina == 0)
+        if (stamina == 0)
             Exhaust();
+    }
 
-        return _stamina;
+    void HpChanged(int newHealth)
+    {
+        print(newHealth);
     }
 
     public void Exhaust()

@@ -6,11 +6,11 @@ public class StaggerState : ArmState
     {
         arm.animator.SetTrigger("Stagger");
 
-        arm.player.OnKick += stateMachine.Neutral;
+        arm.OnAnimationCycle += stateMachine.Neutral;
     }
 
     public override void OnExit()
     {
-        arm.player.OnKick -= stateMachine.Neutral;
+        arm.OnAnimationCycle -= stateMachine.Neutral;
     }
 }

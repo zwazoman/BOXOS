@@ -14,7 +14,9 @@ public class ArmStateMachine : NetworkIdentity
     public ExhaustState exhaustState = new();
     public AttackPrepState attackPrepState = new();
     public AttackState attackState = new();
+    public DefensePrepState defensePrepState = new();
     public BlockState blockState = new();
+    public GuardBreakState guardBreakState = new();
     public ParryState parryState = new();
     #endregion
 
@@ -113,11 +115,27 @@ public class ArmStateMachine : NetworkIdentity
     }
 
     [ObserversRpc]
+    public void DefensePrep()
+    {
+        if (isOwner) print("Block" + " " + owner);
+
+        TransitionTo(defensePrepState);
+    }
+
+    [ObserversRpc]
     public void Block()
     {
         if (isOwner) print("Block" + " " + owner);
 
         TransitionTo(blockState);
+    }
+
+    [ObserversRpc]
+    public void GuardBreak()
+    {
+        if (isOwner) print("Guard Break" + " " + owner);
+
+        TransitionTo(guardBreakState);
     }
 
     [ObserversRpc]

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlockState : ArmState
@@ -8,44 +9,24 @@ public class BlockState : ArmState
         arm.animator.SetTrigger("Block");
 
         arm.OnReceiveHit += Block;
-
-        arm.player.OnKick += stateMachine.Parry;
+        arm.OnGuardBroken += GuardBroken;
     }
 
     public override void OnExit()
     {
         arm.OnReceiveHit -= Block;
-    }
-
-    public override void Update()
-    {
-        if (!update)
-            return;
-
-        if (InputTools.CheckInputAngleEnter(0, armInputDelta))
-        {
-            stateMachine.Parry();
-            StopUpdate();
-            return;
-        }
-
-        //exit conditions
-        //if (InputTools.CheckInputAngleExit(180, armInputDelta))
-        //{
-        //    exitTimer += Time.deltaTime;
-
-        //    if(exitTimer >= PlayerStats.InputExitTime)
-        //    {
-        //        StopUpdate();
-        //        stateMachine.Neutral();
-        //    }
-        //}
+        arm.OnGuardBroken -= GuardBroken;
     }
 
     void Block(Arm attackingArm, int attackID)
     {
         Debug.Log("Block");
         attackingArm.Blocked();
+    }
+
+    void GuardBroken(Arm guardBreakingArm)
+    {
+        stateMachine.Stagger();
     }
 
 }
