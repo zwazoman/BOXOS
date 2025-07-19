@@ -9,11 +9,18 @@ public class NeutralState : ArmState
         base.OnEnter();
 
         arm.animator.SetTrigger("Idle");
+
+        arm.OnReceiveHit += FreeHit;
+
+        //temp
+        arm.player.OnKick += stateMachine.Block;
     }
 
     public override void OnExit()
     {
         base.OnExit();
+
+        arm.OnReceiveHit -= FreeHit;
     }
 
     public override void Update()
@@ -25,7 +32,6 @@ public class NeutralState : ArmState
         if (InputTools.CheckInputAngleEnter(-90, armInputDelta))
         {
             StopUpdate();
-            Debug.Log(update);
             stateMachine.AttackPrep();
             return;
         }

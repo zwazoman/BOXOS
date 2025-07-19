@@ -8,6 +8,8 @@ public class BlockState : ArmState
         arm.animator.SetTrigger("Block");
 
         arm.OnReceiveHit += Block;
+
+        arm.player.OnKick += stateMachine.Parry;
     }
 
     public override void OnExit()
@@ -28,21 +30,22 @@ public class BlockState : ArmState
         }
 
         //exit conditions
-        if (InputTools.CheckInputAngleExit(180, armInputDelta))
-        {
-            exitTimer += Time.deltaTime;
+        //if (InputTools.CheckInputAngleExit(180, armInputDelta))
+        //{
+        //    exitTimer += Time.deltaTime;
 
-            if(exitTimer >= PlayerStats.InputExitTime)
-            {
-                StopUpdate();
-                stateMachine.Neutral();
-            }
-        }
+        //    if(exitTimer >= PlayerStats.InputExitTime)
+        //    {
+        //        StopUpdate();
+        //        stateMachine.Neutral();
+        //    }
+        //}
     }
 
     void Block(Arm attackingArm, int attackID)
     {
         Debug.Log("Block");
+        attackingArm.Blocked();
     }
 
 }

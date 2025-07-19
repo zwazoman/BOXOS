@@ -1,4 +1,5 @@
 using PurrNet;
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -20,7 +21,12 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public Player opponent;
+    public event Action OnPlayerSpawned;
+
+    [SerializeField] public NetworkManager networkManager;
+
+    [HideInInspector] public Player opponent;
+    [HideInInspector] public PlayerID opponentId;
 
     private void Awake()
     {
@@ -29,4 +35,15 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this);
     }
+
+    public void PlayerSpawned()
+    {
+        OnPlayerSpawned?.Invoke();
+    }
+
+    private void Update()
+    {
+        //print(opponentId);
+    }
+
 }

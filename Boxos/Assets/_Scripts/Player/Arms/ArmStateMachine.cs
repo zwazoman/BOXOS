@@ -28,7 +28,12 @@ public class ArmStateMachine : NetworkIdentity
     {
         base.OnSpawned();
 
-        Neutral();
+        //Neutral();
+
+        if (GameManager.Instance.opponentId == PlayerID.Server)
+            GameManager.Instance.OnPlayerSpawned += Neutral;
+        else
+            Neutral();
     }
 
     public void TransitionTo(ArmState state)
@@ -49,7 +54,7 @@ public class ArmStateMachine : NetworkIdentity
 
     void Update()
     {
-        if (!isOwner)
+        if (!isOwner || currentState == null)
             return;
 
         currentState.armInputDelta = _arm.player.GetStickVector(_arm.side);
@@ -63,55 +68,63 @@ public class ArmStateMachine : NetworkIdentity
         return false;
     }
 
+
     #region Transitions
 
     [ObserversRpc]
     public void Neutral()
     {
-        print("Neutral");
+        if(isOwner) print("Neutral" + " " + owner);
+
         TransitionTo(neutralState);
     }
 
     [ObserversRpc]
     public void Stagger()
     {
-        print("Stagger");
+        if (isOwner) print("Stagger" + " " + owner);
+
         TransitionTo(staggerState);
     }
 
     [ObserversRpc]
     public void Exhaust()
     {
-        print("Exhaust");
+        if (isOwner) print("Exhaust" + " " + owner);
+
         TransitionTo(exhaustState);
     }
 
     [ObserversRpc]
     public void AttackPrep()
     {
-        print("AttackPrep");
+        if (isOwner) print("AttackPrep" + " " + owner);
+
         TransitionTo(attackPrepState);
     }
 
     [ObserversRpc]
-    public void Attack(int attackID)
+    public void Attack(int attackId)
     {
-        print("Attack");
-        attackState.attackID = attackID;
+        if (isOwner) print("Attack" + " " + owner);
+
+        attackState.attackID = attackId;
         TransitionTo(attackState);
     }
 
     [ObserversRpc]
     public void Block()
     {
-        print("Block");
+        if (isOwner) print("Block" + " " + owner);
+
         TransitionTo(blockState);
     }
 
     [ObserversRpc]
     public void Parry()
     {
-        print("Parry");
+        if (isOwner) print("Parry" + " " + owner);
+
         TransitionTo(parryState);
     }
 

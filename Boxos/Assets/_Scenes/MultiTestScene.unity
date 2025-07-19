@@ -367,6 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39dbb8745369ab4abfc698f612f1a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkManager: {fileID: 1071934339}
   opponent: {fileID: 0}
 --- !u!1 &890701287
 GameObject:

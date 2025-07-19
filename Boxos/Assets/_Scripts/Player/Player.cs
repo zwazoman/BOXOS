@@ -55,11 +55,13 @@ public class Player : NetworkIdentity
     {
         base.OnSpawned();
 
+
         //_stamina.value = PlayerStats.MaxStamina;
         //_health.value = PlayerStats.MaxHealth;
 
         if (isOwner)
         {
+            print(localPlayerForced);
             _body.SetActive(false);
             _camera.enabled = true;
         }
@@ -68,8 +70,12 @@ public class Player : NetworkIdentity
             _body.SetActive(true);
             _camera.enabled = false;
             GameManager.Instance.opponent = this;
+            GameManager.Instance.opponentId = owner.Value;
+            
             _playerInput.enabled = false;
         }
+
+        GameManager.Instance.PlayerSpawned();
     }
 
     private void Update()

@@ -1,3 +1,4 @@
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class AttackState : ArmState
@@ -19,6 +20,9 @@ public class AttackState : ArmState
         arm.OnAnimationCycle += stateMachine.Neutral;
 
         arm.OnReceiveHit += FreeHit;
+
+        arm.OnBlocked += AttackBlocked;
+        arm.OnParried += AttackParried;
     }
 
     public override void OnExit()
@@ -26,5 +30,18 @@ public class AttackState : ArmState
         arm.OnAnimationCycle -= stateMachine.Neutral;
 
         arm.OnReceiveHit -= FreeHit;
+
+        arm.OnBlocked -= AttackBlocked;
+        arm.OnParried -= AttackParried;
+    }
+
+    void AttackBlocked()
+    {
+        Debug.Log("Attack blocked !");
+    }
+
+    void AttackParried()
+    {
+        Debug.Log("AttackParried");
     }
 }

@@ -44,6 +44,9 @@ public class Arm : NetworkIdentity
 
     public void Hit(int hitid)
     {
+        if (!isOwner)
+            return;
+
         print("han");
         if (GameManager.Instance.opponent == null)
         {
@@ -53,17 +56,19 @@ public class Arm : NetworkIdentity
 
         Arm targetArm = GameManager.Instance.opponent.GetOpposedArm(side);
 
-        targetArm.ReceiveHit(this, hitid);
+        targetArm.ReceiveHit(GameManager.Instance.opponentId, this, hitid);
 
         //handle baisse de stamina
     }
 
-    [ObserversRpc]
-    public void ReceiveHit(Arm attackingArm,int attackID)
+    public void ReceiveHit(PlayerID id, Arm attackingArm,int attackID)
     {
         print("allo " + attackingArm);
         OnReceiveHit?.Invoke(attackingArm, attackID);
     }
+
+    public void Blocked() { OnBlocked?.Invoke(); }
+    public void Parried() { OnParried?.Invoke(); }
 
     private void Update()
     {
