@@ -82,9 +82,11 @@ public class ArmStateMachine : NetworkIdentity
     }
 
     [ObserversRpc]
-    public void Stagger()
+    public void Stagger(float duration = 0)
     {
         if (isOwner) print("Stagger" + " " + owner);
+
+        staggerState.duration = duration;
 
         TransitionTo(staggerState);
     }
