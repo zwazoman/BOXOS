@@ -22,22 +22,16 @@ public static class PlayerStats
     public const int ParriedHeavyAttackStaminaCost = 7;
     public const float ParriedHeavyAttackStaggerDuration = 1;
 
-    public const float KickSpeed = 1200;
-    public const int KickStaminaCost = 4;
-    public const int MissedKickSelfDamage = 1;
-    public const float MissedKickStaggerDuration = 2;
-
+    public const float BlockWindowDuration = 2.5f;
     public const int LightAttackBlockStaminaCost = 2;
     public const int HeavyAttackBlockStaminaCost = 5;
-    public const int KickBlockStaminaCost = 8;
 
     public const float ParryDuration = .5f;
     public const int ParryStaminaCost = 2;
-    public const int KickParryStaminaCost = 15;
 
     //InputStats
 
-    public const float ArmInputMargin = 25;
+    public const float StickInputMargin = .1f;
     public const float MaxDistanceToNeutral = .8f;
     public const float MinDistanceToNeutral = .5f;
     public const float InputExitTime = .15f;

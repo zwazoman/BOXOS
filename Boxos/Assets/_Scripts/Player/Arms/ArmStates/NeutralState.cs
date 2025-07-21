@@ -28,19 +28,22 @@ public class NeutralState : ArmState
         if (!update)
             return;
 
-        //attack prep
-        if (InputTools.CheckInputAngleEnter(-90, armInputDelta))
+        //test
+        //InputTools.InputAngleEnter(Vector2.right, armInputDelta);
+
+        //attack Prep
+        if (InputTools.InputAngleEnter(Vector2.down, armInputDelta))
         {
             StopUpdate();
             stateMachine.AttackPrep();
             return;
         }
 
-        //Block
-        if (InputTools.CheckInputAngleEnter(180, armInputDelta) || InputTools.CheckInputAngleEnter(-180, armInputDelta))
+        //defense Prep
+        if (InputTools.InputAngleEnter(Vector2.left, armInputDelta))
         {
             StopUpdate();
-            stateMachine.Block();
+            stateMachine.DefensePrep();
             return;
         }
     }

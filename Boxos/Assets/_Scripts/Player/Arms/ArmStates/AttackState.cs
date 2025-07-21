@@ -5,6 +5,8 @@ public class AttackState : ArmState
 {
     public int attackID;
 
+    bool isCancelable = false;
+
     public override void OnEnter()
     {
         switch (attackID)
@@ -14,9 +16,11 @@ public class AttackState : ArmState
                 break;
             case 1:
                 arm.animator.SetTrigger("HeavyAttack");
+                isCancelable = true;
                 break;
         }
 
+        arm.CheckAnimationCycle();
         arm.OnAnimationCycle += stateMachine.Neutral;
 
         arm.OnReceiveHit += FreeHit;

@@ -5,17 +5,25 @@ public class GuardBreakState : ArmState
 {
     public override void OnEnter()
     {
-        arm.animator.SetTrigger("Parry");
-        arm.OnAnimationCycle += () => stateMachine.Stagger();
+        arm.animator.SetTrigger("GuardBreak");
+
+        arm.CheckAnimationCycle();
+        arm.OnAnimationCycle += GuardBreakEnd;
 
         arm.OnSuccessfullGuardBreak += stateMachine.Neutral;
     }
 
     public override void OnExit()
     {
-        arm.OnAnimationCycle -= () => stateMachine.Stagger();
+        arm.OnAnimationCycle -= GuardBreakEnd;
 
         arm.OnSuccessfullGuardBreak -= stateMachine.Neutral;
+    }
+
+    void GuardBreakEnd()
+    {
+        stateMachine.Stagger();
+        Debug.Log("Guardbreak end");
     }
 
     public void GuardBreak()

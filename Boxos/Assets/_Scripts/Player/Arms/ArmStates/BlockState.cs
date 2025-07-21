@@ -18,6 +18,14 @@ public class BlockState : ArmState
         arm.OnGuardBroken -= GuardBroken;
     }
 
+    public override void Update()
+    {
+        if (!update)
+            return;
+
+        HandleDurationBasedExit();
+    }
+
     void Block(Arm attackingArm, int attackID)
     {
         Debug.Log("Block");

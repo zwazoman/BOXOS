@@ -86,8 +86,7 @@ public class ArmStateMachine : NetworkIdentity
     {
         if (isOwner) print("Stagger" + " " + owner);
 
-        staggerState.duration = duration;
-
+        staggerState.stateDuration = duration;
         TransitionTo(staggerState);
     }
 
@@ -119,7 +118,7 @@ public class ArmStateMachine : NetworkIdentity
     [ObserversRpc]
     public void DefensePrep()
     {
-        if (isOwner) print("Block" + " " + owner);
+        if (isOwner) print("Defense Prep" + " " + owner);
 
         TransitionTo(defensePrepState);
     }
@@ -129,6 +128,7 @@ public class ArmStateMachine : NetworkIdentity
     {
         if (isOwner) print("Block" + " " + owner);
 
+        blockState.stateDuration = PlayerStats.BlockWindowDuration;
         TransitionTo(blockState);
     }
 

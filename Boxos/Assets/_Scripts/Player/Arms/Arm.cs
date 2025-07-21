@@ -29,7 +29,7 @@ public class Arm : NetworkIdentity
     [SerializeField] public Animator animator;
     [SerializeField] public ArmStateMachine stateMachine;
 
-
+    bool _checkAnimationCycle = false;
 
     private void Awake()
     {
@@ -70,13 +70,22 @@ public class Arm : NetworkIdentity
     public void Blocked() { OnBlocked?.Invoke(); }
     public void Parried() { OnParried?.Invoke(); }
 
+    public void CheckAnimationCycle()
+    {
+        _checkAnimationCycle = true;
+    }
+
     private void Update()
     {
-        if (!isOwner)
+        if (!isOwner || !_checkAnimationCycle)
             return;
 
         AnimatorStateInfo currenStateInfo = animator.GetCurrentAnimatorStateInfo(0);
         if (currenStateInfo.normalizedTime >= 1)
+        {
+            print("clochard");
             OnAnimationCycle?.Invoke();
+            _checkAnimationCycle = false;
+        }
     }
 }

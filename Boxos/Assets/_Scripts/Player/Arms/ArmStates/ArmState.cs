@@ -8,8 +8,9 @@ public class ArmState
 
     public Vector2 armInputDelta;
 
-    protected float exitTimer;
+    public float stateDuration;
 
+    protected float exitTimer;
     protected bool update = true;
 
     public virtual void OnEnter()
@@ -28,6 +29,17 @@ public class ArmState
     public void StopUpdate()
     {
         update = false;
+    }
+
+    protected void HandleDurationBasedExit()
+    {
+        exitTimer += Time.deltaTime;
+
+        if (exitTimer >= stateDuration)
+        {
+            stateMachine.Neutral();
+            StopUpdate();
+        }
     }
 
     public void FreeHit(Arm attackingArm, int hitID)

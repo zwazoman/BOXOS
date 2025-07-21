@@ -5,7 +5,7 @@ public class DefensePrepState : ArmState
     public override void OnEnter()
     {
         base.OnEnter();
-        arm.animator.SetTrigger("Block");
+        arm.animator.SetTrigger("DefensePrep");
 
         arm.OnReceiveHit += FreeHit;
     }
@@ -21,30 +21,30 @@ public class DefensePrepState : ArmState
             return;
 
         //blockHandle
-        if(InputTools.CheckInputAngleEnter(90, armInputDelta))
+        if(InputTools.InputAngleEnter(Vector2.up, armInputDelta))
         {
             stateMachine.Block();
             StopUpdate();
             return;
         }
 
-        //parry handle
-        if (InputTools.CheckInputAngleEnter(0, armInputDelta))
+        //GB handle
+        if (InputTools.InputAngleEnter(Vector2.right, armInputDelta))
         {
-            stateMachine.Parry();
+            stateMachine.GuardBreak();
             StopUpdate();
             return;
         }
 
         //exit conditions
-        if (InputTools.CheckInputAngleExit(180, armInputDelta))
+        if (InputTools.InputAngleExit(Vector2.left, armInputDelta))
         {
             exitTimer += Time.deltaTime;
 
             if (exitTimer >= PlayerStats.InputExitTime)
             {
-                StopUpdate();
                 stateMachine.Neutral();
+                StopUpdate();
             }
         }
     }

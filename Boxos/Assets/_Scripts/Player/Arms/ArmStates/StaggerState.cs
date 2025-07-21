@@ -1,19 +1,18 @@
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class StaggerState : ArmState
 {
-    public float duration;
-
-    float timer;
-
     public override void OnEnter()
     {
+        base.OnEnter();
+
         arm.animator.SetTrigger("Stagger");
 
-        timer = 0;
-        if (duration == 0)
-            duration = 2;
+        if (stateDuration == 0)
+            stateDuration = 2;
 
+        Debug.Log(stateDuration + " " + exitTimer);
     }
 
     public override void OnExit()
@@ -23,10 +22,7 @@ public class StaggerState : ArmState
 
     public override void Update()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= duration)
-            stateMachine.Neutral();
+        HandleDurationBasedExit();
     }
 
 

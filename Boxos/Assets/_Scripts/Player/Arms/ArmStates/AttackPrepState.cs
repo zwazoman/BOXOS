@@ -25,11 +25,11 @@ public class AttackPrepState : ArmState
             return;
 
         //heavy attack handle
-        if (InputTools.CheckInputAngleEnter(0, armInputDelta))
+        if (InputTools.InputAngleEnter(Vector2.right, armInputDelta))
         {
             _circularInput = true;
         }
-        if (_circularInput && InputTools.CheckInputAngleEnter(90, armInputDelta))
+        if (_circularInput && InputTools.InputAngleEnter(Vector2.up, armInputDelta))
         {
             stateMachine.Attack(1);
             StopUpdate();
@@ -37,7 +37,7 @@ public class AttackPrepState : ArmState
         }
 
         //light attack handle
-        if (InputTools.CheckInputAngleEnter(90, armInputDelta))
+        if (InputTools.InputAngleEnter(Vector2.up, armInputDelta))
         {
             stateMachine.Attack(0);
             StopUpdate();
@@ -46,7 +46,7 @@ public class AttackPrepState : ArmState
 
 
         //Exit Conditions
-        if (InputTools.CheckInputAngleExit(-90, armInputDelta))
+        if (InputTools.InputAngleExit(Vector2.down, armInputDelta))
         {
             exitTimer += Time.deltaTime;
 

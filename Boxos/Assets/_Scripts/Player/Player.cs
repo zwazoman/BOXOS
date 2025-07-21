@@ -57,7 +57,6 @@ public class Player : NetworkIdentity
     {
         base.OnSpawned();
 
-
         //_stamina.value = PlayerStats.MaxStamina;
         //_health.value = PlayerStats.MaxHealth;
 
