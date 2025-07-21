@@ -2402,7 +2402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentProvider: {fileID: 1097043114}
   createRoomArgs:
-    maxPlayers: 5
+    maxPlayers: 2
     roomProperties:
       keys:
       - PurrNet
@@ -2559,7 +2559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbyManager: {fileID: 1097043115}
-  nextScene: NetworkedScene
+  nextScene: MultiTestScene
 --- !u!1 &1101296062
 GameObject:
   m_ObjectHideFlags: 0
