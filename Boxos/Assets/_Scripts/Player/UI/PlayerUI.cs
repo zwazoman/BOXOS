@@ -38,13 +38,13 @@ public class PlayerUI : NetworkBehaviour
         {
             _opponentCanvas.enabled = false;
             _ownerHpText.text = PlayerStats.MaxHealth.ToString();
-            //_ownerStaminaText.text = PlayerStats.MaxStamina.ToString();
+            _ownerStaminaText.text = PlayerStats.MaxStamina.ToString();
         }
         else
         {
             _ownerCanvas.enabled = false;
             _opponentHpText.text = PlayerStats.MaxHealth.ToString();
-            //_opponentStaminaText.text = PlayerStats.MaxStamina.ToString();
+            _opponentStaminaText.text = PlayerStats.MaxStamina.ToString();
         }
 
     }

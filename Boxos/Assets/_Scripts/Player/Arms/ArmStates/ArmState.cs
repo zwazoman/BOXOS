@@ -49,11 +49,11 @@ public class ArmState
         switch (hitID)
         {
             default:
-                arm.player.TakeDamage(PlayerStats.LightAttackDamage);
+                arm.player.UpdateHealth(PlayerStats.LightAttackDamage);
                 stateMachine.Stagger();
                 break;
             case 1:
-                arm.player.TakeDamage(PlayerStats.HeavyAttackDamage);
+                arm.player.UpdateHealth(PlayerStats.HeavyAttackDamage);
                 stateMachine.Stagger();
                 break;
         }

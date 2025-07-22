@@ -533,7 +533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1071934340}
   - component: {fileID: 1071934339}
-  - component: {fileID: 1071934343}
+  - component: {fileID: 1071934345}
   - component: {fileID: 1071934344}
   - component: {fileID: 1071934341}
   - component: {fileID: 1071934342}
@@ -557,11 +557,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stopPlayingOnDisconnect: 0
-  _startServerFlags: 0
-  _startClientFlags: 0
+  _startServerFlags: -1
+  _startClientFlags: -1
   _cookieScope: 1
   _dontDestroyOnLoad: 0
-  _transport: {fileID: 1071934344}
+  _transport: {fileID: 1071934345}
   _networkPrefabs: {fileID: 11400000, guid: b9d9c581edcec97479c9acbc8314335d, type: 2}
   _networkAssets: {fileID: 11400000, guid: bcff6ad9d6c7a364083ac0c1db2426c8, type: 2}
   _networkRules: {fileID: 11400000, guid: d8799083b96579a42b8b2d03e4ceae98, type: 2}
@@ -614,23 +614,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c476fd9733ed148b4631bd99c76108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1071934343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071934337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 332e746c3c3253246aacad4d5559f1fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _masterServer: https://purrbalancer.riten.dev:8080/
-  _roomName: 8e738dce502a470e99b375b15c1119b8
-  _region: eu-central
-  _host: eu1.purrlay.riten.dev
-  _pollEventsInUpdate: 0
 --- !u!114 &1071934344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,6 +630,23 @@ MonoBehaviour:
   _dedicatedServer: 0
   _peerToPeer: 1
   _address: 76561198831446308
+--- !u!114 &1071934345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071934337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc64ff707d914a64e95f2ac0bf554c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _serverPort: 5000
+  _maxConnections: 100
+  _address: 127.0.0.1
+  _timeoutInSeconds: 5
+  _pollEventsInUpdate: 0
 --- !u!1 &1937872756
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +735,7 @@ Transform:
   m_GameObject: {fileID: 1937872756}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.483038, y: 1.373, z: -0.28383297}
+  m_LocalPosition: {x: -4.301308, y: -0.50499994, z: -0.052314}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -7,8 +7,9 @@ public static class PlayerStats
     public const int MaxHealth = 10;
     public const int MaxStamina = 20;
 
-    public const float StaminaStaggerDuration = 2;
-    public const float StaminaRegenDurationOffset = 1;
+    public const float StaminaStaggerDuration = 1.5f;
+    public const float StaminaRegenDurationOffset = .3f;
+    public const int StaminaRegenPerTick = 1;
 
     public const float LightAttackSpeed = 500;
     public const int LightAttackDamage = 1;

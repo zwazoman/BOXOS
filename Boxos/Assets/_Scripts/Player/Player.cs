@@ -1,5 +1,6 @@
 using PurrNet;
 using System;
+using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,7 +42,8 @@ public class Player : NetworkIdentity
     [HideInInspector] public Vector2 leftArmInputDelta = Vector2.zero;
     [HideInInspector] public Vector2 rightArmInputDelta = Vector2.zero;
 
-    bool _regenStamina;
+    bool staminaRegen;
+    float staminaTimer;
 
     private void Awake()
     {
@@ -49,8 +51,6 @@ public class Player : NetworkIdentity
             _camera = GetComponentInChildren<CinemachineCamera>();
         if (_playerInput == null)
             TryGetComponent(out _playerInput);
-
-        health.onChanged += HpChanged;
     }
 
     protected override void OnSpawned()
@@ -65,6 +65,8 @@ public class Player : NetworkIdentity
             print(localPlayerForced);
             _body.SetActive(false);
             _camera.enabled = true;
+            StartCoroutine(RegenStamina());
+            staminaRegen = true;
         }
         else
         {
@@ -83,6 +85,17 @@ public class Player : NetworkIdentity
     {
         if (!isOwner)
             return;
+
+        if (!staminaRegen)
+        {
+            staminaTimer += Time.deltaTime;
+            if(staminaTimer >= PlayerStats.StaminaStaggerDuration)
+            {
+                staminaRegen = true;
+                staminaTimer = 0;
+                StartCoroutine(RegenStamina());
+            }
+        }
     }
 
     public void OnLeftArmControl(InputAction.CallbackContext ctx)
@@ -102,7 +115,7 @@ public class Player : NetworkIdentity
             OnKick?.Invoke();
             print("Kick");
 
-            TakeDamage(2);
+            UpdateHealth(2);
         }
     }
 
@@ -121,30 +134,40 @@ public class Player : NetworkIdentity
     }
 
     [ServerRpc]
-    public void TakeDamage(int amount)
+    public void UpdateHealth(int amount)
     {
         OnTakeDamage?.Invoke();
 
-        health.value = Mathf.Clamp(health - amount, 0, PlayerStats.MaxHealth);
+        health.value = Mathf.Clamp(health + amount, 0, PlayerStats.MaxHealth);
 
         if (health == 0)
             Die();
     }
 
     [ServerRpc]
-    public void LoseStamina(int amount)
+    public void UpdateStamina(int amount)
     {
         OnLoseStamina?.Invoke();
 
-        stamina.value = Mathf.Clamp(stamina - amount, 0, PlayerStats.MaxStamina);
+        if (stamina.value > stamina.value + amount)
+        {
+            StopCoroutine("RegenStamina");
+            staminaRegen = false;
+        }
+
+        stamina.value = Mathf.Clamp(stamina + amount, 0, PlayerStats.MaxStamina);
 
         if (stamina == 0)
             Exhaust();
     }
 
-    void HpChanged(int newHealth)
+    IEnumerator RegenStamina()
     {
-        print(newHealth);
+        while (true)
+        {
+            UpdateStamina(PlayerStats.StaminaRegenPerTick);
+            yield return new WaitForSeconds(PlayerStats.StaminaRegenDurationOffset);
+        }
     }
 
     public void Exhaust()
