@@ -8,6 +8,8 @@ public class ParryState : ArmState
         arm.OnAnimationCycle += stateMachine.Neutral;
 
         arm.OnReceiveHit += Parry;
+
+        arm.OnExhaust += stateMachine.Exhaust;
     }
 
     public override void OnExit()
@@ -15,6 +17,8 @@ public class ParryState : ArmState
         arm.OnAnimationCycle -= stateMachine.Neutral;
 
         arm.OnReceiveHit -= Parry;
+
+        arm.OnExhaust -= stateMachine.Exhaust;
     }
 
     void Parry(Arm attackingArm, int attackID)

@@ -8,14 +8,20 @@ public class BlockState : ArmState
         base.OnEnter();
         arm.animator.SetTrigger("Block");
 
+        arm.player.UpdateStamina(-PlayerStats.BlockStaminaCost);
+
         arm.OnReceiveHit += Block;
         arm.OnGuardBroken += GuardBroken;
+
+        arm.OnExhaust += stateMachine.Exhaust;
     }
 
     public override void OnExit()
     {
         arm.OnReceiveHit -= Block;
         arm.OnGuardBroken -= GuardBroken;
+
+        arm.OnExhaust -= stateMachine.Exhaust;
     }
 
     public override void Update()

@@ -10,13 +10,17 @@ public class AttackPrepState : ArmState
         base.OnEnter();
         arm.animator.SetTrigger("PrepAttack");
 
-        arm.OnReceiveHit += FreeHit;
+        arm.OnReceiveHit += DamagingHit;
+
+        arm.OnExhaust += stateMachine.Exhaust;
     }
 
     public override void OnExit()
     {
         _circularInput = false;
-        arm.OnReceiveHit += FreeHit;
+        arm.OnReceiveHit += DamagingHit;
+
+        arm.OnExhaust -= stateMachine.Exhaust;
     }
 
     public override void Update()

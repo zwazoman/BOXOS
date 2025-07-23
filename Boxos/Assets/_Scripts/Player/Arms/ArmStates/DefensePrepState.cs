@@ -7,12 +7,16 @@ public class DefensePrepState : ArmState
         base.OnEnter();
         arm.animator.SetTrigger("DefensePrep");
 
-        arm.OnReceiveHit += FreeHit;
+        arm.OnReceiveHit += DamagingHit;
+
+        arm.OnExhaust += stateMachine.Exhaust;
     }
 
     public override void OnExit()
     {
-        arm.OnReceiveHit -= FreeHit;
+        arm.OnReceiveHit -= DamagingHit;
+
+        arm.OnExhaust -= stateMachine.Exhaust;
     }
 
     public override void Update()

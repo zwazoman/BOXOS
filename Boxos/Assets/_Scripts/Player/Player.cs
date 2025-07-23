@@ -151,14 +151,14 @@ public class Player : NetworkIdentity
 
         if (stamina.value > stamina.value + amount)
         {
-            StopCoroutine("RegenStamina");
+            StopCoroutine(RegenStamina());
             staminaRegen = false;
         }
 
         stamina.value = Mathf.Clamp(stamina + amount, 0, PlayerStats.MaxStamina);
 
         if (stamina == 0)
-            Exhaust();
+            OnExhaust?.Invoke();
     }
 
     IEnumerator RegenStamina()
@@ -168,11 +168,6 @@ public class Player : NetworkIdentity
             UpdateStamina(PlayerStats.StaminaRegenPerTick);
             yield return new WaitForSeconds(PlayerStats.StaminaRegenDurationOffset);
         }
-    }
-
-    public void Exhaust()
-    {
-        OnExhaust?.Invoke();
     }
 
     public void Die()

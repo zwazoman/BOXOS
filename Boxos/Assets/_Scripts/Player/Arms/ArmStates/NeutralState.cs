@@ -10,7 +10,9 @@ public class NeutralState : ArmState
 
         arm.animator.SetTrigger("Idle");
 
-        arm.OnReceiveHit += FreeHit;
+        arm.OnReceiveHit += DamagingHit;
+
+        arm.OnExhaust += stateMachine.Exhaust;
 
         //temp
         arm.player.OnKick += stateMachine.Block;
@@ -20,7 +22,9 @@ public class NeutralState : ArmState
     {
         base.OnExit();
 
-        arm.OnReceiveHit -= FreeHit;
+        arm.OnReceiveHit -= DamagingHit;
+
+        arm.OnExhaust -= stateMachine.Exhaust;
     }
 
     public override void Update()

@@ -7,10 +7,14 @@ public class GuardBreakState : ArmState
     {
         arm.animator.SetTrigger("GuardBreak");
 
+        arm.player.UpdateStamina(-PlayerStats.GuardBreakStaminaCost);
+
         arm.CheckAnimationCycle();
         arm.OnAnimationCycle += GuardBreakEnd;
 
         arm.OnSuccessfullGuardBreak += stateMachine.Neutral;
+
+        arm.OnExhaust += stateMachine.Exhaust;
     }
 
     public override void OnExit()
@@ -18,6 +22,8 @@ public class GuardBreakState : ArmState
         arm.OnAnimationCycle -= GuardBreakEnd;
 
         arm.OnSuccessfullGuardBreak -= stateMachine.Neutral;
+
+        arm.OnExhaust -= stateMachine.Exhaust;
     }
 
     void GuardBreakEnd()

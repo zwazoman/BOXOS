@@ -64,5 +64,4 @@ public class PlayerUI : NetworkBehaviour
         else
             _opponentStaminaText.text = newAmount.ToString();
     }
-
 }

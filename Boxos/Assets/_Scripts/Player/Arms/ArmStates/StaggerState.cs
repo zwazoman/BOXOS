@@ -13,11 +13,13 @@ public class StaggerState : ArmState
             stateDuration = 2;
 
         Debug.Log(stateDuration + " " + exitTimer);
+
+        arm.OnExhaust += stateMachine.Exhaust;
     }
 
     public override void OnExit()
     {
-
+        arm.OnExhaust -= stateMachine.Exhaust;
     }
 
     public override void Update()
