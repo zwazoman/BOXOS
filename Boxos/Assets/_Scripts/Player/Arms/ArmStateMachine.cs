@@ -16,7 +16,6 @@ public class ArmStateMachine : NetworkIdentity
     public DefensePrepState defensePrepState = new();
     public BlockState blockState = new();
     public GuardBreakState guardBreakState = new();
-    public ParryState parryState = new();
     #endregion
 
     private void Awake()
@@ -138,15 +137,6 @@ public class ArmStateMachine : NetworkIdentity
 
         TransitionTo(guardBreakState);
     }
-
-    [ObserversRpc]
-    public void Parry()
-    {
-        if (isOwner) print("Parry" + " " + owner);
-
-        TransitionTo(parryState);
-    }
-
     #endregion
 
 }

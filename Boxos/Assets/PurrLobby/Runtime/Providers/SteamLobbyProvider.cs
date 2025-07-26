@@ -194,6 +194,7 @@ namespace PurrLobby.Providers
                     OnError?.Invoke("SteamAPI initialization failed.");
                     return;
                 }
+                Debug.Log("Steam initialized");
                 RunSteamCallbacks();
             }
         }

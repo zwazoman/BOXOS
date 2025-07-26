@@ -12,8 +12,6 @@ public class StaggerState : ArmState
         if (stateDuration == 0)
             stateDuration = 2;
 
-        Debug.Log(stateDuration + " " + exitTimer);
-
         arm.OnExhaust += stateMachine.Exhaust;
     }
 
@@ -24,6 +22,9 @@ public class StaggerState : ArmState
 
     public override void Update()
     {
+        if (!update)
+            return;
+
         HandleDurationBasedExit();
     }
 

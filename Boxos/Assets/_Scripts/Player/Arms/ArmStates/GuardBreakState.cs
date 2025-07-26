@@ -29,15 +29,5 @@ public class GuardBreakState : ArmState
     void GuardBreakEnd()
     {
         stateMachine.Stagger();
-        Debug.Log("Guardbreak end");
-    }
-
-    public void GuardBreak()
-    {
-        if (!arm.isOwner)
-            return;
-
-        Arm targetArm = GameManager.Instance.opponent.GetOpposedArm(arm.side);
-        targetArm.GuardBroken(arm);
     }
 }

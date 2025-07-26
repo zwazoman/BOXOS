@@ -8,4 +8,14 @@ public class ArmAnimationEventReceiver : MonoBehaviour
     {
         _arm.Hit(attackID);
     }
+
+    public void GuardBreak()
+    {
+        _arm.GuardBreak();
+    }
+
+    public void ParryWindow(bool state)
+    {
+        _arm.ParryWindow(state);
+    }
 }

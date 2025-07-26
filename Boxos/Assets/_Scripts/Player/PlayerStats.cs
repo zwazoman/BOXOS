@@ -8,8 +8,8 @@ public static class PlayerStats
     public const int MaxHealth = 10;
     public const int MaxStamina = 20;
 
-    public const float StaminaStaggerDuration = 1.5f;
-    public const float StaminaRegenDurationOffset = .3f;
+    public const float StaminaStaggerDuration = 2f;
+    public const float StaminaRegenDurationOffset = .6f;
     public const int StaminaRegenPerTick = 1;
 
     public const float LightAttackSpeed = 500;
@@ -34,6 +34,8 @@ public static class PlayerStats
 
     public const int GuardBreakStaminaCost = 4;
 
+    public const float ExhaustDuration = 2.5f;
+
     //InputStats
 
     public const float StickInputMargin = .1f;
@@ -41,4 +43,14 @@ public static class PlayerStats
     public const float MinDistanceToNeutral = .5f;
     public const float InputExitTime = .15f;
 
+}
+
+public struct AttackStats
+{
+    public float speed;
+    public float damage;
+    public float opponentStaggerTime;
+    public float blockedStaggerTime;
+    public float parriedStaggerTime;
+    public bool isCancelable;
 }

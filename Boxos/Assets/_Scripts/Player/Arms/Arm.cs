@@ -1,6 +1,7 @@
 using PurrNet;
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class Arm : NetworkIdentity
 {
@@ -15,8 +16,10 @@ public class Arm : NetworkIdentity
     public event Action<Arm, int> OnReceiveHit;
 
     public event Action OnGuardBreak;
+    public event Action<Arm> OnReceiveGuardBreak;
     public event Action OnSuccessfullGuardBreak;
-    public event Action<Arm> OnGuardBroken;
+
+    public event Action<bool> OnParryWindow;
 
     public event Action OnExhaust;
 
@@ -41,6 +44,11 @@ public class Arm : NetworkIdentity
             TryGetComponent(out stateMachine);
     }
 
+    private void Start()
+    {
+        player.OnExhaust += () => OnExhaust?.Invoke();
+    }
+
     protected override void OnSpawned()
     {
         base.OnSpawned();
@@ -48,27 +56,53 @@ public class Arm : NetworkIdentity
 
     public void Hit(int hitid)
     {
+        //gérer juice
+
+        if (!isOwner)
+            return;
+
+        print("HIT");
+
+        Arm targetArm = GameManager.Instance.opponent.GetOpposedArm(side);
+
+        targetArm.ReceiveHit(GameManager.Instance.opponentId, this, hitid);
+
+        //handle baisse de stamina
+    }
+
+    public void GuardBreak()
+    {
         if (!isOwner)
             return;
 
         Arm targetArm = GameManager.Instance.opponent.GetOpposedArm(side);
 
-        targetArm.ReceiveHit(this, hitid);
+        targetArm.ReceiveGuardBreak(GameManager.Instance.opponentId, this);
 
-        //handle baisse de stamina
     }
 
-    public void ReceiveHit(Arm attackingArm,int attackID){ OnReceiveHit?.Invoke(attackingArm, attackID); }
+    [TargetRpc]
+    public void ReceiveHit(PlayerID id, Arm attackingArm,int attackID)
+    { 
+        OnReceiveHit?.Invoke(attackingArm, attackID); 
+    }
 
-    public void GuardBroken(Arm guardBreakingArm)
+    [TargetRpc]
+    public void ReceiveGuardBreak(PlayerID id, Arm guardBreakingArm)
     {
-        guardBreakingArm.SuccessfullGuardbreak();
-        OnGuardBroken?.Invoke(guardBreakingArm);
+        OnReceiveGuardBreak?.Invoke(guardBreakingArm);
     }
 
-    public void SuccessfullGuardbreak() { OnSuccessfullGuardBreak?.Invoke(); }
-    public void Blocked() { OnBlocked?.Invoke(); }
-    public void Parried() { OnParried?.Invoke(); }
+    [TargetRpc]
+    public void SuccessfullGuardbreak(PlayerID id) { OnSuccessfullGuardBreak?.Invoke(); }
+
+    [TargetRpc]
+    public void Blocked(PlayerID id) { OnBlocked?.Invoke(); }
+
+    [TargetRpc]
+    public void Parried(PlayerID id) { OnParried?.Invoke(); }
+
+    public void ParryWindow(bool state){    OnParryWindow?.Invoke(state);   }
 
     public void CheckAnimationCycle()
     {
@@ -83,7 +117,6 @@ public class Arm : NetworkIdentity
         AnimatorStateInfo currenStateInfo = animator.GetCurrentAnimatorStateInfo(0);
         if (currenStateInfo.normalizedTime >= 1)
         {
-            print("clochard");
             OnAnimationCycle?.Invoke();
             _checkAnimationCycle = false;
         }

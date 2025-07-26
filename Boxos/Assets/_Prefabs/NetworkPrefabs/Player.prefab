@@ -1533,11 +1533,11 @@ MonoBehaviour:
   _playerInput: {fileID: 1341465486721655262}
   stamina:
     _value: 20
-    _ownerAuth: 0
+    _ownerAuth: 1
     _sendIntervalInSeconds: 0
   health:
     _value: 10
-    _ownerAuth: 0
+    _ownerAuth: 1
     _sendIntervalInSeconds: 0
   leftArm: {fileID: 8979250601822179935}
   rightArm: {fileID: 7161319801387934753}

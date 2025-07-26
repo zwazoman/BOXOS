@@ -7,13 +7,16 @@ public class ExhaustState : ArmState
         arm.animator.SetTrigger("Exhaust");
 
         arm.OnReceiveHit += DamagingHit;
+
+        stateDuration = PlayerStats.ExhaustDuration;
     }
 
     public override void Update()
     {
-        base.Update();
+        if (!update)
+            return;
 
-        Debug.Log("Bien exhaust");
+        HandleDurationBasedExit();
     }
 
     public override void OnExit()

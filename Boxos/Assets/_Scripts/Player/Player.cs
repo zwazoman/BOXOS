@@ -33,8 +33,8 @@ public class Player : NetworkIdentity
 
     [SerializeField] PlayerInput _playerInput;
 
-    public SyncVar<int> stamina = new(initialValue: PlayerStats.MaxStamina, ownerAuth: false);
-    public SyncVar<int> health = new(initialValue: PlayerStats.MaxHealth, ownerAuth: false);
+    public SyncVar<int> stamina = new(initialValue: PlayerStats.MaxStamina, ownerAuth: true);
+    public SyncVar<int> health = new(initialValue: PlayerStats.MaxHealth, ownerAuth: true);
 
     [SerializeField] public Arm leftArm;
     [SerializeField] public Arm rightArm;
@@ -133,9 +133,11 @@ public class Player : NetworkIdentity
         return leftArm;
     }
 
-    [ServerRpc]
     public void UpdateHealth(int amount)
     {
+        if (!isOwner)
+            return;
+
         OnTakeDamage?.Invoke();
 
         health.value = Mathf.Clamp(health + amount, 0, PlayerStats.MaxHealth);
@@ -144,26 +146,30 @@ public class Player : NetworkIdentity
             Die();
     }
 
-    [ServerRpc]
     public void UpdateStamina(int amount)
     {
+        if (!isOwner)
+            return;
+
         OnLoseStamina?.Invoke();
 
         if (stamina.value > stamina.value + amount)
         {
-            StopCoroutine(RegenStamina());
             staminaRegen = false;
         }
 
         stamina.value = Mathf.Clamp(stamina + amount, 0, PlayerStats.MaxStamina);
 
         if (stamina == 0)
+        {
+            print("EXHAUST");
             OnExhaust?.Invoke();
+        }
     }
 
     IEnumerator RegenStamina()
     {
-        while (true)
+        while (staminaRegen)
         {
             UpdateStamina(PlayerStats.StaminaRegenPerTick);
             yield return new WaitForSeconds(PlayerStats.StaminaRegenDurationOffset);

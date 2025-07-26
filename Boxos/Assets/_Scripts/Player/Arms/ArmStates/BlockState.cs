@@ -11,7 +11,7 @@ public class BlockState : ArmState
         arm.player.UpdateStamina(-PlayerStats.BlockStaminaCost);
 
         arm.OnReceiveHit += Block;
-        arm.OnGuardBroken += GuardBroken;
+        arm.OnReceiveGuardBreak += GuardBroken;
 
         arm.OnExhaust += stateMachine.Exhaust;
     }
@@ -19,7 +19,7 @@ public class BlockState : ArmState
     public override void OnExit()
     {
         arm.OnReceiveHit -= Block;
-        arm.OnGuardBroken -= GuardBroken;
+        arm.OnReceiveGuardBreak -= GuardBroken;
 
         arm.OnExhaust -= stateMachine.Exhaust;
     }
@@ -34,13 +34,16 @@ public class BlockState : ArmState
 
     void Block(Arm attackingArm, int attackID)
     {
-        Debug.Log("Block");
-        attackingArm.Blocked();
+        Debug.Log("Blocked !");
+        attackingArm.Blocked(GameManager.Instance.opponentId);
     }
 
     void GuardBroken(Arm guardBreakingArm)
     {
-        stateMachine.Stagger();
+        Debug.Log("Guard Broken !");
+
+        stateMachine.Stagger(3);
+        guardBreakingArm.SuccessfullGuardbreak(GameManager.Instance.opponentId);
     }
 
 }
