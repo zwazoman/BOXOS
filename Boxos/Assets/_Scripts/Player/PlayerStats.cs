@@ -15,6 +15,7 @@ public static class PlayerStats
     public const float LightAttackSpeed = 500;
     public const int LightAttackDamage = 1;
     public const int LightAttackStaminaCost = 3;
+    public const float LightAttackHitStaggerDuration = .3f;
     public const float BlockedLightAttackStaggerDuration = 1.5f;
     public const int ParriedLightAttackStaminaCost = 8;
     public const float ParriedLightAttackStaggerDuration = 3;
@@ -22,6 +23,7 @@ public static class PlayerStats
     public const float HeavyAttackSpeed = 1000;
     public const int HeavyAttackDamage = 2;
     public const int HeavyAttackStaminaCost = 5;
+    public const float HeavyAttackHitStaggerDuration = .7f;
     public const float BlockedHeavyAttackStaggerDuration = 1.5f;
     public const int ParriedHeavyAttackStaminaCost = 6;
     public const float ParriedHeavyAttackStaggerDuration = 1;
@@ -48,9 +50,19 @@ public static class PlayerStats
 public struct AttackStats
 {
     public float speed;
-    public float damage;
-    public float opponentStaggerTime;
+    public int damage;
+    public float StaggerDuration;
     public float blockedStaggerTime;
     public float parriedStaggerTime;
     public bool isCancelable;
+
+    public AttackStats(float speed, int damage, float opponentStaggerTime, float blockedStaggerTime, float parriedStaggerTime, bool isCancelable)
+    {
+        this.speed = speed;
+        this.damage = damage;
+        this.StaggerDuration = opponentStaggerTime;
+        this.blockedStaggerTime = blockedStaggerTime;
+        this.parriedStaggerTime = parriedStaggerTime;
+        this.isCancelable = isCancelable;
+    }
 }

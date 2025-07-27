@@ -13,7 +13,7 @@ public class Arm : NetworkIdentity
     public event Action OnBlocked;
 
     public event Action OnHit;
-    public event Action<Arm, int> OnReceiveHit;
+    public event Action<Arm, AttackStats> OnReceiveHit;
 
     public event Action OnGuardBreak;
     public event Action<Arm> OnReceiveGuardBreak;
@@ -29,7 +29,7 @@ public class Arm : NetworkIdentity
 
     [SerializeField] public Player player;
     [SerializeField] public ArmSide side;
-    [SerializeField] public Animator animator;
+    [SerializeField] public NetworkAnimator animator;
     [SerializeField] public ArmStateMachine stateMachine;
 
     bool _checkAnimationCycle = false;
@@ -54,7 +54,7 @@ public class Arm : NetworkIdentity
         base.OnSpawned();
     }
 
-    public void Hit(int hitid)
+    public void Hit(AttackStats attackStats)
     {
         //gérer juice
 
@@ -65,7 +65,7 @@ public class Arm : NetworkIdentity
 
         Arm targetArm = GameManager.Instance.opponent.GetOpposedArm(side);
 
-        targetArm.ReceiveHit(GameManager.Instance.opponentId, this, hitid);
+        targetArm.ReceiveHit(GameManager.Instance.opponentId, this, attackStats);
 
         //handle baisse de stamina
     }
@@ -82,9 +82,9 @@ public class Arm : NetworkIdentity
     }
 
     [TargetRpc]
-    public void ReceiveHit(PlayerID id, Arm attackingArm,int attackID)
+    public void ReceiveHit(PlayerID id, Arm attackingArm,AttackStats attackStats)
     { 
-        OnReceiveHit?.Invoke(attackingArm, attackID); 
+        OnReceiveHit?.Invoke(attackingArm, attackStats); 
     }
 
     [TargetRpc]

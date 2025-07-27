@@ -42,20 +42,11 @@ public class ArmState
         }
     }
 
-    public void DamagingHit(Arm attackingArm, int hitID)
+    public void DamagingHit(Arm attackingArm, AttackStats attackStats)
     {
         Debug.Log("OUCH");
 
-        switch (hitID)
-        {
-            default:
-                arm.player.UpdateHealth(-PlayerStats.LightAttackDamage);
-                stateMachine.Stagger(.6f);
-                break;
-            case 1:
-                arm.player.UpdateHealth(-PlayerStats.HeavyAttackDamage);
-                stateMachine.Stagger(1);
-                break;
-        }
+        arm.player.UpdateHealth(-attackStats.damage);
+        stateMachine.Stagger(attackStats.StaggerDuration);
     }
 }

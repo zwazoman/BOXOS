@@ -32,7 +32,7 @@ public class BlockState : ArmState
         HandleDurationBasedExit();
     }
 
-    void Block(Arm attackingArm, int attackID)
+    void Block(Arm attackingArm, AttackStats attackStats)
     {
         Debug.Log("Blocked !");
         attackingArm.Blocked(GameManager.Instance.opponentId);

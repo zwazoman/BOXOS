@@ -71,7 +71,7 @@ public class ArmStateMachine : NetworkIdentity
 
     #region Transitions
 
-    [ObserversRpc]
+    //[ObserversRpc]
     public void Neutral()
     {
         if(isOwner) print("Neutral" + " " + owner);
@@ -79,7 +79,7 @@ public class ArmStateMachine : NetworkIdentity
         TransitionTo(neutralState);
     }
 
-    [ObserversRpc]
+    //[ObserversRpc]
     public void Stagger(float duration = 0)
     {
         if (isOwner) print("Stagger" + " " + owner);
@@ -88,7 +88,7 @@ public class ArmStateMachine : NetworkIdentity
         TransitionTo(staggerState);
     }
 
-    [ObserversRpc]
+    //[ObserversRpc]
     public void Exhaust()
     {
         if (isOwner) print("Exhaust" + " " + owner);
@@ -96,7 +96,7 @@ public class ArmStateMachine : NetworkIdentity
         TransitionTo(exhaustState);
     }
 
-    [ObserversRpc]
+    //[ObserversRpc]
     public void AttackPrep()
     {
         if (isOwner) print("AttackPrep" + " " + owner);
@@ -104,7 +104,7 @@ public class ArmStateMachine : NetworkIdentity
         TransitionTo(attackPrepState);
     }
 
-    [ObserversRpc]
+    //[ObserversRpc]
     public void Attack(int attackId)
     {
         if (isOwner) print("Attack" + " " + owner);
@@ -113,7 +113,7 @@ public class ArmStateMachine : NetworkIdentity
         TransitionTo(attackState);
     }
 
-    [ObserversRpc]
+    //[ObserversRpc]
     public void DefensePrep()
     {
         if (isOwner) print("Defense Prep" + " " + owner);
@@ -121,7 +121,7 @@ public class ArmStateMachine : NetworkIdentity
         TransitionTo(defensePrepState);
     }
 
-    [ObserversRpc]
+    //[ObserversRpc]
     public void Block()
     {
         if (isOwner) print("Block" + " " + owner);
@@ -130,7 +130,7 @@ public class ArmStateMachine : NetworkIdentity
         TransitionTo(blockState);
     }
 
-    [ObserversRpc]
+    //[ObserversRpc]
     public void GuardBreak()
     {
         if (isOwner) print("Guard Break" + " " + owner);
