@@ -1588,7 +1588,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4615105653328339482}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnParryLeft
+        m_MethodName: OnCancelLeft
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1620,7 +1620,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4615105653328339482}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnParryRight
+        m_MethodName: OnCancelRight
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1632,22 +1632,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e618f310-a1fb-4940-b7fb-305d2726eab6
     m_ActionName: 'Boxe/Parry Right[/XInputControllerWindows/rightTrigger,/Keyboard/numpad0]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4615105653328339482}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnKickInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 26b61ad9-04e1-4962-b5ff-dc14abeb5288
-    m_ActionName: 'Boxe/Kick[/Keyboard/space,/XInputControllerWindows/buttonWest]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Boxe

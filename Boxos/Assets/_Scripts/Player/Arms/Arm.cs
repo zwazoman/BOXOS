@@ -19,7 +19,10 @@ public class Arm : NetworkIdentity
     public event Action<Arm> OnReceiveGuardBreak;
     public event Action OnSuccessfullGuardBreak;
 
+    public event Action OnCancel;
+
     public event Action<bool> OnParryWindow;
+    public event Action<bool> OnCancelWindow;
 
     public event Action OnExhaust;
 
@@ -81,6 +84,14 @@ public class Arm : NetworkIdentity
 
     }
 
+    public void Cancel()
+    {
+        if (!isOwner)
+            return;
+        OnCancel?.Invoke();
+    }
+
+
     [TargetRpc]
     public void ReceiveHit(PlayerID id, Arm attackingArm,AttackStats attackStats)
     { 
@@ -102,7 +113,9 @@ public class Arm : NetworkIdentity
     [TargetRpc]
     public void Parried(PlayerID id) { OnParried?.Invoke(); }
 
-    public void ParryWindow(bool state){    OnParryWindow?.Invoke(state);   }
+    public void ParryWindow(bool state){ OnParryWindow?.Invoke(state); }
+
+    public void CancelWindow(bool state) { OnCancelWindow?.Invoke(state); }
 
     public void CheckAnimationCycle()
     {

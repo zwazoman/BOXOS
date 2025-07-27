@@ -108,15 +108,14 @@ public class Player : NetworkIdentity
         rightArmInputDelta = ctx.ReadValue<Vector2>();
     }
 
-    public void OnKickInput(InputAction.CallbackContext ctx)
+    public void OnCancelLeft(InputAction.CallbackContext ctx)
     {
-        if (ctx.started)
-        {
-            OnKick?.Invoke();
-            print("Kick");
+        leftArm.Cancel();
+    }
 
-            UpdateHealth(2);
-        }
+    public void OnCancelRight(InputAction.CallbackContext ctx)
+    {
+        rightArm.Cancel();
     }
 
     public Vector2 GetStickVector(ArmSide side)

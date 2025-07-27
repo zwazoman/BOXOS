@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Parry Left",
+                    "name": "Cancel Left",
                     "type": "Button",
                     "id": "a4a224d2-1bc7-494b-af11-c5c747f2c24c",
                     "expectedControlType": "",
@@ -33,18 +33,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Parry Right",
+                    "name": "Cancel Right",
                     "type": "Button",
                     "id": "e618f310-a1fb-4940-b7fb-305d2726eab6",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Kick",
-                    "type": "Button",
-                    "id": "26b61ad9-04e1-4962-b5ff-dc14abeb5288",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -186,34 +177,12 @@
                 },
                 {
                     "name": "",
-                    "id": "66212e0d-eb0f-4f61-b593-eae2be2a7c4a",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Kick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e298b360-cfa2-4b69-88ef-5ae2681a9cbe",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Kick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "41c2f8f6-0828-4db8-b9a3-9a7f819bc4d0",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Parry Left",
+                    "action": "Cancel Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -224,7 +193,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Parry Left",
+                    "action": "Cancel Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -235,7 +204,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Parry Right",
+                    "action": "Cancel Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -246,7 +215,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Parry Right",
+                    "action": "Cancel Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -33,8 +33,10 @@ public class AttackState : ArmState
 
         arm.OnBlocked += AttackBlocked;
         arm.OnReceiveGuardBreak += AttackParried;
+        arm.OnCancel += AttackCanceled;
 
         arm.OnParryWindow += ParryWindowHandle;
+        arm.OnCancelWindow += CancelWindowHandle;
 
         arm.OnExhaust += stateMachine.Exhaust;
     }
@@ -82,11 +84,21 @@ public class AttackState : ArmState
                 break;
         }
         parryingArm.SuccessfullGuardbreak(GameManager.Instance.opponentId);
+    }
 
+    void AttackCanceled()
+    {
+        arm.player.UpdateStamina(-2);
+        stateMachine.Neutral();
     }
 
     void ParryWindowHandle(bool state)
     {
         isParriable = state;
+    }
+
+    void CancelWindowHandle(bool state)
+    {
+        isCancelable = state;
     }
 }

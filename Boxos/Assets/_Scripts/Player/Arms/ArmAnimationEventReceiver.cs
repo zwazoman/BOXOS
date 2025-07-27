@@ -42,4 +42,10 @@ public class ArmAnimationEventReceiver : MonoBehaviour
     {
         _arm.ParryWindow(state == 1);
     }
+
+    public void CancelWindow(int state)
+    {
+        _arm.CancelWindow(state == 1);
+    }
+
 }

@@ -101,7 +101,7 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Parry Left"",
+                    ""name"": ""Cancel Left"",
                     ""type"": ""Button"",
                     ""id"": ""a4a224d2-1bc7-494b-af11-c5c747f2c24c"",
                     ""expectedControlType"": """",
@@ -119,18 +119,9 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Parry Right"",
+                    ""name"": ""Cancel Right"",
                     ""type"": ""Button"",
                     ""id"": ""e618f310-a1fb-4940-b7fb-305d2726eab6"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Kick"",
-                    ""type"": ""Button"",
-                    ""id"": ""26b61ad9-04e1-4962-b5ff-dc14abeb5288"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -272,34 +263,12 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""66212e0d-eb0f-4f61-b593-eae2be2a7c4a"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Kick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e298b360-cfa2-4b69-88ef-5ae2681a9cbe"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Kick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""41c2f8f6-0828-4db8-b9a3-9a7f819bc4d0"",
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Parry Left"",
+                    ""action"": ""Cancel Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -310,7 +279,7 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Parry Left"",
+                    ""action"": ""Cancel Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -321,7 +290,7 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Parry Right"",
+                    ""action"": ""Cancel Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -332,7 +301,7 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Parry Right"",
+                    ""action"": ""Cancel Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -361,10 +330,9 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
         // Boxe
         m_Boxe = asset.FindActionMap("Boxe", throwIfNotFound: true);
         m_Boxe_LeftArm = m_Boxe.FindAction("Left Arm", throwIfNotFound: true);
-        m_Boxe_ParryLeft = m_Boxe.FindAction("Parry Left", throwIfNotFound: true);
+        m_Boxe_CancelLeft = m_Boxe.FindAction("Cancel Left", throwIfNotFound: true);
         m_Boxe_RightArm = m_Boxe.FindAction("Right Arm", throwIfNotFound: true);
-        m_Boxe_ParryRight = m_Boxe.FindAction("Parry Right", throwIfNotFound: true);
-        m_Boxe_Kick = m_Boxe.FindAction("Kick", throwIfNotFound: true);
+        m_Boxe_CancelRight = m_Boxe.FindAction("Cancel Right", throwIfNotFound: true);
     }
 
     ~@BoxosInputActions()
@@ -446,10 +414,9 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Boxe;
     private List<IBoxeActions> m_BoxeActionsCallbackInterfaces = new List<IBoxeActions>();
     private readonly InputAction m_Boxe_LeftArm;
-    private readonly InputAction m_Boxe_ParryLeft;
+    private readonly InputAction m_Boxe_CancelLeft;
     private readonly InputAction m_Boxe_RightArm;
-    private readonly InputAction m_Boxe_ParryRight;
-    private readonly InputAction m_Boxe_Kick;
+    private readonly InputAction m_Boxe_CancelRight;
     /// <summary>
     /// Provides access to input actions defined in input action map "Boxe".
     /// </summary>
@@ -466,21 +433,17 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @LeftArm => m_Wrapper.m_Boxe_LeftArm;
         /// <summary>
-        /// Provides access to the underlying input action "Boxe/ParryLeft".
+        /// Provides access to the underlying input action "Boxe/CancelLeft".
         /// </summary>
-        public InputAction @ParryLeft => m_Wrapper.m_Boxe_ParryLeft;
+        public InputAction @CancelLeft => m_Wrapper.m_Boxe_CancelLeft;
         /// <summary>
         /// Provides access to the underlying input action "Boxe/RightArm".
         /// </summary>
         public InputAction @RightArm => m_Wrapper.m_Boxe_RightArm;
         /// <summary>
-        /// Provides access to the underlying input action "Boxe/ParryRight".
+        /// Provides access to the underlying input action "Boxe/CancelRight".
         /// </summary>
-        public InputAction @ParryRight => m_Wrapper.m_Boxe_ParryRight;
-        /// <summary>
-        /// Provides access to the underlying input action "Boxe/Kick".
-        /// </summary>
-        public InputAction @Kick => m_Wrapper.m_Boxe_Kick;
+        public InputAction @CancelRight => m_Wrapper.m_Boxe_CancelRight;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -510,18 +473,15 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
             @LeftArm.started += instance.OnLeftArm;
             @LeftArm.performed += instance.OnLeftArm;
             @LeftArm.canceled += instance.OnLeftArm;
-            @ParryLeft.started += instance.OnParryLeft;
-            @ParryLeft.performed += instance.OnParryLeft;
-            @ParryLeft.canceled += instance.OnParryLeft;
+            @CancelLeft.started += instance.OnCancelLeft;
+            @CancelLeft.performed += instance.OnCancelLeft;
+            @CancelLeft.canceled += instance.OnCancelLeft;
             @RightArm.started += instance.OnRightArm;
             @RightArm.performed += instance.OnRightArm;
             @RightArm.canceled += instance.OnRightArm;
-            @ParryRight.started += instance.OnParryRight;
-            @ParryRight.performed += instance.OnParryRight;
-            @ParryRight.canceled += instance.OnParryRight;
-            @Kick.started += instance.OnKick;
-            @Kick.performed += instance.OnKick;
-            @Kick.canceled += instance.OnKick;
+            @CancelRight.started += instance.OnCancelRight;
+            @CancelRight.performed += instance.OnCancelRight;
+            @CancelRight.canceled += instance.OnCancelRight;
         }
 
         /// <summary>
@@ -536,18 +496,15 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
             @LeftArm.started -= instance.OnLeftArm;
             @LeftArm.performed -= instance.OnLeftArm;
             @LeftArm.canceled -= instance.OnLeftArm;
-            @ParryLeft.started -= instance.OnParryLeft;
-            @ParryLeft.performed -= instance.OnParryLeft;
-            @ParryLeft.canceled -= instance.OnParryLeft;
+            @CancelLeft.started -= instance.OnCancelLeft;
+            @CancelLeft.performed -= instance.OnCancelLeft;
+            @CancelLeft.canceled -= instance.OnCancelLeft;
             @RightArm.started -= instance.OnRightArm;
             @RightArm.performed -= instance.OnRightArm;
             @RightArm.canceled -= instance.OnRightArm;
-            @ParryRight.started -= instance.OnParryRight;
-            @ParryRight.performed -= instance.OnParryRight;
-            @ParryRight.canceled -= instance.OnParryRight;
-            @Kick.started -= instance.OnKick;
-            @Kick.performed -= instance.OnKick;
-            @Kick.canceled -= instance.OnKick;
+            @CancelRight.started -= instance.OnCancelRight;
+            @CancelRight.performed -= instance.OnCancelRight;
+            @CancelRight.canceled -= instance.OnCancelRight;
         }
 
         /// <summary>
@@ -609,12 +566,12 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLeftArm(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Parry Left" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Cancel Left" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnParryLeft(InputAction.CallbackContext context);
+        void OnCancelLeft(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Right Arm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -623,18 +580,11 @@ public partial class @BoxosInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRightArm(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Parry Right" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Cancel Right" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnParryRight(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Kick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnKick(InputAction.CallbackContext context);
+        void OnCancelRight(InputAction.CallbackContext context);
     }
 }
