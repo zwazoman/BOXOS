@@ -8,12 +8,12 @@ public class BlockState : ArmState
         base.OnEnter();
         arm.animator.SetTrigger("Block");
 
-        arm.player.UpdateStamina(-PlayerStats.BlockStaminaCost);
+        arm.player.UpdateHeat(PlayerStats.BlockHeatCost);
 
         arm.OnReceiveHit += Block;
         arm.OnReceiveGuardBreak += GuardBroken;
 
-        arm.OnExhaust += stateMachine.Exhaust;
+        arm.OnExhaust += stateMachine.OverHeat;
     }
 
     public override void OnExit()
@@ -21,14 +21,11 @@ public class BlockState : ArmState
         arm.OnReceiveHit -= Block;
         arm.OnReceiveGuardBreak -= GuardBroken;
 
-        arm.OnExhaust -= stateMachine.Exhaust;
+        arm.OnExhaust -= stateMachine.OverHeat;
     }
 
     public override void Update()
     {
-        if (!update)
-            return;
-
         HandleDurationBasedExit();
     }
 

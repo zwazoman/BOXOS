@@ -12,7 +12,7 @@ public class Player : NetworkIdentity
     public event Action OnTakeDamage;
     public event Action OnLoseStamina;
     public event Action OnStaminaRegen;
-    public event Action OnExhaust;
+    public event Action OnOverheat;
     public event Action OnDie;
 
     public event Action OnKick;
@@ -33,7 +33,7 @@ public class Player : NetworkIdentity
 
     [SerializeField] PlayerInput _playerInput;
 
-    public SyncVar<int> stamina = new(initialValue: PlayerStats.MaxStamina, ownerAuth: true);
+    public SyncVar<int> heat = new(initialValue: PlayerStats.MaxHeat, ownerAuth: true);
     public SyncVar<int> health = new(initialValue: PlayerStats.MaxHealth, ownerAuth: true);
 
     [SerializeField] public Arm leftArm;
@@ -42,8 +42,8 @@ public class Player : NetworkIdentity
     [HideInInspector] public Vector2 leftArmInputDelta = Vector2.zero;
     [HideInInspector] public Vector2 rightArmInputDelta = Vector2.zero;
 
-    bool staminaRegen;
-    float staminaTimer;
+    bool _cooling;
+    float _coolTimer;
 
     private void Awake()
     {
@@ -65,8 +65,8 @@ public class Player : NetworkIdentity
             print(localPlayerForced);
             _body.SetActive(false);
             _camera.enabled = true;
-            StartCoroutine(RegenStamina());
-            staminaRegen = true;
+            StartCoroutine(CoolHeat());
+            _cooling = true;
         }
         else
         {
@@ -86,14 +86,14 @@ public class Player : NetworkIdentity
         if (!isOwner)
             return;
 
-        if (!staminaRegen)
+        if (!_cooling)
         {
-            staminaTimer += Time.deltaTime;
-            if(staminaTimer >= PlayerStats.StaminaStaggerDuration)
+            _coolTimer += Time.deltaTime;
+            if(_coolTimer >= PlayerStats.HeatTimeToCool)
             {
-                staminaRegen = true;
-                staminaTimer = 0;
-                StartCoroutine(RegenStamina());
+                _cooling = true;
+                _coolTimer = 0;
+                StartCoroutine(CoolHeat());
             }
         }
     }
@@ -145,32 +145,32 @@ public class Player : NetworkIdentity
             Die();
     }
 
-    public void UpdateStamina(int amount)
+    public void UpdateHeat(int amount)
     {
         if (!isOwner)
             return;
 
         OnLoseStamina?.Invoke();
 
-        if (stamina.value > stamina.value + amount)
+        if (heat.value < heat.value + amount)
         {
-            staminaRegen = false;
+            _cooling = false;
         }
 
-        stamina.value = Mathf.Clamp(stamina + amount, 0, PlayerStats.MaxStamina);
+        heat.value = Mathf.Clamp(heat + amount, 0, PlayerStats.MaxHeat);
 
-        if (stamina == 0)
+        if (heat == PlayerStats.MaxHeat)
         {
-            print("EXHAUST");
-            OnExhaust?.Invoke();
+            print("OVERHEAT");
+            OnOverheat?.Invoke();
         }
     }
 
-    IEnumerator RegenStamina()
+    IEnumerator CoolHeat()
     {
-        while (staminaRegen)
+        while (_cooling)
         {
-            UpdateStamina(PlayerStats.StaminaRegenPerTick);
+            UpdateHeat(-PlayerStats.StaminaRegenPerTick);
             yield return new WaitForSeconds(PlayerStats.StaminaRegenDurationOffset);
         }
     }

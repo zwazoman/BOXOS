@@ -11,12 +11,10 @@ public class ArmState
     public float stateDuration;
 
     protected float exitTimer;
-    protected bool update = true;
 
     public virtual void OnEnter()
     {
         exitTimer = 0;
-        update = true;
     }
 
     public virtual void Update()
@@ -26,11 +24,6 @@ public class ArmState
 
     public virtual void OnExit() { }
 
-    public void StopUpdate()
-    {
-        update = false;
-    }
-
     protected void HandleDurationBasedExit()
     {
         exitTimer += Time.deltaTime;
@@ -38,7 +31,6 @@ public class ArmState
         if (exitTimer >= stateDuration)
         {
             stateMachine.Neutral();
-            StopUpdate();
         }
     }
 

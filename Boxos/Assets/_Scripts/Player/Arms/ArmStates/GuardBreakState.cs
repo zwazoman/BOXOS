@@ -7,14 +7,14 @@ public class GuardBreakState : ArmState
     {
         arm.animator.SetTrigger("GuardBreak");
 
-        arm.player.UpdateStamina(-PlayerStats.GuardBreakStaminaCost);
+        arm.player.UpdateHeat(PlayerStats.GuardBreakHeatCost);
 
         arm.CheckAnimationCycle();
         arm.OnAnimationCycle += GuardBreakEnd;
 
         arm.OnSuccessfullGuardBreak += stateMachine.Neutral;
 
-        arm.OnExhaust += stateMachine.Exhaust;
+        arm.OnExhaust += stateMachine.OverHeat;
     }
 
     public override void OnExit()
@@ -23,7 +23,7 @@ public class GuardBreakState : ArmState
 
         arm.OnSuccessfullGuardBreak -= stateMachine.Neutral;
 
-        arm.OnExhaust -= stateMachine.Exhaust;
+        arm.OnExhaust -= stateMachine.OverHeat;
     }
 
     void GuardBreakEnd()

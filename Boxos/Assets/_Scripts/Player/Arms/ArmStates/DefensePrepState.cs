@@ -9,26 +9,22 @@ public class DefensePrepState : ArmState
 
         arm.OnReceiveHit += DamagingHit;
 
-        arm.OnExhaust += stateMachine.Exhaust;
+        arm.OnExhaust += stateMachine.OverHeat;
     }
 
     public override void OnExit()
     {
         arm.OnReceiveHit -= DamagingHit;
 
-        arm.OnExhaust -= stateMachine.Exhaust;
+        arm.OnExhaust -= stateMachine.OverHeat;
     }
 
     public override void Update()
     {
-        if (!update)
-            return;
-
         //blockHandle
         if(InputTools.InputAngleEnter(Vector2.up, armInputDelta))
         {
             stateMachine.Block();
-            StopUpdate();
             return;
         }
 
@@ -36,7 +32,6 @@ public class DefensePrepState : ArmState
         if (InputTools.InputAngleEnter(Vector2.right, armInputDelta))
         {
             stateMachine.GuardBreak();
-            StopUpdate();
             return;
         }
 
@@ -48,7 +43,6 @@ public class DefensePrepState : ArmState
             if (exitTimer >= PlayerStats.InputExitTime)
             {
                 stateMachine.Neutral();
-                StopUpdate();
             }
         }
     }

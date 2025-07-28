@@ -10,7 +10,7 @@ public class ArmStateMachine : NetworkIdentity
     #region States
     public NeutralState neutralState = new();
     public StaggerState staggerState = new();
-    public ExhaustState exhaustState = new();
+    public OverHeatState overHeatState = new();
     public AttackPrepState attackPrepState = new();
     public AttackState attackState = new();
     public DefensePrepState defensePrepState = new();
@@ -89,11 +89,11 @@ public class ArmStateMachine : NetworkIdentity
     }
 
     //[ObserversRpc]
-    public void Exhaust()
+    public void OverHeat()
     {
-        if (isOwner) print("Exhaust" + " " + owner);
+        if (isOwner) print("Overheat" + " " + owner);
 
-        TransitionTo(exhaustState);
+        TransitionTo(overHeatState);
     }
 
     //[ObserversRpc]

@@ -17,11 +17,11 @@ public class AttackState : ArmState
         {
             default:
                 arm.animator.SetTrigger("LightAttack");
-                arm.player.UpdateStamina(-PlayerStats.LightAttackStaminaCost);
+                arm.player.UpdateHeat(PlayerStats.LightAttackHeatCost);
                 break;
             case 1:
                 arm.animator.SetTrigger("HeavyAttack");
-                arm.player.UpdateStamina(-PlayerStats.HeavyAttackStaminaCost);
+                arm.player.UpdateHeat(PlayerStats.HeavyAttackHeatCost);
                 isCancelable = true;
                 break;
         }
@@ -38,7 +38,7 @@ public class AttackState : ArmState
         arm.OnParryWindow += ParryWindowHandle;
         arm.OnCancelWindow += CancelWindowHandle;
 
-        arm.OnExhaust += stateMachine.Exhaust;
+        arm.OnExhaust += stateMachine.OverHeat;
     }
 
     public override void OnExit()
@@ -52,7 +52,7 @@ public class AttackState : ArmState
 
         arm.OnParryWindow -= ParryWindowHandle;
 
-        arm.OnExhaust -= stateMachine.Exhaust;
+        arm.OnExhaust -= stateMachine.OverHeat;
     }
 
     void AttackBlocked()
@@ -76,11 +76,11 @@ public class AttackState : ArmState
         {
             default:
                 stateMachine.Stagger(PlayerStats.ParriedLightAttackStaggerDuration);
-                arm.player.UpdateStamina(-PlayerStats.ParriedLightAttackStaminaCost);
+                arm.player.UpdateHeat(PlayerStats.ParriedLightAttackHeatCost);
                 break;
             case 1:
                 stateMachine.Stagger(PlayerStats.ParriedHeavyAttackStaggerDuration);
-                arm.player.UpdateStamina(-PlayerStats.ParriedHeavyAttackStaminaCost);
+                arm.player.UpdateHeat(PlayerStats.ParriedHeavyAttackHeatCost);
                 break;
         }
         parryingArm.SuccessfullGuardbreak(GameManager.Instance.opponentId);
@@ -88,7 +88,7 @@ public class AttackState : ArmState
 
     void AttackCanceled()
     {
-        arm.player.UpdateStamina(-2);
+        arm.player.UpdateHeat(2);
         stateMachine.Neutral();
     }
 

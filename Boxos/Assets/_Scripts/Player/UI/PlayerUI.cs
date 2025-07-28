@@ -27,7 +27,7 @@ public class PlayerUI : NetworkBehaviour
     private void Start()
     {
         _player.health.onChanged += UpdateHealth;
-        _player.stamina.onChanged += UpdateStamina;
+        _player.heat.onChanged += UpdateStamina;
     }
 
     protected override void OnSpawned()
@@ -38,13 +38,13 @@ public class PlayerUI : NetworkBehaviour
         {
             _opponentCanvas.enabled = false;
             _ownerHpText.text = PlayerStats.MaxHealth.ToString();
-            _ownerStaminaText.text = PlayerStats.MaxStamina.ToString();
+            _ownerStaminaText.text = PlayerStats.MaxHeat.ToString();
         }
         else
         {
             _ownerCanvas.enabled = false;
             _opponentHpText.text = PlayerStats.MaxHealth.ToString();
-            _opponentStaminaText.text = PlayerStats.MaxStamina.ToString();
+            _opponentStaminaText.text = PlayerStats.MaxHeat.ToString();
         }
 
     }

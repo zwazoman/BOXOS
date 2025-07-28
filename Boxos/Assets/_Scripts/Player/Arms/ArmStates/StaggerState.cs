@@ -12,19 +12,16 @@ public class StaggerState : ArmState
         if (stateDuration == 0)
             stateDuration = 2;
 
-        arm.OnExhaust += stateMachine.Exhaust;
+        arm.OnExhaust += stateMachine.OverHeat;
     }
 
     public override void OnExit()
     {
-        arm.OnExhaust -= stateMachine.Exhaust;
+        arm.OnExhaust -= stateMachine.OverHeat;
     }
 
     public override void Update()
     {
-        if (!update)
-            return;
-
         HandleDurationBasedExit();
     }
 

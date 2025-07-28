@@ -49,7 +49,7 @@ public class Arm : NetworkIdentity
 
     private void Start()
     {
-        player.OnExhaust += () => OnExhaust?.Invoke();
+        player.OnOverheat += () => OnExhaust?.Invoke();
     }
 
     protected override void OnSpawned()

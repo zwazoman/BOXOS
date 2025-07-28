@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ExhaustState : ArmState
+public class OverHeatState : ArmState
 {
     public override void OnEnter()
     {
@@ -8,14 +8,11 @@ public class ExhaustState : ArmState
 
         arm.OnReceiveHit += DamagingHit;
 
-        stateDuration = PlayerStats.ExhaustDuration;
+        stateDuration = PlayerStats.OverheatDuration;
     }
 
     public override void Update()
     {
-        if (!update)
-            return;
-
         HandleDurationBasedExit();
     }
 

@@ -12,7 +12,7 @@ public class NeutralState : ArmState
 
         arm.OnReceiveHit += DamagingHit;
 
-        arm.OnExhaust += stateMachine.Exhaust;
+        arm.OnExhaust += stateMachine.OverHeat;
 
         //temp
         arm.player.OnKick += stateMachine.Block;
@@ -24,21 +24,14 @@ public class NeutralState : ArmState
 
         arm.OnReceiveHit -= DamagingHit;
 
-        arm.OnExhaust -= stateMachine.Exhaust;
+        arm.OnExhaust -= stateMachine.OverHeat;
     }
 
     public override void Update()
     {
-        if (!update)
-            return;
-
-        //test
-        //InputTools.InputAngleEnter(Vector2.right, armInputDelta);
-
         //attack Prep
         if (InputTools.InputAngleEnter(Vector2.down, armInputDelta))
         {
-            StopUpdate();
             stateMachine.AttackPrep();
             return;
         }
@@ -46,7 +39,6 @@ public class NeutralState : ArmState
         //defense Prep
         if (InputTools.InputAngleEnter(Vector2.left, armInputDelta))
         {
-            StopUpdate();
             stateMachine.DefensePrep();
             return;
         }

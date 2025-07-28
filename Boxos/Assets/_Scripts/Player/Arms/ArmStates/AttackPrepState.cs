@@ -12,7 +12,7 @@ public class AttackPrepState : ArmState
 
         arm.OnReceiveHit += DamagingHit;
 
-        arm.OnExhaust += stateMachine.Exhaust;
+        arm.OnExhaust += stateMachine.OverHeat;
     }
 
     public override void OnExit()
@@ -20,14 +20,11 @@ public class AttackPrepState : ArmState
         _circularInput = false;
         arm.OnReceiveHit += DamagingHit;
 
-        arm.OnExhaust -= stateMachine.Exhaust;
+        arm.OnExhaust -= stateMachine.OverHeat;
     }
 
     public override void Update()
     {
-        if (!update)
-            return;
-
         //heavy attack handle
         if (InputTools.InputAngleEnter(Vector2.right, armInputDelta))
         {
@@ -36,7 +33,6 @@ public class AttackPrepState : ArmState
         if (_circularInput && InputTools.InputAngleEnter(Vector2.up, armInputDelta))
         {
             stateMachine.Attack(1);
-            StopUpdate();
             return;
         }
 
@@ -44,7 +40,6 @@ public class AttackPrepState : ArmState
         if (InputTools.InputAngleEnter(Vector2.up, armInputDelta))
         {
             stateMachine.Attack(0);
-            StopUpdate();
             return;
         }
 
@@ -56,7 +51,6 @@ public class AttackPrepState : ArmState
 
             if (exitTimer >= PlayerStats.InputExitTime)
             {
-                StopUpdate();
                 stateMachine.Neutral();
             }
         }
