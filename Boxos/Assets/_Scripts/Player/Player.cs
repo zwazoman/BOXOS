@@ -10,8 +10,8 @@ public class Player : NetworkIdentity
     #region Events
 
     public event Action OnTakeDamage;
-    public event Action OnLoseStamina;
-    public event Action OnStaminaRegen;
+    public event Action OnHeatUp;
+    public event Action OnCool;
     public event Action OnOverheat;
     public event Action OnDie;
 
@@ -33,7 +33,7 @@ public class Player : NetworkIdentity
 
     [SerializeField] PlayerInput _playerInput;
 
-    public SyncVar<int> heat = new(initialValue: PlayerStats.MaxHeat, ownerAuth: true);
+    public SyncVar<int> heat = new(initialValue: 0, ownerAuth: true);
     public SyncVar<int> health = new(initialValue: PlayerStats.MaxHealth, ownerAuth: true);
 
     [SerializeField] public Arm leftArm;
@@ -56,10 +56,6 @@ public class Player : NetworkIdentity
     protected override void OnSpawned()
     {
         base.OnSpawned();
-
-        //_stamina.value = PlayerStats.MaxStamina;
-        //_health.value = PlayerStats.MaxHealth;
-
         if (isOwner)
         {
             print(localPlayerForced);
@@ -150,7 +146,7 @@ public class Player : NetworkIdentity
         if (!isOwner)
             return;
 
-        OnLoseStamina?.Invoke();
+        OnHeatUp?.Invoke();
 
         if (heat.value < heat.value + amount)
         {
@@ -170,8 +166,8 @@ public class Player : NetworkIdentity
     {
         while (_cooling)
         {
-            UpdateHeat(-PlayerStats.StaminaRegenPerTick);
-            yield return new WaitForSeconds(PlayerStats.StaminaRegenDurationOffset);
+            UpdateHeat(-PlayerStats.CoolingPerTick);
+            yield return new WaitForSeconds(PlayerStats.CoolingDurationOffset);
         }
     }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6321325900920146801}
   - component: {fileID: 4583661817769060662}
   m_Layer: 5
-  m_Name: StaminaText
+  m_Name: HeatText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,10 +196,10 @@ MonoBehaviour:
   _player: {fileID: 4615105653328339482}
   _ownerCanvas: {fileID: 6672401035979128736}
   _ownerHpText: {fileID: 4290595700180142363}
-  _ownerStaminaText: {fileID: 4583661817769060662}
+  _ownerHeatText: {fileID: 4583661817769060662}
   _opponentCanvas: {fileID: 42836796891390285}
   _opponentHpText: {fileID: 4965638435149573139}
-  _opponentStaminaText: {fileID: 1475087132140999562}
+  _opponentHeatText: {fileID: 1475087132140999562}
 --- !u!1 &1720056076511671672
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,7 +875,7 @@ GameObject:
   - component: {fileID: 4853884080718988637}
   - component: {fileID: 1475087132140999562}
   m_Layer: 5
-  m_Name: Stamina text
+  m_Name: HeatText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1531,8 +1531,8 @@ MonoBehaviour:
   _body: {fileID: 6406992371960766418}
   _camera: {fileID: 8303467015618133355}
   _playerInput: {fileID: 1341465486721655262}
-  stamina:
-    _value: 20
+  heat:
+    _value: 0
     _ownerAuth: 1
     _sendIntervalInSeconds: 0
   health:

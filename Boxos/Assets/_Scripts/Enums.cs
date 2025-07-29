@@ -4,9 +4,21 @@ public enum ArmSide
     Right,
 }
 
-public enum HitStrength
+public enum DurationType
+{
+    Fixed,
+    AnimationBased,
+    Infinite
+}
+
+public enum AttackType
 {
     Light,
     Heavy,
+}
+
+public enum SpecialAttacks
+{
+
 }
 

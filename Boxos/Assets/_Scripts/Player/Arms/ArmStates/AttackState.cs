@@ -3,31 +3,23 @@ using UnityEngine;
 
 public class AttackState : ArmState
 {
-    public int attackID;
+    protected AttackStats? stats;
 
-    bool isParriable = false;
+    protected AttackType type;
 
-    bool isCancelable = false;
+    protected bool isParriable;
+
+    protected bool isCancelable;
 
     public override void OnEnter()
     {
+        if (stats.HasValue == false)
+            stats = stateMachine.attacks[type];
+
         isParriable = false;
+        isCancelable = false;
 
-        switch (attackID)
-        {
-            default:
-                arm.animator.SetTrigger("LightAttack");
-                arm.player.UpdateHeat(PlayerStats.LightAttackHeatCost);
-                break;
-            case 1:
-                arm.animator.SetTrigger("HeavyAttack");
-                arm.player.UpdateHeat(PlayerStats.HeavyAttackHeatCost);
-                isCancelable = true;
-                break;
-        }
-
-        arm.CheckAnimationCycle();
-        arm.OnAnimationCycle += stateMachine.Neutral;
+        arm.OnHit += Hit;
 
         arm.OnReceiveHit += DamagingHit;
 
@@ -39,65 +31,74 @@ public class AttackState : ArmState
         arm.OnCancelWindow += CancelWindowHandle;
 
         arm.OnExhaust += stateMachine.OverHeat;
+
+        Debug.Log("attack entered");
     }
 
     public override void OnExit()
     {
-        arm.OnAnimationCycle -= stateMachine.Neutral;
+        arm.OnHit -= Hit;
 
         arm.OnReceiveHit -= DamagingHit;
 
         arm.OnBlocked -= AttackBlocked;
         arm.OnReceiveGuardBreak -= AttackParried;
+        arm.OnCancel -= AttackCanceled;
 
         arm.OnParryWindow -= ParryWindowHandle;
 
         arm.OnExhaust -= stateMachine.OverHeat;
     }
 
-    void AttackBlocked()
+    protected virtual void Hit()
+    {
+        Debug.Log("TAPE");
+
+        Arm targetArm = GameManager.Instance.opponent.GetOpposedArm(arm.side);
+
+        targetArm.ReceiveHit(GameManager.Instance.opponentId, arm, stats.Value);
+    }
+
+    protected virtual void AttackBlocked()
     {
         Debug.Log("Attack blocked !");
-
-        stateMachine.Stagger(1f);
-
         //surement jouer un son là
+
+        stateMachine.Stagger(stats.Value.blockedStaggerTime);
+        arm.player.UpdateHeat(stats.Value.blockedHeatCost);
+
     }
 
 
-    void AttackParried(Arm parryingArm)
+    protected virtual void AttackParried(Arm parryingArm)
     {
         if (!isParriable)
             return;
 
-        Debug.Log("Attack Parried");
-        
-        switch (attackID)
-        {
-            default:
-                stateMachine.Stagger(PlayerStats.ParriedLightAttackStaggerDuration);
-                arm.player.UpdateHeat(PlayerStats.ParriedLightAttackHeatCost);
-                break;
-            case 1:
-                stateMachine.Stagger(PlayerStats.ParriedHeavyAttackStaggerDuration);
-                arm.player.UpdateHeat(PlayerStats.ParriedHeavyAttackHeatCost);
-                break;
-        }
+        Debug.Log("parried");
+
+        stateMachine.Stagger(stats.Value.parriedStaggerTime);
+        arm.player.UpdateHeat(stats.Value.parriedHeatCost);
+
         parryingArm.SuccessfullGuardbreak(GameManager.Instance.opponentId);
     }
 
-    void AttackCanceled()
+    protected virtual void AttackCanceled()
     {
-        arm.player.UpdateHeat(2);
+        Debug.Log("IL A ESSAYE DE CANCEL");
+
+        if (!isCancelable)
+            return;
+
         stateMachine.Neutral();
     }
 
-    void ParryWindowHandle(bool state)
+    protected void ParryWindowHandle(bool state)
     {
         isParriable = state;
     }
 
-    void CancelWindowHandle(bool state)
+    protected void CancelWindowHandle(bool state)
     {
         isCancelable = state;
     }

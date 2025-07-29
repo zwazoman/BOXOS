@@ -1,8 +1,13 @@
+using NUnit.Framework;
 using PurrNet;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ArmStateMachine : NetworkIdentity
 {
+    public Dictionary<AttackType, AttackStats> attacks = new();
+    [SerializeField] List<AttacksScriptable> attacksScriptables = new();
+
     [SerializeField] Arm _arm;
 
     ArmState currentState;
@@ -16,6 +21,11 @@ public class ArmStateMachine : NetworkIdentity
     public DefensePrepState defensePrepState = new();
     public BlockState blockState = new();
     public GuardBreakState guardBreakState = new();
+
+    //attacks
+    public LightAttackState lightAttackState = new();
+    public HeavyAttackState heavyAttackState = new();
+
     #endregion
 
     private void Awake()
@@ -23,12 +33,17 @@ public class ArmStateMachine : NetworkIdentity
         if (_arm == null)
             TryGetComponent(out _arm);
     }
-
     protected override void OnSpawned()
     {
         base.OnSpawned();
 
-        //Neutral();
+        if (!isOwner)
+            return;
+
+        foreach (AttacksScriptable truc in attacksScriptables)
+        {
+            attacks.Add(truc.attackType, truc.stats);
+        }
 
         if (GameManager.Instance.opponentId == PlayerID.Server)
             GameManager.Instance.OnPlayerSpawned += Neutral;
@@ -108,8 +123,6 @@ public class ArmStateMachine : NetworkIdentity
     public void Attack(int attackId)
     {
         if (isOwner) print("Attack" + " " + owner);
-
-        attackState.attackID = attackId;
         TransitionTo(attackState);
     }
 

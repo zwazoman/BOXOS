@@ -10,13 +10,13 @@ public class PlayerUI : NetworkBehaviour
 
     [SerializeField] Canvas _ownerCanvas;
     [SerializeField] TMP_Text _ownerHpText;
-    [SerializeField] TMP_Text _ownerStaminaText;
+    [SerializeField] TMP_Text _ownerHeatText;
 
     [Header("Opponent Section")]
 
     [SerializeField] Canvas _opponentCanvas;
     [SerializeField] TMP_Text _opponentHpText;
-    [SerializeField] TMP_Text _opponentStaminaText;
+    [SerializeField] TMP_Text _opponentHeatText;
 
     private void Awake()
     {
@@ -27,24 +27,23 @@ public class PlayerUI : NetworkBehaviour
     private void Start()
     {
         _player.health.onChanged += UpdateHealth;
-        _player.heat.onChanged += UpdateStamina;
+        _player.heat.onChanged += UpdateHeat;
     }
 
     protected override void OnSpawned()
     {
         base.OnSpawned();
-
         if (isOwner)
         {
             _opponentCanvas.enabled = false;
-            _ownerHpText.text = PlayerStats.MaxHealth.ToString();
-            _ownerStaminaText.text = PlayerStats.MaxHeat.ToString();
+            _ownerHpText.text = _player.health.value.ToString();
+            _ownerHeatText.text = _player.heat.value.ToString();
         }
         else
         {
             _ownerCanvas.enabled = false;
-            _opponentHpText.text = PlayerStats.MaxHealth.ToString();
-            _opponentStaminaText.text = PlayerStats.MaxHeat.ToString();
+            _opponentHpText.text = _player.health.value.ToString();
+            _opponentHeatText.text = _player.heat.value.ToString();
         }
 
     }
@@ -57,11 +56,11 @@ public class PlayerUI : NetworkBehaviour
             _opponentHpText.text = newAmount.ToString();
     }
 
-    void UpdateStamina(int newAmount)
+    void UpdateHeat(int newAmount)
     {
         if(isOwner)
-            _ownerStaminaText.text = newAmount.ToString();
+            _ownerHeatText.text = newAmount.ToString();
         else
-            _opponentStaminaText.text = newAmount.ToString();
+            _opponentHeatText.text = newAmount.ToString();
     }
 }

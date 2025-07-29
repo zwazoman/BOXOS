@@ -32,14 +32,14 @@ public class AttackPrepState : ArmState
         }
         if (_circularInput && InputTools.InputAngleEnter(Vector2.up, armInputDelta))
         {
-            stateMachine.Attack(1);
+            stateMachine.TransitionTo(stateMachine.heavyAttackState);
             return;
         }
 
         //light attack handle
         if (InputTools.InputAngleEnter(Vector2.up, armInputDelta))
         {
-            stateMachine.Attack(0);
+            stateMachine.TransitionTo(stateMachine.lightAttackState);
             return;
         }
 

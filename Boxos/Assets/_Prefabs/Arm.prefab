@@ -348,6 +348,9 @@ MonoBehaviour:
   _directChildren: []
   _networkRules: {fileID: 0}
   _visitiblityRules: {fileID: 0}
+  attacksScriptables:
+  - {fileID: 11400000, guid: 57098dcfc19d43248a81d94f293fadc3, type: 2}
+  - {fileID: 11400000, guid: 1368d2879613d984aa001f7cad90b2ea, type: 2}
   _arm: {fileID: 1197276455699501822}
 --- !u!1 &7581468112728295793
 GameObject:

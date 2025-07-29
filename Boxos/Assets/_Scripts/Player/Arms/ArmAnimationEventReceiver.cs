@@ -4,33 +4,9 @@ public class ArmAnimationEventReceiver : MonoBehaviour
 {
     [SerializeField] Arm _arm;
 
-    public void Hit(int attackID)
+    public void Hit()
     {
-        switch (attackID)
-        {
-            case 0:
-                AttackStats lightAttackStats = new(
-                    PlayerStats.LightAttackSpeed,
-                    PlayerStats.LightAttackDamage,
-                    PlayerStats.LightAttackHitStaggerDuration,
-                    PlayerStats.BlockedLightAttackStaggerDuration,
-                    PlayerStats.ParriedLightAttackStaggerDuration,
-                    false
-                    );
-                _arm.Hit(lightAttackStats);
-                break;
-            case 1:
-                AttackStats heavyAttackStats = new(
-                    PlayerStats.LightAttackSpeed,
-                    PlayerStats.LightAttackDamage,
-                    PlayerStats.LightAttackHitStaggerDuration,
-                    PlayerStats.BlockedLightAttackStaggerDuration,
-                    PlayerStats.ParriedLightAttackStaggerDuration,
-                    false
-                    );
-                _arm.Hit(heavyAttackStats);
-                break;
-        }
+        _arm.Hit();
     }
 
     public void GuardBreak()
@@ -48,4 +24,8 @@ public class ArmAnimationEventReceiver : MonoBehaviour
         _arm.CancelWindow(state == 1);
     }
 
+    public void AnimationEnd()
+    {
+        _arm.AnimationEnd();
+    }
 }

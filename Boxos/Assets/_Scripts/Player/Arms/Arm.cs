@@ -26,7 +26,7 @@ public class Arm : NetworkIdentity
 
     public event Action OnExhaust;
 
-    public event Action OnAnimationCycle;
+    public event Action OnAnimationEnd;
 
     #endregion
 
@@ -57,22 +57,6 @@ public class Arm : NetworkIdentity
         base.OnSpawned();
     }
 
-    public void Hit(AttackStats attackStats)
-    {
-        //gérer juice
-
-        if (!isOwner)
-            return;
-
-        print("HIT");
-
-        Arm targetArm = GameManager.Instance.opponent.GetOpposedArm(side);
-
-        targetArm.ReceiveHit(GameManager.Instance.opponentId, this, attackStats);
-
-        //handle baisse de stamina
-    }
-
     public void GuardBreak()
     {
         if (!isOwner)
@@ -94,7 +78,8 @@ public class Arm : NetworkIdentity
 
     [TargetRpc]
     public void ReceiveHit(PlayerID id, Arm attackingArm,AttackStats attackStats)
-    { 
+    {
+        print("receivehit");
         OnReceiveHit?.Invoke(attackingArm, attackStats); 
     }
 
@@ -113,25 +98,11 @@ public class Arm : NetworkIdentity
     [TargetRpc]
     public void Parried(PlayerID id) { OnParried?.Invoke(); }
 
+    public void Hit() { if(isOwner) OnHit?.Invoke(); }
+
     public void ParryWindow(bool state){ OnParryWindow?.Invoke(state); }
 
     public void CancelWindow(bool state) { OnCancelWindow?.Invoke(state); }
 
-    public void CheckAnimationCycle()
-    {
-        _checkAnimationCycle = true;
-    }
-
-    private void Update()
-    {
-        if (!isOwner || !_checkAnimationCycle)
-            return;
-
-        AnimatorStateInfo currenStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (currenStateInfo.normalizedTime >= 1)
-        {
-            OnAnimationCycle?.Invoke();
-            _checkAnimationCycle = false;
-        }
-    }
+    public void AnimationEnd() { OnAnimationEnd?.Invoke(); }
 }
