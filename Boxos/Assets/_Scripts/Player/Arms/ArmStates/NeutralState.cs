@@ -30,14 +30,14 @@ public class NeutralState : ArmState
     public override void Update()
     {
         //attack Prep
-        if (InputTools.InputAngleEnter(Vector2.down, armInputDelta))
+        if (InputTools.InputAngle(Vector2.down, armInputDelta))
         {
             stateMachine.AttackPrep();
             return;
         }
 
         //defense Prep
-        if (InputTools.InputAngleEnter(Vector2.left, armInputDelta))
+        if (InputTools.InputAngle(Vector2.left, armInputDelta))
         {
             stateMachine.DefensePrep();
             return;

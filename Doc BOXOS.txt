@@ -7,3 +7,20 @@ every input with  direct visual repercussion
 send and receive messages to the server
 
 ex : attack -> hit(pass the arm through) -> ennemy receives "attacked" -> check if blocked or parried -> if blocked : send "hit blocked" to the received arm -> arm receives and behaves.
+
+-Arm States :
+en feu (prend des ticks de heat, necessite un input pour s'éteindre)
+
+
+-Protheses:
+Attack :
+tape de l'autre coté
+attacke verticale(uniquement parrable mais grosse window) cancelable ?
+charge (plus longtemps = plus de degats)
+coup chauffant qui inlige de la heat mais t'en inflige aussi
+coup qui met en feu
+flash dans la gueule
+patate avec animation tres légère mais gros bruit
+airhorm qui nique l'audio du mec en face (filtre audio)
+
+Defense:

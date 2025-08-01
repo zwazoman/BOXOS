@@ -34,6 +34,7 @@ public class Arm : NetworkIdentity
     [SerializeField] public ArmSide side;
     [SerializeField] public NetworkAnimator animator;
     [SerializeField] public ArmStateMachine stateMachine;
+    [SerializeField] public ArmInputHandler inputs;
 
     bool _checkAnimationCycle = false;
 
@@ -45,6 +46,8 @@ public class Arm : NetworkIdentity
             GetComponentInParent<Player>();
         if(stateMachine == null)
             TryGetComponent(out stateMachine);
+        if(inputs == null)
+            TryGetComponent(out inputs);
     }
 
     private void Start()

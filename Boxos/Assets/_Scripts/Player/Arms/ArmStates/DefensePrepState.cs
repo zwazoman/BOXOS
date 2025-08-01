@@ -22,21 +22,21 @@ public class DefensePrepState : ArmState
     public override void Update()
     {
         //blockHandle
-        if(InputTools.InputAngleEnter(Vector2.up, armInputDelta))
+        if(InputTools.InputAngle(Vector2.up, armInputDelta))
         {
             stateMachine.Block();
             return;
         }
 
         //GB handle
-        if (InputTools.InputAngleEnter(Vector2.right, armInputDelta))
+        if (InputTools.InputAngle(Vector2.right, armInputDelta))
         {
             stateMachine.GuardBreak();
             return;
         }
 
         //exit conditions
-        if (InputTools.InputAngleExit(Vector2.left, armInputDelta))
+        if (InputTools.InputAngle(Vector2.left, armInputDelta, false))
         {
             exitTimer += Time.deltaTime;
 
