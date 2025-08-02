@@ -37,12 +37,25 @@ public class ArmInputHandler : MonoBehaviour
                 print(armInput.directions.Count);
                 if (armInput.directionCpt == armInput.directions.Count - 1)
                 {
+                    float inputTime = 0;
+
+                    switch (armInput.directionCpt)
+                    {
+                        case 0:
+                            inputTime = .1f;
+                            break;
+                        case 1:
+                            inputTime = .04f;
+                            break;
+                        case 2:
+                            inputTime = 0f;
+                            break;
+                    }
+
                     print("ALLO");
                     armInput.endingTimer += Time.deltaTime;
 
-                    ////flattiming * const(<1)*cpt ?
-
-                    if (armInput.endingTimer >= .01)
+                    if (armInput.endingTimer >= inputTime)
                         armInput.Perform();
                 }
                 else

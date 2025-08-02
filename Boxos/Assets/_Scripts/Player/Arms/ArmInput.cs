@@ -24,6 +24,7 @@ public class ArmInput
 
     public void Perform()
     {
+        Debug.Log("perform");
         OnPerformed?.Invoke(/*state*/);
     }
 }

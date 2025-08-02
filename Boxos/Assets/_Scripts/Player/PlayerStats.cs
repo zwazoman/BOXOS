@@ -28,7 +28,7 @@ public static class PlayerStats
     public const float StickInputMargin = .1f;
     public const float MaxDistanceToNeutral = .8f;
     public const float MinDistanceToNeutral = .5f;
-    public const float InputExitTime = .15f;
+    public const float InputExitTime = .3f;
 
 }
 
