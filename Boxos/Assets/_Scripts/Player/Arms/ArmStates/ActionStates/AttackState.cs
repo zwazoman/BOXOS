@@ -4,6 +4,7 @@ using UnityEngine;
 public class AttackState : ActionState
 {
     protected AttackStats? stats;
+    protected HitData hitData;
 
     protected ActionType type;
 
@@ -32,6 +33,8 @@ public class AttackState : ActionState
 
         arm.OnExhaust += stateMachine.OverHeat;
 
+        arm.player.UpdateHeat(stats.Value.heatCost);
+
         Debug.Log("attack entered");
     }
 
@@ -52,11 +55,11 @@ public class AttackState : ActionState
 
     protected virtual void Hit()
     {
+        hitData = new HitData(stats.Value.damage, stats.Value.StaggerDuration);
         Debug.Log("TAPE");
+        Arm targetArm = GameManager.Instance.opponent.GetOpposedArmBySide(arm.side);
 
-        Arm targetArm = GameManager.Instance.opponent.GetOpposedArm(arm.side);
-
-        targetArm.ReceiveHit(GameManager.Instance.opponentId, arm, stats.Value);
+        targetArm.ReceiveHit(GameManager.Instance.opponentId, arm, hitData);
     }
 
     protected virtual void AttackBlocked()

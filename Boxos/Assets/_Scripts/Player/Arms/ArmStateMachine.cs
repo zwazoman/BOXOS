@@ -29,6 +29,10 @@ public class ArmStateMachine : NetworkIdentity
     //attacks
     public LightAttackState lightAttackState = new();
     public HeavyAttackState heavyAttackState = new();
+    public OtherSideAttackState otherSideAttackState = new();
+    public BlockBreakAttackState blockBreakAttackState = new();
+    public ChargedAttackState chargedAttackState = new();
+
 
     //defenses
     public BlockState blockState = new();
@@ -39,6 +43,9 @@ public class ArmStateMachine : NetworkIdentity
     {
         actionStatesByTypes.Add(ActionType.LightAttack, lightAttackState);
         actionStatesByTypes.Add(ActionType.HeavyAttack, heavyAttackState);
+        actionStatesByTypes.Add(ActionType.OtherSideAttack, otherSideAttackState);
+        actionStatesByTypes.Add(ActionType.BlockBreakAttack, blockBreakAttackState);
+        actionStatesByTypes.Add(ActionType.ChargedAttack, chargedAttackState);
         actionStatesByTypes.Add(ActionType.Block, blockState);
         actionStatesByTypes.Add(ActionType.GuardBreak, guardBreakState);
     }

@@ -13,7 +13,7 @@ public class Arm : NetworkIdentity
     public event Action OnBlocked;
 
     public event Action OnHit;
-    public event Action<Arm, AttackStats> OnReceiveHit;
+    public event Action<Arm,HitData> OnReceiveHit;
 
     public event Action OnGuardBreak;
     public event Action<Arm> OnReceiveGuardBreak;
@@ -68,7 +68,7 @@ public class Arm : NetworkIdentity
         if (!isOwner)
             return;
 
-        Arm targetArm = GameManager.Instance.opponent.GetOpposedArm(side);
+        Arm targetArm = GameManager.Instance.opponent.GetOpposedArmBySide(side);
 
         targetArm.ReceiveGuardBreak(GameManager.Instance.opponentId, this);
 
@@ -83,10 +83,10 @@ public class Arm : NetworkIdentity
 
 
     [TargetRpc]
-    public void ReceiveHit(PlayerID id, Arm attackingArm,AttackStats attackStats)
+    public void ReceiveHit(PlayerID id, Arm attackingArm, HitData hitData)
     {
         print("receivehit");
-        OnReceiveHit?.Invoke(attackingArm, attackStats); 
+        OnReceiveHit?.Invoke(attackingArm, hitData); 
     }
 
     [TargetRpc]

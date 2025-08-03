@@ -14,10 +14,11 @@ en feu (prend des ticks de heat, necessite un input pour s'éteindre)
 
 -Protheses:
 Attack :
-tape de l'autre coté
-attacke verticale(uniquement parrable mais grosse window) cancelable ?
-charge (plus longtemps = plus de degats)
+tape de l'autre coté--
+attacke verticale(uniquement parrable mais grosse window) cancelable ?--
+charge (plus longtemps = plus de degats)--
 coup chauffant qui inlige de la heat mais t'en inflige aussi
+coup qui fait des dégats seulement si blocké ou parré
 coup qui met en feu
 flash dans la gueule
 patate avec animation tres légère mais gros bruit

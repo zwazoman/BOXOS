@@ -121,11 +121,20 @@ public class Player : NetworkIdentity
         return rightArmInputDelta;
     }
 
-    public Arm GetOpposedArm(ArmSide side)
+    public Arm GetArmBySide(ArmSide side)
+    {
+        if (side == ArmSide.Right)
+            return rightArm;
+        else
+            return leftArm;
+    }
+
+    public Arm GetOpposedArmBySide(ArmSide side)
     {
         if (side == ArmSide.Left)
             return rightArm;
-        return leftArm;
+        else
+            return leftArm;
     }
 
     public void UpdateHealth(int amount)

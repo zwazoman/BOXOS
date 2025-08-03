@@ -11,7 +11,6 @@ public class LightAttackState : AttackState
         arm.OnAnimationEnd += stateMachine.Neutral;
 
         arm.animator.SetTrigger("LightAttack");
-        arm.player.UpdateHeat(stats.Value.heatCost);
     }
 
     public override void Update()

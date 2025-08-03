@@ -1,22 +1,16 @@
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 
-public class HeavyAttackState : AttackState
+public class OtherSideAttackState : AttackState
 {
     public override void OnEnter()
     {
-        type = ActionType.HeavyAttack;
+        type = ActionType.OtherSideAttack;
 
         base.OnEnter();
 
         arm.OnAnimationEnd += stateMachine.Neutral;
 
         arm.animator.SetTrigger("HeavyAttack");
-    }
-
-    public override void Update()
-    {
-        base.Update();
     }
 
     public override void OnExit()
@@ -26,4 +20,10 @@ public class HeavyAttackState : AttackState
         arm.OnAnimationEnd -= stateMachine.Neutral;
     }
 
+    protected override void Hit()
+    {
+        Arm targetArm = GameManager.Instance.opponent.GetArmBySide(arm.side);
+
+        targetArm.ReceiveHit(GameManager.Instance.opponentId, arm, hitData);
+    }
 }

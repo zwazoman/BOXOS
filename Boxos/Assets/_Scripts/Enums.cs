@@ -16,6 +16,9 @@ public enum ActionType
     //attacks
     LightAttack,
     HeavyAttack,
+    OtherSideAttack,
+    BlockBreakAttack,
+    ChargedAttack,
 
     //defenses
     Block,

@@ -31,9 +31,13 @@ public class BlockState : DefenseState
         HandleDurationBasedExit();
     }
 
-    void Block(Arm attackingArm, AttackStats attackStats)
+    void Block(Arm attackingArm, HitData hitData)
     {
-        Debug.Log("Blocked !");
+        if (!hitData.isUnblockable)
+            DamagingHit(attackingArm, hitData);
+
+        arm.player.UpdateHeat(hitData.blockHeatCost);
+
         attackingArm.Blocked(GameManager.Instance.opponentId);
     }
 

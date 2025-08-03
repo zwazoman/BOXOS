@@ -44,3 +44,21 @@ public struct AttackStats
     public float parriedStaggerTime;
     public int parriedHeatCost;
 }
+
+public struct HitData
+{
+    public int damage;
+    public float staggerDuration;
+    public int heatCost;
+    public int blockHeatCost;
+    public bool isUnblockable;
+
+    public HitData(int damage = 0, float staggerDuration = 0, int heatCost = 0, int blockHeatCost = 0, bool isUnblockable = false)
+    {
+        this.damage = damage;
+        this.staggerDuration = staggerDuration;
+        this.heatCost = heatCost;
+        this.blockHeatCost = blockHeatCost;
+        this.isUnblockable = isUnblockable;
+    }
+}

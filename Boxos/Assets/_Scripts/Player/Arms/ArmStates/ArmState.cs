@@ -34,12 +34,12 @@ public class ArmState
         }
     }
 
-    public void DamagingHit(Arm attackingArm, AttackStats attackStats)
+    public void DamagingHit(Arm attackingArm, HitData hitData)
     {
         Debug.Log("OUCH");
 
-        arm.player.UpdateHealth(-attackStats.damage);
-        stateMachine.Stagger(attackStats.StaggerDuration);
+        arm.player.UpdateHealth(-hitData.damage);
+        stateMachine.Stagger(hitData.staggerDuration);
     }
 
     protected void TransitionWithType(ActionType type)

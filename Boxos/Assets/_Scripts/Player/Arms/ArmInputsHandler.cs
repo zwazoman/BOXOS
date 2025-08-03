@@ -33,8 +33,6 @@ public class ArmInputsHandler : MonoBehaviour
 
             if (InputTools.InputAngle(currentTargetDirection, stickInput))
             {
-                print(armInput.directionCpt);
-                print(armInput.directions.Count);
                 if (armInput.directionCpt == armInput.directions.Count - 1)
                 {
                     float inputTime = 0;
@@ -52,7 +50,6 @@ public class ArmInputsHandler : MonoBehaviour
                             break;
                     }
 
-                    print("ALLO");
                     armInput.endingTimer += Time.deltaTime;
 
                     if (armInput.endingTimer >= inputTime)
