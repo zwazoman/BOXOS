@@ -13,9 +13,6 @@ public class NeutralState : ArmState
         arm.OnReceiveHit += DamagingHit;
 
         arm.OnExhaust += stateMachine.OverHeat;
-
-        //temp
-        arm.player.OnKick += stateMachine.Block;
     }
 
     public override void OnExit()

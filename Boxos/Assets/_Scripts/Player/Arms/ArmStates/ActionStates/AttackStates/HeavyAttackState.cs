@@ -5,7 +5,7 @@ public class HeavyAttackState : AttackState
 {
     public override void OnEnter()
     {
-        type = AttackType.Heavy;
+        type = ActionType.HeavyAttack;
 
         base.OnEnter();
 

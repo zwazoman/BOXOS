@@ -4,7 +4,7 @@ public class LightAttackState : AttackState
 {
     public override void OnEnter()
     {
-        type = AttackType.Light;
+        type = ActionType.LightAttack;
 
         base.OnEnter();
 

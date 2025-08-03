@@ -5,16 +5,12 @@ using System.Collections.Generic;
 [Serializable]
 public class ArmInput
 {
-    public const float baseEndingDuration = .1f;
-
-    public event Action/*<ArmState>*/ OnPerformed;
-
-    public ArmState state;
+    public event Action<ActionType> OnPerformed;
 
     public List<Vector2> directions = new();
 
-    public int directionCpt = 0;
-    public float endingTimer = 0;
+    [HideInInspector] public int directionCpt = 0;
+    [HideInInspector] public float endingTimer = 0;
 
     public void Reset()
     {
@@ -22,9 +18,9 @@ public class ArmInput
         endingTimer = 0;
     }
 
-    public void Perform()
+    public void Perform(ActionType type)
     {
         Debug.Log("perform");
-        OnPerformed?.Invoke(/*state*/);
+        OnPerformed?.Invoke(type);
     }
 }

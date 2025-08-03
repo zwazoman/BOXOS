@@ -11,14 +11,14 @@ public enum DurationType
     Infinite
 }
 
-public enum AttackType
+public enum ActionType
 {
-    Light,
-    Heavy,
-}
+    //attacks
+    LightAttack,
+    HeavyAttack,
 
-public enum SpecialAttacks
-{
-
+    //defenses
+    Block,
+    GuardBreak,
 }
 

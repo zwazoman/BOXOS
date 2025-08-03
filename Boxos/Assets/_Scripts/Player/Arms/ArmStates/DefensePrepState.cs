@@ -10,6 +10,12 @@ public class DefensePrepState : ArmState
         arm.OnReceiveHit += DamagingHit;
 
         arm.OnExhaust += stateMachine.OverHeat;
+
+        foreach (DefenseTruc defense in stateMachine.defenses.Values)
+        {
+            arm.inputs.actionDatas.Add(defense.data);
+            defense.data.inputs.OnPerformed += TransitionWithType;
+        }
     }
 
     public override void OnExit()
@@ -17,23 +23,29 @@ public class DefensePrepState : ArmState
         arm.OnReceiveHit -= DamagingHit;
 
         arm.OnExhaust -= stateMachine.OverHeat;
+
+        foreach (DefenseTruc defense in stateMachine.defenses.Values)
+        {
+            defense.data.inputs.OnPerformed -= TransitionWithType;
+        }
+        arm.inputs.ClearArmInputs();
     }
 
     public override void Update()
     {
-        //blockHandle
-        if(InputTools.InputAngle(Vector2.up, armInputDelta))
-        {
-            stateMachine.Block();
-            return;
-        }
+        ////blockHandle
+        //if(InputTools.InputAngle(Vector2.up, armInputDelta))
+        //{
+        //    stateMachine.Block();
+        //    return;
+        //}
 
-        //GB handle
-        if (InputTools.InputAngle(Vector2.right, armInputDelta))
-        {
-            stateMachine.GuardBreak();
-            return;
-        }
+        ////GB handle
+        //if (InputTools.InputAngle(Vector2.right, armInputDelta))
+        //{
+        //    stateMachine.GuardBreak();
+        //    return;
+        //}
 
         //exit conditions
         if (InputTools.InputAngle(Vector2.left, armInputDelta, false))

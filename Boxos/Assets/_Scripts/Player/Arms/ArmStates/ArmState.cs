@@ -41,4 +41,9 @@ public class ArmState
         arm.player.UpdateHealth(-attackStats.damage);
         stateMachine.Stagger(attackStats.StaggerDuration);
     }
+
+    protected void TransitionWithType(ActionType type)
+    {
+        stateMachine.TransitionTo(stateMachine.actionStatesByTypes[type]);
+    }
 }

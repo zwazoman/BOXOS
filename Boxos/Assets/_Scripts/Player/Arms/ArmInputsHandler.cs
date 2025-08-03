@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 
-public class ArmInputHandler : MonoBehaviour
+public class ArmInputsHandler : MonoBehaviour
 {
     [SerializeField] Arm _arm;
 
@@ -15,19 +15,19 @@ public class ArmInputHandler : MonoBehaviour
 
     Vector2 stickInput;
 
-    [HideInInspector] public List<ArmInput> armInputs = new List<ArmInput>();
+    [HideInInspector] public List<ActionData> actionDatas = new();
 
     // Update is called once per frame
     void Update()
     {
-        if (armInputs.Count == 0)
+        if (actionDatas.Count == 0)
             return;
 
         stickInput = _arm.player.GetStickVector(_arm.side);
 
-        for (int i = 0; i < armInputs.Count; i++)
+        for (int i = 0; i < actionDatas.Count; i++)
         {
-            ArmInput armInput = armInputs[i];
+            ArmInput armInput = actionDatas[i].inputs;
 
             Vector2 currentTargetDirection = armInput.directions[armInput.directionCpt];
 
@@ -56,7 +56,7 @@ public class ArmInputHandler : MonoBehaviour
                     armInput.endingTimer += Time.deltaTime;
 
                     if (armInput.endingTimer >= inputTime)
-                        armInput.Perform();
+                        armInput.Perform(actionDatas[i].type);
                 }
                 else
                     armInput.directionCpt++;
@@ -68,9 +68,9 @@ public class ArmInputHandler : MonoBehaviour
 
     public void ClearArmInputs()
     {
-        foreach (ArmInput armInput in armInputs)
-            armInput.Reset();
+        foreach (ActionData actionData in actionDatas)
+            actionData.inputs.Reset();
 
-        armInputs.Clear();
+        actionDatas.Clear();
     }
 }

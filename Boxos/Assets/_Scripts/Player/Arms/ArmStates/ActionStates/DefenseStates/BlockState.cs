@@ -1,10 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BlockState : ArmState
+public class BlockState : DefenseState
 {
     public override void OnEnter()
     {
+        stateDuration = PlayerStats.BlockWindowDuration;
+
         base.OnEnter();
         arm.animator.SetTrigger("Block");
 

@@ -10,15 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b62582d599ea0fc4690ee306705b5edb, type: 3}
-  m_Name: HeavyAttack
+  m_Name: LightAttack
   m_EditorClassIdentifier: 
-  attackType: 1
+  inputs:
+    directions:
+    - {x: 0, y: 1}
+    directionCpt: 0
+    endingTimer: 0
+  attackType: 0
   stats:
-    speed: 800
-    damage: 2
-    heatCost: 5
-    StaggerDuration: 0.7
+    speed: 500
+    damage: 1
+    heatCost: 3
+    StaggerDuration: 0.3
     blockedStaggerTime: 1.5
     blockedHeatCost: 0
-    parriedStaggerTime: 1.5
-    parriedHeatCost: 6
+    parriedStaggerTime: 3
+    parriedHeatCost: 8

@@ -1,11 +1,11 @@
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
-public class AttackState : ArmState
+public class AttackState : ActionState
 {
     protected AttackStats? stats;
 
-    protected AttackType type;
+    protected ActionType type;
 
     protected bool isParriable;
 
@@ -14,7 +14,7 @@ public class AttackState : ArmState
     public override void OnEnter()
     {
         if (stats.HasValue == false)
-            stats = stateMachine.attacks[type];
+            stats = stateMachine.attacks[type].data.stats;
 
         isParriable = false;
         isCancelable = false;

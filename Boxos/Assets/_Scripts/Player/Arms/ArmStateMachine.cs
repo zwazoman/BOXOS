@@ -2,15 +2,19 @@ using NUnit.Framework;
 using PurrNet;
 using UnityEngine;
 using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
+using System;
 
 public class ArmStateMachine : NetworkIdentity
 {
-    public Dictionary<AttackType, AttackStats> attacks = new();
-    [SerializeField] List<AttacksScriptable> attacksScriptables = new();
-
     [SerializeField] Arm _arm;
 
     ArmState currentState;
+
+    [SerializeField] public SerializedDictionary<ActionType, AttackTruc> attacks = new();
+    [SerializeField] public SerializedDictionary<ActionType,DefenseTruc> defenses = new();
+
+    public Dictionary<ActionType, ActionState> actionStatesByTypes = new();
 
     #region States
     public NeutralState neutralState = new();
@@ -19,19 +23,33 @@ public class ArmStateMachine : NetworkIdentity
     public AttackPrepState attackPrepState = new();
     public AttackState attackState = new();
     public DefensePrepState defensePrepState = new();
-    public BlockState blockState = new();
-    public GuardBreakState guardBreakState = new();
+
+    //Actions
 
     //attacks
     public LightAttackState lightAttackState = new();
     public HeavyAttackState heavyAttackState = new();
 
+    //defenses
+    public BlockState blockState = new();
+    public GuardBreakState guardBreakState = new();
+
+
+    void FillActionStates()
+    {
+        actionStatesByTypes.Add(ActionType.LightAttack, lightAttackState);
+        actionStatesByTypes.Add(ActionType.HeavyAttack, heavyAttackState);
+        actionStatesByTypes.Add(ActionType.Block, blockState);
+        actionStatesByTypes.Add(ActionType.GuardBreak, guardBreakState);
+    }
     #endregion
 
     private void Awake()
     {
         if (_arm == null)
             TryGetComponent(out _arm);
+
+        FillActionStates();
     }
     protected override void OnSpawned()
     {
@@ -39,11 +57,6 @@ public class ArmStateMachine : NetworkIdentity
 
         if (!isOwner)
             return;
-
-        foreach (AttacksScriptable truc in attacksScriptables)
-        {
-            attacks.Add(truc.attackType, truc.stats);
-        }
 
         if (GameManager.Instance.opponentId == PlayerID.Server)
             GameManager.Instance.OnPlayerSpawned += Neutral;
@@ -86,7 +99,6 @@ public class ArmStateMachine : NetworkIdentity
 
     #region Transitions
 
-    //[ObserversRpc]
     public void Neutral()
     {
         if(isOwner) print("Neutral" + " " + owner);
@@ -94,7 +106,6 @@ public class ArmStateMachine : NetworkIdentity
         TransitionTo(neutralState);
     }
 
-    //[ObserversRpc]
     public void Stagger(float duration = 0)
     {
         if (isOwner) print("Stagger" + " " + owner);
@@ -103,7 +114,6 @@ public class ArmStateMachine : NetworkIdentity
         TransitionTo(staggerState);
     }
 
-    //[ObserversRpc]
     public void OverHeat()
     {
         if (isOwner) print("Overheat" + " " + owner);
@@ -111,7 +121,6 @@ public class ArmStateMachine : NetworkIdentity
         TransitionTo(overHeatState);
     }
 
-    //[ObserversRpc]
     public void AttackPrep()
     {
         if (isOwner) print("AttackPrep" + " " + owner);
@@ -119,37 +128,38 @@ public class ArmStateMachine : NetworkIdentity
         TransitionTo(attackPrepState);
     }
 
-    //[ObserversRpc]
-    public void Attack(int attackId)
-    {
-        if (isOwner) print("Attack" + " " + owner);
-        TransitionTo(attackState);
-    }
-
-    //[ObserversRpc]
     public void DefensePrep()
     {
         if (isOwner) print("Defense Prep" + " " + owner);
 
         TransitionTo(defensePrepState);
     }
-
-    //[ObserversRpc]
-    public void Block()
-    {
-        if (isOwner) print("Block" + " " + owner);
-
-        blockState.stateDuration = PlayerStats.BlockWindowDuration;
-        TransitionTo(blockState);
-    }
-
-    //[ObserversRpc]
-    public void GuardBreak()
-    {
-        if (isOwner) print("Guard Break" + " " + owner);
-
-        TransitionTo(guardBreakState);
-    }
     #endregion
 
+}
+
+[Serializable]
+public struct AttackTruc
+{
+    public ActionType type;
+    public AttackData data;
+
+    public AttackTruc(ActionType type, AttackData data)
+    {
+        this.type = type;
+        this.data = data;
+    }
+}
+
+[Serializable]
+public struct DefenseTruc
+{
+    public ActionType type;
+    public DefenseData data;
+
+    public DefenseTruc(ActionType type, DefenseData data)
+    {
+        this.type = type;
+        this.data = data;
+    }
 }

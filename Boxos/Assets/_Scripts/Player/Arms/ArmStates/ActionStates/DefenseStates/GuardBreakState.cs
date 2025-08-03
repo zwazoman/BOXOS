@@ -1,7 +1,7 @@
 using System.Globalization;
 using UnityEngine;
 
-public class GuardBreakState : ArmState
+public class GuardBreakState : DefenseState
 {
     public override void OnEnter()
     {

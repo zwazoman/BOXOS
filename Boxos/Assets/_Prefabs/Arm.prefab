@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 1197276455699501822}
   - component: {fileID: 1843948664010579805}
   - component: {fileID: 7096799498282803425}
+  - component: {fileID: 534296522163231132}
   m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
@@ -329,6 +330,7 @@ MonoBehaviour:
   animator: {fileID: 3678301021894414432}
   stateMachine: {fileID: 1843948664010579805}
   inputs: {fileID: 7096799498282803425}
+  prosthetics: {fileID: 534296522163231132}
 --- !u!114 &1843948664010579805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,10 +352,27 @@ MonoBehaviour:
   _directChildren: []
   _networkRules: {fileID: 0}
   _visitiblityRules: {fileID: 0}
-  attacksScriptables:
-  - {fileID: 11400000, guid: 57098dcfc19d43248a81d94f293fadc3, type: 2}
-  - {fileID: 11400000, guid: 1368d2879613d984aa001f7cad90b2ea, type: 2}
   _arm: {fileID: 1197276455699501822}
+  attacks:
+    _serializedList:
+    - Key: 0
+      Value:
+        type: 0
+        data: {fileID: 11400000, guid: 57098dcfc19d43248a81d94f293fadc3, type: 2}
+    - Key: 1
+      Value:
+        type: 1
+        data: {fileID: 11400000, guid: 1368d2879613d984aa001f7cad90b2ea, type: 2}
+  defenses:
+    _serializedList:
+    - Key: 2
+      Value:
+        type: 2
+        data: {fileID: 11400000, guid: 2036bc05912a8884881a3c2cf88f3e48, type: 2}
+    - Key: 3
+      Value:
+        type: 3
+        data: {fileID: 11400000, guid: 23c6911811f07444f9bd0328827fbc4f, type: 2}
 --- !u!114 &7096799498282803425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,7 +386,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _arm: {fileID: 1197276455699501822}
-  armInputs: []
+  actionDatas: []
+--- !u!114 &534296522163231132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5615870306256745676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5dec8885dedf4442b5044b59851e924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _arm: {fileID: 1197276455699501822}
+  _prosthesisData: {fileID: 0}
 --- !u!1 &7581468112728295793
 GameObject:
   m_ObjectHideFlags: 0

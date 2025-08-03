@@ -3,12 +3,6 @@ using UnityEngine;
 
 public class AttackPrepState : ArmState
 {
-    bool _circularInput = false;
-
-    ArmInput test = new();
-    ArmInput test2 = new();
-    ArmInput test3 = new();
-
     public override void OnEnter()
     {
         base.OnEnter();
@@ -18,32 +12,11 @@ public class AttackPrepState : ArmState
 
         arm.OnExhaust += stateMachine.OverHeat;
 
-        if (_circularInput)
+        foreach(AttackTruc attack in stateMachine.attacks.Values)
         {
-            arm.inputs.armInputs.Add(test);
-            arm.inputs.armInputs.Add(test3);
-            arm.inputs.armInputs.Add(test2);
-            return;
+            arm.inputs.actionDatas.Add(attack.data);
+            attack.data.inputs.OnPerformed += TransitionWithType;
         }
-
-        test2.directions.Add(Vector2.up);
-
-        test.directions.Add(Vector2.right);
-        test.directions.Add(Vector2.up);
-
-        test3.directions.Add(Vector2.right);
-        test3.directions.Add(Vector2.up);
-        test3.directions.Add(Vector2.left);
-
-        test.OnPerformed += () => stateMachine.TransitionTo(stateMachine.heavyAttackState);
-        test2.OnPerformed += () => stateMachine.TransitionTo(stateMachine.lightAttackState);
-        test3.OnPerformed += () => stateMachine.GuardBreak();
-
-        arm.inputs.armInputs.Add(test);
-        arm.inputs.armInputs.Add(test3);
-        arm.inputs.armInputs.Add(test2);
-
-        _circularInput = true;
     }
 
     public override void OnExit()
@@ -52,29 +25,16 @@ public class AttackPrepState : ArmState
 
         arm.OnExhaust -= stateMachine.OverHeat;
 
+        foreach (AttackTruc attack in stateMachine.attacks.Values)
+        {
+            attack.data.inputs.OnPerformed -= TransitionWithType;
+        }
+
         arm.inputs.ClearArmInputs();
     }
 
     public override void Update()
     {
-        ////heavy attack handle
-        //if (InputTools.InputAngle(Vector2.right, armInputDelta))
-        //{
-        //    _circularInput = true;
-        //}
-        //if (_circularInput && InputTools.InputAngle(Vector2.up, armInputDelta))
-        //{
-        //    stateMachine.TransitionTo(stateMachine.heavyAttackState);
-        //    return;
-        //}
-
-        ////light attack handle
-        //if (InputTools.InputAngle(Vector2.up, armInputDelta))
-        //{
-        //    stateMachine.TransitionTo(stateMachine.lightAttackState);
-        //    return;
-        //}
-
 
         //Exit Conditions
         if (InputTools.InputAngle(Vector2.down, armInputDelta, false))
