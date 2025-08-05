@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DefensePrepState : ArmState
+public class UtilitaryPrepState : ArmState
 {
     public override void OnEnter()
     {
@@ -11,10 +11,10 @@ public class DefensePrepState : ArmState
 
         arm.OnExhaust += stateMachine.OverHeat;
 
-        foreach (DefenseTruc defense in stateMachine.defenses.Values)
+        foreach (UtilitaryTruc utilitaries in stateMachine.utilitaries.Values)
         {
-            arm.inputs.actionDatas.Add(defense.data);
-            defense.data.inputs.OnPerformed += TransitionWithType;
+            arm.inputs.actionDatas.Add(utilitaries.data);
+            utilitaries.data.inputs.OnPerformed += TransitionWithType;
         }
     }
 
@@ -24,9 +24,9 @@ public class DefensePrepState : ArmState
 
         arm.OnExhaust -= stateMachine.OverHeat;
 
-        foreach (DefenseTruc defense in stateMachine.defenses.Values)
+        foreach (UtilitaryTruc utilitaries in stateMachine.utilitaries.Values)
         {
-            defense.data.inputs.OnPerformed -= TransitionWithType;
+            utilitaries.data.inputs.OnPerformed -= TransitionWithType;
         }
         arm.inputs.ClearArmInputs();
     }

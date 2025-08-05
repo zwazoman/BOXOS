@@ -25,3 +25,5 @@ patate avec animation tres légère mais gros bruit
 airhorm qui nique l'audio du mec en face (filtre audio)
 
 Defense:
+
+recharge de heat

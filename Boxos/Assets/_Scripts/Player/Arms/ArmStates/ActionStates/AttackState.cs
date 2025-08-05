@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class AttackState : ActionState
 {
-    protected AttackStats? stats;
+    protected AttackStats stats;
     protected HitData hitData;
-
-    protected ActionType type;
 
     protected bool isParriable;
 
@@ -14,15 +12,15 @@ public class AttackState : ActionState
 
     public override void OnEnter()
     {
-        if (stats.HasValue == false)
-            stats = stateMachine.attacks[type].data.stats;
+        base.OnEnter();
+
+        actionData = stateMachine.attacks[type].data;
+        stats = stateMachine.attacks[type].data.stats;
 
         isParriable = false;
         isCancelable = false;
 
         arm.OnHit += Hit;
-
-        arm.OnReceiveHit += DamagingHit;
 
         arm.OnBlocked += AttackBlocked;
         arm.OnReceiveGuardBreak += AttackParried;
@@ -31,10 +29,6 @@ public class AttackState : ActionState
         arm.OnParryWindow += ParryWindowHandle;
         arm.OnCancelWindow += CancelWindowHandle;
 
-        arm.OnExhaust += stateMachine.OverHeat;
-
-        arm.player.UpdateHeat(stats.Value.heatCost);
-
         Debug.Log("attack entered");
     }
 
@@ -42,20 +36,16 @@ public class AttackState : ActionState
     {
         arm.OnHit -= Hit;
 
-        arm.OnReceiveHit -= DamagingHit;
-
         arm.OnBlocked -= AttackBlocked;
         arm.OnReceiveGuardBreak -= AttackParried;
         arm.OnCancel -= AttackCanceled;
 
         arm.OnParryWindow -= ParryWindowHandle;
-
-        arm.OnExhaust -= stateMachine.OverHeat;
     }
 
     protected virtual void Hit()
     {
-        hitData = new HitData(stats.Value.damage, stats.Value.StaggerDuration);
+        hitData = new HitData(stats.damages, stats.StaggerDuration);
         Debug.Log("TAPE");
         Arm targetArm = GameManager.Instance.opponent.GetOpposedArmBySide(arm.side);
 
@@ -67,8 +57,8 @@ public class AttackState : ActionState
         Debug.Log("Attack blocked !");
         //surement jouer un son là
 
-        stateMachine.Stagger(stats.Value.blockedStaggerTime);
-        arm.player.UpdateHeat(stats.Value.blockedHeatCost);
+        stateMachine.Stagger(stats.blockedStaggerTime);
+        arm.player.UpdateHeat(stats.blockedHeatCost);
 
     }
 
@@ -80,8 +70,8 @@ public class AttackState : ActionState
 
         Debug.Log("parried");
 
-        stateMachine.Stagger(stats.Value.parriedStaggerTime);
-        arm.player.UpdateHeat(stats.Value.parriedHeatCost);
+        stateMachine.Stagger(stats.parriedStaggerTime);
+        arm.player.UpdateHeat(stats.parriedHeatCost);
 
         parryingArm.SuccessfullGuardbreak(GameManager.Instance.opponentId);
     }

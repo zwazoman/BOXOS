@@ -1,28 +1,25 @@
 using System.Globalization;
 using UnityEngine;
 
-public class GuardBreakState : DefenseState
+public class GuardBreakState : UtilitaryState
 {
     public override void OnEnter()
     {
+        type = ActionType.GuardBreak;
+
+        base.OnEnter();
+
         arm.animator.SetTrigger("GuardBreak");
 
-        arm.player.UpdateHeat(PlayerStats.GuardBreakHeatCost);
-
         arm.OnAnimationEnd += GuardBreakEnd;
-
         arm.OnSuccessfullGuardBreak += stateMachine.Neutral;
-
-        arm.OnExhaust += stateMachine.OverHeat;
     }
 
     public override void OnExit()
     {
+        base.OnExit();
         arm.OnAnimationEnd -= GuardBreakEnd;
-
         arm.OnSuccessfullGuardBreak -= stateMachine.Neutral;
-
-        arm.OnExhaust -= stateMachine.OverHeat;
     }
 
     void GuardBreakEnd()

@@ -6,9 +6,9 @@ public enum ArmSide
 
 public enum DurationType
 {
-    Fixed,
-    AnimationBased,
-    Infinite
+    Timer,
+    Input,
+    Animation
 }
 
 public enum ActionType
@@ -20,8 +20,9 @@ public enum ActionType
     BlockBreakAttack,
     ChargedAttack,
 
-    //defenses
+    //utilitaries
     Block,
     GuardBreak,
+    Recovery,
 }
 

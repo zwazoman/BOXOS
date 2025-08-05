@@ -1,29 +1,26 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BlockState : DefenseState
+public class BlockState : UtilitaryState
 {
     public override void OnEnter()
     {
         stateDuration = PlayerStats.BlockWindowDuration;
 
+        type = ActionType.Block;
+
         base.OnEnter();
         arm.animator.SetTrigger("Block");
 
-        arm.player.UpdateHeat(PlayerStats.BlockHeatCost);
-
         arm.OnReceiveHit += Block;
         arm.OnReceiveGuardBreak += GuardBroken;
-
-        arm.OnExhaust += stateMachine.OverHeat;
     }
 
     public override void OnExit()
     {
+        base.OnExit();
         arm.OnReceiveHit -= Block;
         arm.OnReceiveGuardBreak -= GuardBroken;
-
-        arm.OnExhaust -= stateMachine.OverHeat;
     }
 
     public override void Update()

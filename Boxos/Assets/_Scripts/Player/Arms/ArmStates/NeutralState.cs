@@ -36,7 +36,7 @@ public class NeutralState : ArmState
         //defense Prep
         if (InputTools.InputAngle(Vector2.left, armInputDelta))
         {
-            stateMachine.DefensePrep();
+            stateMachine.UtilitaryPrep();
             return;
         }
     }

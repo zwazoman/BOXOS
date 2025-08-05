@@ -12,7 +12,7 @@ public class ArmStateMachine : NetworkIdentity
     ArmState currentState;
 
     [SerializeField] public SerializedDictionary<ActionType, AttackTruc> attacks = new();
-    [SerializeField] public SerializedDictionary<ActionType,DefenseTruc> defenses = new();
+    [SerializeField] public SerializedDictionary<ActionType,UtilitaryTruc> utilitaries = new();
 
     public Dictionary<ActionType, ActionState> actionStatesByTypes = new();
 
@@ -22,7 +22,7 @@ public class ArmStateMachine : NetworkIdentity
     public OverHeatState overHeatState = new();
     public AttackPrepState attackPrepState = new();
     public AttackState attackState = new();
-    public DefensePrepState defensePrepState = new();
+    public UtilitaryPrepState utilitaryPrepState = new();
 
     //Actions
 
@@ -34,7 +34,7 @@ public class ArmStateMachine : NetworkIdentity
     public ChargedAttackState chargedAttackState = new();
 
 
-    //defenses
+    //Utilitaries
     public BlockState blockState = new();
     public GuardBreakState guardBreakState = new();
 
@@ -135,11 +135,11 @@ public class ArmStateMachine : NetworkIdentity
         TransitionTo(attackPrepState);
     }
 
-    public void DefensePrep()
+    public void UtilitaryPrep()
     {
-        if (isOwner) print("Defense Prep" + " " + owner);
+        if (isOwner) print("Utilitary Prep" + " " + owner);
 
-        TransitionTo(defensePrepState);
+        TransitionTo(utilitaryPrepState);
     }
     #endregion
 
@@ -159,12 +159,12 @@ public struct AttackTruc
 }
 
 [Serializable]
-public struct DefenseTruc
+public struct UtilitaryTruc
 {
     public ActionType type;
-    public DefenseData data;
+    public UtilitaryData data;
 
-    public DefenseTruc(ActionType type, DefenseData data)
+    public UtilitaryTruc(ActionType type, UtilitaryData data)
     {
         this.type = type;
         this.data = data;

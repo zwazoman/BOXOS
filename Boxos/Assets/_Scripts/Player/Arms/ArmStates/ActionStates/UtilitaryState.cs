@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class DefenseState : ActionState
+public class UtilitaryState : ActionState
 {
     public override void OnEnter()
     {
         base.OnEnter();
+
+        actionData = stateMachine.utilitaries[type].data;
     }
 
     public override void OnExit()

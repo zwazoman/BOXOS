@@ -7,4 +7,10 @@ public class ActionData : ScriptableObject
 
     [field : SerializeField]
     public ArmInput inputs;
+
+    [field: SerializeField]
+    public int heatCost;
+
+    //[field: SerializeField]
+    //public DurationType durationType;
 }

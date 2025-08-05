@@ -1,14 +1,11 @@
 using UnityEngine;
 
-public class ChargedAttackState  : AttackState
+public class ChargedAttackState  : AttackState,ITickingState
 {
-    bool AttackLaunched = false;
+    bool AttackLaunched;
 
-    float chargeTimer = 0;
-    Vector2 endingDirection;
-
-    int damage = 1;
-    float incrementOffset = 2;
+    float timer = 0;
+    int damage;
     
 
     public override void OnEnter()
@@ -17,7 +14,7 @@ public class ChargedAttackState  : AttackState
 
         base.OnEnter();
 
-        endingDirection = stateMachine.attacks[type].data.inputs.directions[stateMachine.attacks[type].data.inputs.directions.Count - 1];
+        damage = stats.damages;
 
         arm.animator.SetTrigger("Exhaust"); // la préparation
     }
@@ -41,7 +38,7 @@ public class ChargedAttackState  : AttackState
             LaunchAttack();
         }
 
-        if (InputTools.InputAngle(endingDirection, armInputDelta, false))
+        if (InputTools.InputAngle(stateMachine.attacks[type].data.inputs.directions[stateMachine.attacks[type].data.inputs.directions.Count - 1], armInputDelta, false))
         {
             exitTimer += Time.deltaTime;
 
@@ -51,12 +48,12 @@ public class ChargedAttackState  : AttackState
             }
         }
 
-        chargeTimer += Time.deltaTime;
+        timer += Time.deltaTime;
 
-        if (chargeTimer >= incrementOffset)
+        if (timer >= PlayerStats.ChargeAttackTimeOffset)
         {
             damage++;
-            chargeTimer = 0;
+            timer = 0;
         }
 
     }
@@ -71,7 +68,7 @@ public class ChargedAttackState  : AttackState
 
     protected override void Hit()
     {
-        hitData = new HitData(damage, stats.Value.StaggerDuration);
+        hitData = new HitData(damage, stats.StaggerDuration);
         hitData.blockHeatCost = damage * 2;
 
         Arm targetArm = GameManager.Instance.opponent.GetOpposedArmBySide(arm.side);

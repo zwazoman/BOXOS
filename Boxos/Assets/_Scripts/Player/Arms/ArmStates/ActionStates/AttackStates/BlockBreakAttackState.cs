@@ -24,7 +24,7 @@ public class BlockBreakAttackState : AttackState
 
     protected override void Hit()
     {
-        hitData = new HitData(stats.Value.damage, stats.Value.StaggerDuration);
+        hitData = new HitData(stats.damages, stats.StaggerDuration);
         hitData.isUnblockable = true;
         
         Debug.Log("TAPE");

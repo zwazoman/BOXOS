@@ -32,11 +32,11 @@ public class ProstheticsHanlder : NetworkIdentity
             _arm.stateMachine.attacks.Add(data.type, new AttackTruc(data.type, data));
             print("attack added");
         }
-        else if (_prosthesisData.actionData is DefenseData)
+        else if (_prosthesisData.actionData is UtilitaryData)
         {
-            DefenseData data = _prosthesisData.actionData as DefenseData;
-            _arm.stateMachine.defenses.Add(data.type, new DefenseTruc(data.type, data));
-            print("DefenseAdded");
+            UtilitaryData data = _prosthesisData.actionData as UtilitaryData;
+            _arm.stateMachine.utilitaries.Add(data.type, new UtilitaryTruc(data.type, data));
+            print("UtilitaryAdded");
         }
 
     }
