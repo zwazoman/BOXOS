@@ -22,7 +22,7 @@ MonoBehaviour:
     endingTimer: 0
   heatCost: 5
   stats:
-    speed: 800
+    speed: 1
     damages: 0
     StaggerDuration: 0.7
     blockedStaggerTime: 1.5
