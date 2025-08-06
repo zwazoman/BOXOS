@@ -71,8 +71,8 @@ public class ChargedAttackState  : AttackState,ITickingState
         hitData = new HitData(damage, stats.StaggerDuration);
         hitData.blockHeatCost = damage * 2;
 
-        Arm targetArm = GameManager.Instance.opponent.GetOpposedArmBySide(arm.side);
+        Arm targetArm = FightManager.Instance.opponent.GetOpposedArmBySide(arm.side);
 
-        targetArm.ReceiveHit(GameManager.Instance.opponentId, arm, hitData);
+        targetArm.ReceiveHit(FightManager.Instance.opponentId, arm, hitData);
     }
 }

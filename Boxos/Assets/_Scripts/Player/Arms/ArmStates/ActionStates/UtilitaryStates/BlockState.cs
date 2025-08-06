@@ -36,7 +36,7 @@ public class BlockState : UtilitaryState
     {
         arm.player.UpdateHeat(hitData.blockHeatCost);
 
-        attackingArm.Blocked(GameManager.Instance.opponentId);
+        attackingArm.Blocked(FightManager.Instance.opponentId);
     }
 
     void GuardBroken(Arm guardBreakingArm)
@@ -44,7 +44,7 @@ public class BlockState : UtilitaryState
         Debug.Log("Guard Broken !");
 
         stateMachine.Stagger(3);
-        guardBreakingArm.SuccessfullGuardbreak(GameManager.Instance.opponentId);
+        guardBreakingArm.SuccessfullGuardbreak(FightManager.Instance.opponentId);
     }
 
 }

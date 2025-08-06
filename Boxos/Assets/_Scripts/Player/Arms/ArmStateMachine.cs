@@ -76,8 +76,8 @@ public class ArmStateMachine : NetworkIdentity
         if (!isOwner)
             return;
 
-        if (GameManager.Instance.opponentId == PlayerID.Server)
-            GameManager.Instance.OnPlayerSpawned += Neutral;
+        if (FightManager.Instance.opponentId == PlayerID.Server)
+            FightManager.Instance.OnPlayerSpawned += Neutral;
         else
             Neutral();
     }

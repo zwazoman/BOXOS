@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/PurrLobby/LobbyScenes/LobbySample.unity
+    path: Assets/_Scenes/MainMenu.unity
+    guid: 597a36b8cc41d4a4081a65d6adb3f1cc
+  - enabled: 1
+    path: Assets/_Scenes/LobbySample.unity
     guid: 163ab76a47bff6646b7627336bc33bdf
   - enabled: 1
     path: Assets/_Scenes/MultiTestScene.unity

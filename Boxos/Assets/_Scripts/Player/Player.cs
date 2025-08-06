@@ -68,13 +68,13 @@ public class Player : NetworkIdentity
         {
             _body.SetActive(true);
             _camera.enabled = false;
-            GameManager.Instance.opponent = this;
-            GameManager.Instance.opponentId = owner.Value;
+            FightManager.Instance.opponent = this;
+            FightManager.Instance.opponentId = owner.Value;
             
             _playerInput.enabled = false;
         }
 
-        GameManager.Instance.PlayerSpawned();
+        FightManager.Instance.PlayerSpawned();
     }
 
     private void Update()

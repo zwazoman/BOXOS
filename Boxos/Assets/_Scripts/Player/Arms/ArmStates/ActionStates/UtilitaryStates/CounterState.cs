@@ -47,7 +47,7 @@ public class CounterState : UtilitaryState
         _hitData = hitData;
         _targetArm = attackingArm;
 
-        attackingArm.Blocked(GameManager.Instance.opponentId);
+        attackingArm.Blocked(FightManager.Instance.opponentId);
 
         arm.animator.SetTrigger("LightAttack");
 
@@ -56,6 +56,6 @@ public class CounterState : UtilitaryState
 
     void Hit()
     {
-        _targetArm.ReceiveHit(GameManager.Instance.opponentId, _targetArm, _hitData);
+        _targetArm.ReceiveHit(FightManager.Instance.opponentId, _targetArm, _hitData);
     }
 }

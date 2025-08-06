@@ -69,9 +69,9 @@ public class Arm : NetworkIdentity
         if (!isOwner)
             return;
 
-        Arm targetArm = GameManager.Instance.opponent.GetOpposedArmBySide(side);
+        Arm targetArm = FightManager.Instance.opponent.GetOpposedArmBySide(side);
 
-        targetArm.ReceiveGuardBreak(GameManager.Instance.opponentId, this);
+        targetArm.ReceiveGuardBreak(FightManager.Instance.opponentId, this);
 
     }
 

@@ -25,11 +25,11 @@ public class BlockBreakAttackState : AttackState
         hitData = new HitData(stats.damages, stats.StaggerDuration);
         
         Debug.Log("TAPE");
-        targetArm.ReceiveHit(GameManager.Instance.opponentId, arm, hitData);
+        targetArm.ReceiveHit(FightManager.Instance.opponentId, arm, hitData);
     }
 
     protected override void AttackBlocked()
     {
-        targetArm.ReceiveTrueHit(GameManager.Instance.opponentId, arm, hitData);
+        targetArm.ReceiveTrueHit(FightManager.Instance.opponentId, arm, hitData);
     }
 }

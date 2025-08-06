@@ -25,7 +25,7 @@ public class DefenseBreakAttack : AttackState
     protected override void AttackBlocked()
     {
         hitData = new HitData(stats.damages, stats.StaggerDuration);
-        targetArm.ReceiveTrueHit(GameManager.Instance.opponentId, arm, hitData);
+        targetArm.ReceiveTrueHit(FightManager.Instance.opponentId, arm, hitData);
     }
 
     protected override void ParryAttempt(Arm parryingArm)
@@ -34,11 +34,11 @@ public class DefenseBreakAttack : AttackState
             return;
 
         hitData = new HitData(stats.damages * PlayerStats.ParriedDamageMultiplier, stats.StaggerDuration * PlayerStats.ParriedStaggerTimeMultiplier);
-        targetArm.ReceiveTrueHit(GameManager.Instance.opponentId, arm, hitData);
+        targetArm.ReceiveTrueHit(FightManager.Instance.opponentId, arm, hitData);
     }
 
     protected override void Hit()
     {
-        targetArm.ReceiveHit(GameManager.Instance.opponentId, arm, hitData);
+        targetArm.ReceiveHit(FightManager.Instance.opponentId, arm, hitData);
     }
 }

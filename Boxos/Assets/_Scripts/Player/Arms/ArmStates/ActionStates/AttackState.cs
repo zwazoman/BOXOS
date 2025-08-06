@@ -52,7 +52,7 @@ public class AttackState : ActionState
     {
         hitData = new HitData(stats.damages, stats.StaggerDuration);
         Debug.Log("TAPE");
-        targetArm.ReceiveHit(GameManager.Instance.opponentId, arm, hitData);
+        targetArm.ReceiveHit(FightManager.Instance.opponentId, arm, hitData);
     }
 
     protected virtual void AttackBlocked()
@@ -76,7 +76,7 @@ public class AttackState : ActionState
         stateMachine.Stagger(stats.parriedStaggerTime);
         arm.player.UpdateHeat(stats.parriedHeatCost);
 
-        parryingArm.SuccessfullGuardbreak(GameManager.Instance.opponentId);
+        parryingArm.SuccessfullGuardbreak(FightManager.Instance.opponentId);
     }
 
     protected virtual void AttackCanceled()
@@ -101,6 +101,6 @@ public class AttackState : ActionState
 
     protected virtual void SetTargetArm()
     {
-        targetArm = GameManager.Instance.opponent.GetOpposedArmBySide(arm.side);
+        targetArm = FightManager.Instance.opponent.GetOpposedArmBySide(arm.side);
     }
 }

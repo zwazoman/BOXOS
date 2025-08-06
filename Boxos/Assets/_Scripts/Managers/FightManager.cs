@@ -2,19 +2,19 @@ using PurrNet;
 using System;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class FightManager : MonoBehaviour
 {
     #region Singleton
-    private static GameManager instance;
+    private static FightManager instance;
 
-    public static GameManager Instance
+    public static FightManager Instance
     {
         get
         {
             if (instance == null)
             {
                 GameObject go = new GameObject("GameManager");
-                instance = go.AddComponent<GameManager>();
+                instance = go.AddComponent<FightManager>();
             }
             return instance;
         }

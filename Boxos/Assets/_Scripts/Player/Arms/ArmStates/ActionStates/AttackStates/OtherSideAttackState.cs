@@ -22,11 +22,11 @@ public class OtherSideAttackState : AttackState
 
     protected override void Hit()
     {
-        targetArm.ReceiveHit(GameManager.Instance.opponentId, arm, hitData);
+        targetArm.ReceiveHit(FightManager.Instance.opponentId, arm, hitData);
     }
 
     protected override void SetTargetArm()
     {
-        targetArm = GameManager.Instance.opponent.GetArmBySide(arm.side);
+        targetArm = FightManager.Instance.opponent.GetArmBySide(arm.side);
     }
 }
