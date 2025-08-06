@@ -18,9 +18,9 @@ MonoBehaviour:
     - {x: 0, y: 1}
     directionCpt: 0
     endingTimer: 0
-  heatCost: 0
+  heatCost: 3
   stats:
-    speed: 800
+    speed: 1
     damages: 1
     StaggerDuration: 0.3
     blockedStaggerTime: 1.5
