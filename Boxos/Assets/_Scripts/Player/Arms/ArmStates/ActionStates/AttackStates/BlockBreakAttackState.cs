@@ -8,8 +8,6 @@ public class BlockBreakAttackState : AttackState
 
         base.OnEnter();
 
-        hitData.isUnblockable = false;
-
         arm.OnAnimationEnd += stateMachine.Neutral;
 
         arm.animator.SetTrigger("HeavyAttack");
@@ -25,11 +23,13 @@ public class BlockBreakAttackState : AttackState
     protected override void Hit()
     {
         hitData = new HitData(stats.damages, stats.StaggerDuration);
-        hitData.isUnblockable = true;
         
         Debug.Log("TAPE");
-        Arm targetArm = GameManager.Instance.opponent.GetOpposedArmBySide(arm.side);
-
         targetArm.ReceiveHit(GameManager.Instance.opponentId, arm, hitData);
+    }
+
+    protected override void AttackBlocked()
+    {
+        targetArm.ReceiveTrueHit(GameManager.Instance.opponentId, arm, hitData);
     }
 }

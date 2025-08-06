@@ -22,8 +22,11 @@ public class OtherSideAttackState : AttackState
 
     protected override void Hit()
     {
-        Arm targetArm = GameManager.Instance.opponent.GetArmBySide(arm.side);
-
         targetArm.ReceiveHit(GameManager.Instance.opponentId, arm, hitData);
+    }
+
+    protected override void SetTargetArm()
+    {
+        targetArm = GameManager.Instance.opponent.GetArmBySide(arm.side);
     }
 }

@@ -19,10 +19,12 @@ public enum ActionType
     OtherSideAttack,
     BlockBreakAttack,
     ChargedAttack,
+    DefenseBreakAttack,
 
     //utilitaries
     Block,
     GuardBreak,
     Recovery,
+    Counter,
 }
 

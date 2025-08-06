@@ -7,24 +7,29 @@ public class AttackState : ActionState
     protected HitData hitData;
 
     protected bool isParriable;
-
     protected bool isCancelable;
+
+    protected Arm targetArm;
 
     public override void OnEnter()
     {
-        base.OnEnter();
-
         actionData = stateMachine.attacks[type].data;
         stats = stateMachine.attacks[type].data.stats;
+
+        base.OnEnter();
 
         isParriable = false;
         isCancelable = false;
 
+        SetTargetArm();
+
         arm.OnHit += Hit;
 
         arm.OnBlocked += AttackBlocked;
-        arm.OnReceiveGuardBreak += AttackParried;
+        arm.OnReceiveGuardBreak += ParryAttempt;
         arm.OnCancel += AttackCanceled;
+
+        arm.OnReceiveHit += DamagingHit;
 
         arm.OnParryWindow += ParryWindowHandle;
         arm.OnCancelWindow += CancelWindowHandle;
@@ -37,7 +42,7 @@ public class AttackState : ActionState
         arm.OnHit -= Hit;
 
         arm.OnBlocked -= AttackBlocked;
-        arm.OnReceiveGuardBreak -= AttackParried;
+        arm.OnReceiveGuardBreak -= ParryAttempt;
         arm.OnCancel -= AttackCanceled;
 
         arm.OnParryWindow -= ParryWindowHandle;
@@ -47,8 +52,6 @@ public class AttackState : ActionState
     {
         hitData = new HitData(stats.damages, stats.StaggerDuration);
         Debug.Log("TAPE");
-        Arm targetArm = GameManager.Instance.opponent.GetOpposedArmBySide(arm.side);
-
         targetArm.ReceiveHit(GameManager.Instance.opponentId, arm, hitData);
     }
 
@@ -63,7 +66,7 @@ public class AttackState : ActionState
     }
 
 
-    protected virtual void AttackParried(Arm parryingArm)
+    protected virtual void ParryAttempt(Arm parryingArm)
     {
         if (!isParriable)
             return;
@@ -94,5 +97,10 @@ public class AttackState : ActionState
     protected void CancelWindowHandle(bool state)
     {
         isCancelable = state;
+    }
+
+    protected virtual void SetTargetArm()
+    {
+        targetArm = GameManager.Instance.opponent.GetOpposedArmBySide(arm.side);
     }
 }

@@ -14,6 +14,7 @@ public class Arm : NetworkIdentity
 
     public event Action OnHit;
     public event Action<Arm,HitData> OnReceiveHit;
+    public event Action<Arm, HitData> OnReceiveTrueHit;
 
     public event Action OnGuardBreak;
     public event Action<Arm> OnReceiveGuardBreak;
@@ -87,6 +88,12 @@ public class Arm : NetworkIdentity
     {
         print("receivehit");
         OnReceiveHit?.Invoke(attackingArm, hitData); 
+    }
+
+    [TargetRpc]
+    public void ReceiveTrueHit(PlayerID id, Arm attackingArm,HitData hitData)
+    {
+        OnReceiveTrueHit?.Invoke(attackingArm, hitData);
     }
 
     [TargetRpc]

@@ -11,6 +11,7 @@ public class LightAttackState : AttackState
         arm.OnAnimationEnd += stateMachine.Neutral;
 
         arm.animator.SetTrigger("LightAttack");
+        arm.animator.SetFloat("LightAttackSpeed", stats.speed/1000);
     }
 
     public override void Update()

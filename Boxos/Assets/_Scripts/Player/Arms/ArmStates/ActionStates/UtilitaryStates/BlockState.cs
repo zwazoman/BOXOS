@@ -14,6 +14,8 @@ public class BlockState : UtilitaryState
 
         arm.OnReceiveHit += Block;
         arm.OnReceiveGuardBreak += GuardBroken;
+
+        arm.OnReceiveTrueHit += DamagingHit;
     }
 
     public override void OnExit()
@@ -21,6 +23,8 @@ public class BlockState : UtilitaryState
         base.OnExit();
         arm.OnReceiveHit -= Block;
         arm.OnReceiveGuardBreak -= GuardBroken;
+
+        arm.OnReceiveTrueHit -= DamagingHit;
     }
 
     public override void Update()
@@ -30,9 +34,6 @@ public class BlockState : UtilitaryState
 
     void Block(Arm attackingArm, HitData hitData)
     {
-        if (!hitData.isUnblockable)
-            DamagingHit(attackingArm, hitData);
-
         arm.player.UpdateHeat(hitData.blockHeatCost);
 
         attackingArm.Blocked(GameManager.Instance.opponentId);

@@ -25,13 +25,20 @@ public static class PlayerStats
     // ACTION STATS
 
     //block
-    public const float BlockWindowDuration = 2.5f;
+    public const float BlockWindowDuration = /*2.5*/10f;
 
     //recovery
     public const float RecoveryTimeOffset = .5f;
 
     //charged attack
     public const float ChargeAttackTimeOffset = 2;
+
+    //antidefense attack
+    public const int ParriedDamageMultiplier = 2;
+    public const float ParriedStaggerTimeMultiplier = 1.5f;
+
+    //counter attack
+    public const float CounterAttackWindowDuration = 1.5f;
 
 
 }
@@ -54,14 +61,12 @@ public struct HitData
     public float staggerDuration;
     public int heatCost;
     public int blockHeatCost;
-    public bool isUnblockable;
 
-    public HitData(int damage = 0, float staggerDuration = 0, int heatCost = 0, int blockHeatCost = 0, bool isUnblockable = false)
+    public HitData(int damage = 0, float staggerDuration = 0, int heatCost = 0, int blockHeatCost = 0)
     {
         this.damage = damage;
         this.staggerDuration = staggerDuration;
         this.heatCost = heatCost;
         this.blockHeatCost = blockHeatCost;
-        this.isUnblockable = isUnblockable;
     }
 }

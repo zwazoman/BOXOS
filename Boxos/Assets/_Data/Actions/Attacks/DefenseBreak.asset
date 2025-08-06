@@ -10,18 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b62582d599ea0fc4690ee306705b5edb, type: 3}
-  m_Name: Jean-Marie
+  m_Name: DefenseBreak
   m_EditorClassIdentifier: 
-  type: 0
+  type: 5
   inputs:
-    directions: []
+    directions:
+    - {x: -1, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
     directionCpt: 0
     endingTimer: 0
+  heatCost: 4
   stats:
     speed: 0
-    damage: 1
-    heatCost: 0
-    StaggerDuration: 0
+    damages: 2
+    StaggerDuration: 1.5
     blockedStaggerTime: 0
     blockedHeatCost: 0
     parriedStaggerTime: 0

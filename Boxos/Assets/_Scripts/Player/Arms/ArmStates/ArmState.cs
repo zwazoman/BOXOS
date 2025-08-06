@@ -39,11 +39,14 @@ public class ArmState
         Debug.Log("OUCH");
 
         arm.player.UpdateHealth(-hitData.damage);
-        stateMachine.Stagger(hitData.staggerDuration);
+
+        if(hitData.staggerDuration > 0)
+            stateMachine.Stagger(hitData.staggerDuration);
     }
 
     protected void TransitionWithType(ActionType type)
     {
+        Debug.Log(type);
         stateMachine.TransitionTo(stateMachine.actionStatesByTypes[type]);
     }
 }

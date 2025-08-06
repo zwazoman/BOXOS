@@ -1915,7 +1915,7 @@ PrefabInstance:
     - target: {fileID: 534296522163231132, guid: 8ad9c191676dba940b51fe8b7a17c28a, type: 3}
       propertyPath: _prosthesisData
       value: 
-      objectReference: {fileID: 11400000, guid: c62444673860d76438dbe0c2f57cb9d9, type: 2}
+      objectReference: {fileID: 11400000, guid: b0db5dfc3db13ff439ee2db86b8c5ee9, type: 2}
     - target: {fileID: 1197276455699501822, guid: 8ad9c191676dba940b51fe8b7a17c28a, type: 3}
       propertyPath: side
       value: 1

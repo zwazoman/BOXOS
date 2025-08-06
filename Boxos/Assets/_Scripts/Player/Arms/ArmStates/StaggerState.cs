@@ -8,10 +8,6 @@ public class StaggerState : ArmState
         base.OnEnter();
 
         arm.animator.SetTrigger("Stagger");
-
-        if (stateDuration == 0)
-            stateDuration = 2;
-
         arm.OnExhaust += stateMachine.OverHeat;
     }
 

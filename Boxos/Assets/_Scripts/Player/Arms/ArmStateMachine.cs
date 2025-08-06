@@ -32,22 +32,33 @@ public class ArmStateMachine : NetworkIdentity
     public OtherSideAttackState otherSideAttackState = new();
     public BlockBreakAttackState blockBreakAttackState = new();
     public ChargedAttackState chargedAttackState = new();
+    public DefenseBreakAttack defenseBreakAttack = new();
 
 
     //Utilitaries
     public BlockState blockState = new();
     public GuardBreakState guardBreakState = new();
+    public RecoveryState recoveryState = new();
+    public CounterState counterState = new();
 
 
     void FillActionStates()
     {
         actionStatesByTypes.Add(ActionType.LightAttack, lightAttackState);
         actionStatesByTypes.Add(ActionType.HeavyAttack, heavyAttackState);
+
         actionStatesByTypes.Add(ActionType.OtherSideAttack, otherSideAttackState);
         actionStatesByTypes.Add(ActionType.BlockBreakAttack, blockBreakAttackState);
         actionStatesByTypes.Add(ActionType.ChargedAttack, chargedAttackState);
+        actionStatesByTypes.Add(ActionType.DefenseBreakAttack, defenseBreakAttack);
+
+
         actionStatesByTypes.Add(ActionType.Block, blockState);
         actionStatesByTypes.Add(ActionType.GuardBreak, guardBreakState);
+
+        actionStatesByTypes.Add(ActionType.Recovery, recoveryState);
+        actionStatesByTypes.Add(ActionType.Counter, counterState);
+
     }
     #endregion
 

@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b62582d599ea0fc4690ee306705b5edb, type: 3}
-  m_Name: Jean-Paul
+  m_Name: OtherSide
   m_EditorClassIdentifier: 
-  type: 3
+  type: 2
   inputs:
     directions:
+    - {x: 1, y: 0}
     - {x: 0, y: 1}
-    - {x: 0, y: -1}
+    - {x: -1, y: 0}
     directionCpt: 0
     endingTimer: 0
+  heatCost: 5
   stats:
     speed: 800
-    damage: 2
-    heatCost: 8
-    StaggerDuration: 0.9
-    isBlockable: 0
-    blockedStaggerTime: 0
+    damages: 0
+    StaggerDuration: 0.7
+    blockedStaggerTime: 1.5
     blockedHeatCost: 0
-    parriedStaggerTime: 3
-    parriedHeatCost: 8
+    parriedStaggerTime: 2.5
+    parriedHeatCost: 7

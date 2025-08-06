@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7581e07fd478e34ebf368bf2ecc7b34, type: 3}
-  m_Name: Paul
+  m_Name: CounterAttack Prosthesis
   m_EditorClassIdentifier: 
-  actionData: {fileID: 11400000, guid: 23bbf46b54d8287428829393d940b9a2, type: 2}
+  actionData: {fileID: 0}

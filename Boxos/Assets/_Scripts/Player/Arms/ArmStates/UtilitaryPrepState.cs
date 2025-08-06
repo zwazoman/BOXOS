@@ -1,3 +1,4 @@
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class UtilitaryPrepState : ArmState
@@ -11,10 +12,10 @@ public class UtilitaryPrepState : ArmState
 
         arm.OnExhaust += stateMachine.OverHeat;
 
-        foreach (UtilitaryTruc utilitaries in stateMachine.utilitaries.Values)
+        foreach (UtilitaryTruc utilitary in stateMachine.utilitaries.Values)
         {
-            arm.inputs.actionDatas.Add(utilitaries.data);
-            utilitaries.data.inputs.OnPerformed += TransitionWithType;
+            arm.inputs.actionDatas.Add(utilitary.data);
+            utilitary.data.inputs.OnPerformed += TransitionWithType;
         }
     }
 
@@ -33,20 +34,6 @@ public class UtilitaryPrepState : ArmState
 
     public override void Update()
     {
-        ////blockHandle
-        //if(InputTools.InputAngle(Vector2.up, armInputDelta))
-        //{
-        //    stateMachine.Block();
-        //    return;
-        //}
-
-        ////GB handle
-        //if (InputTools.InputAngle(Vector2.right, armInputDelta))
-        //{
-        //    stateMachine.GuardBreak();
-        //    return;
-        //}
-
         //exit conditions
         if (InputTools.InputAngle(Vector2.left, armInputDelta, false))
         {

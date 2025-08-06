@@ -363,15 +363,15 @@ MonoBehaviour:
       Value:
         type: 1
         data: {fileID: 11400000, guid: 1368d2879613d984aa001f7cad90b2ea, type: 2}
-  defenses:
+  utilitaries:
     _serializedList:
-    - Key: 2
+    - Key: 6
       Value:
-        type: 2
+        type: 6
         data: {fileID: 11400000, guid: 2036bc05912a8884881a3c2cf88f3e48, type: 2}
-    - Key: 3
+    - Key: 7
       Value:
-        type: 3
+        type: 7
         data: {fileID: 11400000, guid: 23c6911811f07444f9bd0328827fbc4f, type: 2}
 --- !u!114 &7096799498282803425
 MonoBehaviour:
@@ -399,6 +399,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5dec8885dedf4442b5044b59851e924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _arm: {fileID: 1197276455699501822}
   _prosthesisData: {fileID: 0}
 --- !u!1 &7581468112728295793

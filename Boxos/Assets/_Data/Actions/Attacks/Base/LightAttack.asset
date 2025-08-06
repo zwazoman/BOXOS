@@ -18,12 +18,11 @@ MonoBehaviour:
     - {x: 0, y: 1}
     directionCpt: 0
     endingTimer: 0
+  heatCost: 0
   stats:
-    speed: 500
-    damage: 1
-    heatCost: 3
+    speed: 800
+    damages: 1
     StaggerDuration: 0.3
-    isBlockable: 1
     blockedStaggerTime: 1.5
     blockedHeatCost: 0
     parriedStaggerTime: 3
