@@ -63,6 +63,7 @@ public class Player : NetworkIdentity
             _camera.enabled = true;
             StartCoroutine(CoolHeat());
             _cooling = true;
+            //choper les bras et les set ici
         }
         else
         {
@@ -72,8 +73,8 @@ public class Player : NetworkIdentity
             FightManager.Instance.opponentId = owner.Value;
             
             _playerInput.enabled = false;
+            //choper les bras et les set ici
         }
-
         FightManager.Instance.PlayerSpawned();
     }
 
