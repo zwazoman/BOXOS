@@ -1017,10 +1017,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2356954253505893415, guid: c7a1d2e86310a3943bc683ce3e27a4ec, type: 3}
-      propertyPath: m_Name
-      value: SceneTransitionner
-      objectReference: {fileID: 0}
     - target: {fileID: 6247794871624521982, guid: c7a1d2e86310a3943bc683ce3e27a4ec, type: 3}
       propertyPath: m_Pivot.x
       value: 0

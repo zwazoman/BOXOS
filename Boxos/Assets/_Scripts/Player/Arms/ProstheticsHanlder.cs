@@ -4,7 +4,6 @@ using UnityEngine;
 public class ProstheticsHanlder : NetworkIdentity
 {
     [SerializeField] Arm _arm;
-
     [SerializeField] ProsthesisData _prosthesisData;
 
     private void Awake()
@@ -13,18 +12,9 @@ public class ProstheticsHanlder : NetworkIdentity
             TryGetComponent(out _arm);
     }
 
-    private void Start()
+    public void SetProsthesisData(ProsthesisData prostData)
     {
-        if (!isOwner)
-            return;
-
-        //if (_arm.side == ArmSide.Right)
-        //    _prosthesisData = PlayerInventory.Instance.rightProsthesis;
-        //else
-        //    _prosthesisData = PlayerInventory.Instance.leftProsthesis;
-
-        if (_prosthesisData == null)
-            return;
+        _prosthesisData = prostData;
 
         if (_prosthesisData.actionData is AttackData)
         {
@@ -38,6 +28,5 @@ public class ProstheticsHanlder : NetworkIdentity
             _arm.stateMachine.utilitaries.Add(data.type, new UtilitaryTruc(data.type, data));
             print("UtilitaryAdded");
         }
-
     }
 }

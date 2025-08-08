@@ -27,10 +27,9 @@ public class Player : NetworkIdentity
     public event Action<ArmSide> OnParry;
 
     #endregion
-
+    [Header("References")]
     [SerializeField] GameObject _body;
     [SerializeField] CinemachineCamera _camera;
-
     [SerializeField] PlayerInput _playerInput;
 
     public SyncVar<int> heat = new(initialValue: 0, ownerAuth: true);
@@ -63,7 +62,8 @@ public class Player : NetworkIdentity
             _camera.enabled = true;
             StartCoroutine(CoolHeat());
             _cooling = true;
-            //choper les bras et les set ici
+            SpawnArm(leftArm);
+            SpawnArm(rightArm);
         }
         else
         {
@@ -93,6 +93,19 @@ public class Player : NetworkIdentity
                 StartCoroutine(CoolHeat());
             }
         }
+    }
+
+    void SpawnArm(Arm arm)
+    {
+        ProsthesisData prosthesisData;
+        if (arm.side == ArmSide.Right)
+            prosthesisData = GameData.Instance.playerData.rightArmData;
+        else
+            prosthesisData = GameData.Instance.playerData.leftArmData;
+
+        arm.prosthetics.SetProsthesisData(prosthesisData);
+
+        //s'occuper du visuel mon connard
     }
 
     public void OnLeftArmControl(InputAction.CallbackContext ctx)

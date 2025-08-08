@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7581e07fd478e34ebf368bf2ecc7b34, type: 3}
   m_Name: CounterAttack Prosthesis
   m_EditorClassIdentifier: 
-  actionData: {fileID: 0}
+  actionData: {fileID: 11400000, guid: 768fe4b5cff937c4d913437ec19ddcf9, type: 2}
+  prefab: {fileID: 0}
+  sprite: {fileID: 0}
