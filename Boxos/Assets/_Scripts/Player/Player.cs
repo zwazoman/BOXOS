@@ -57,23 +57,11 @@ public class Player : NetworkIdentity
         base.OnSpawned();
         if (isOwner)
         {
-            print(localPlayerForced);
-            _body.SetActive(false);
-            _camera.enabled = true;
-            StartCoroutine(CoolHeat());
-            _cooling = true;
-            SpawnArm(leftArm);
-            SpawnArm(rightArm);
+            SetupOwner();
         }
         else
         {
-            _body.SetActive(true);
-            _camera.enabled = false;
-            FightManager.Instance.opponent = this;
-            FightManager.Instance.opponentId = owner.Value;
-            
-            _playerInput.enabled = false;
-            //choper les bras et les set ici
+            SetupOpponent();
         }
         FightManager.Instance.PlayerSpawned();
     }
@@ -95,6 +83,29 @@ public class Player : NetworkIdentity
         }
     }
 
+    void SetupOwner()
+    {
+        print(localPlayerForced);
+        _body.SetActive(false);
+        _camera.enabled = true;
+        StartCoroutine(CoolHeat());
+        _cooling = true;
+        SpawnArm(leftArm);
+        SpawnArm(rightArm);
+    }
+
+    void SetupOpponent()
+    {
+        _body.SetActive(true);
+        _camera.enabled = false;
+        FightManager.Instance.opponent = this;
+        FightManager.Instance.opponentId = owner.Value;
+
+        _playerInput.enabled = false;
+        //choper les bras et les set ici
+    }
+
+    [ObserversRpc]
     void SpawnArm(Arm arm)
     {
         ProsthesisData prosthesisData;
