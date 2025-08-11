@@ -23,7 +23,7 @@ public class GameData : MonoBehaviour
     }
     #endregion
 
-    public PlayerData playerData;
+    public PlayerProfile playerData;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class GameData : MonoBehaviour
 }
 
 [Serializable] // A RETIRER
-public struct PlayerData
+public struct PlayerProfile
 {
     public ProsthesisData rightArmData;
     public ProsthesisData leftArmData;
