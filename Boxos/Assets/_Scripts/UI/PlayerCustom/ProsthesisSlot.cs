@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ProsthesisSlot : MonoBehaviour
+public class ProsthesisSlot : PlayerElementSlot
 {
     [SerializeField] Image _image;
     [SerializeField] ArmSide _side;
@@ -30,5 +31,16 @@ public class ProsthesisSlot : MonoBehaviour
     public void ClearData()
     {
         SetData(_view.emptyProsthesis);
+    }
+
+    public override void OnDrop(PointerEventData eventData)
+    {
+        base.OnDrop(eventData);
+        ProsthesisUI draggable;
+
+        if(eventData.pointerDrag.TryGetComponent(out draggable))
+        {
+            SetData(draggable.data);
+        }
     }
 }

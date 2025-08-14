@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProsthesisUI : MonoBehaviour
+public class ProsthesisUI : DraggableUI
 {
     [HideInInspector] public ProsthesisData data;
 
