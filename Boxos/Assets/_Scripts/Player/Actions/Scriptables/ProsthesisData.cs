@@ -12,5 +12,9 @@ public class ProsthesisData : ScriptableObject
     [field: SerializeField]
     public Sprite sprite;
 
-    // visuels etc
+    [field: SerializeField]
+    public string smallDescription;
+
+    [field : SerializeField]
+    public string largeDescription;
 }

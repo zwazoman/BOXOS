@@ -110,9 +110,9 @@ public class Player : NetworkIdentity
     {
         ProsthesisData prosthesisData;
         if (arm.side == ArmSide.Right)
-            prosthesisData = GameData.Instance.playerData.rightArmData;
+            prosthesisData = GameData.Instance.playerProfile.rightArmData;
         else
-            prosthesisData = GameData.Instance.playerData.leftArmData;
+            prosthesisData = GameData.Instance.playerProfile.leftArmData;
 
         arm.prosthetics.SetProsthesisData(prosthesisData);
 

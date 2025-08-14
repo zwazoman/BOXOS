@@ -25,11 +25,12 @@ public class ViewSwap : MonoBehaviour
     [SerializeField] CinemachineCamera cam;
 
     [Header("Views")]
-    [SerializeField] public MenuView mainMenu;
-    [SerializeField] public MenuView playerCustomisation;
-    [SerializeField] public MenuView Lobby;
+    [SerializeField] public MainMenuMenuView mainMenu;
+    [SerializeField] public ProfileCustomMenuView profileCustomisation;
+    [SerializeField] public LobbyMenuView lobby;
 
-    MenuView currentView;
+    MenuView _previousView;
+    MenuView _currentView;
 
     private void Awake()
     {
@@ -46,12 +47,14 @@ public class ViewSwap : MonoBehaviour
 
     public void SwapTo(MenuView view)
     {
-        if(currentView != null)
-            currentView.Disable();
+        if(_currentView != null)
+            _currentView.Disable();
 
-        currentView = view;
-        if(currentView.cam == null)
-            currentView.cam = cam;
+        _previousView = _currentView;
+
+        _currentView = view;
+        if(_currentView.cam == null)
+            _currentView.cam = cam;
 
         view.Enable();
     }
@@ -64,12 +67,18 @@ public class ViewSwap : MonoBehaviour
                 SwapTo(mainMenu);
                 break;
             case "PlayerCustom":
-                SwapTo(playerCustomisation);
+                SwapTo(profileCustomisation);
                 break;
             case "Lobby":
-                SwapTo(Lobby);
+                SwapTo(lobby);
                 break;
         }
+    }
+
+    public void SwapToPrevious()
+    {
+        if(_previousView != null)
+            SwapTo(_previousView);
     }
 
 }

@@ -1,10 +1,14 @@
 using Cysharp.Threading.Tasks;
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
 [RequireComponent (typeof(CanvasGroup))]
 public class MenuView : MonoBehaviour
 {
+    public event Action OnEnable;
+    public event Action OnDisable;
+
     [HideInInspector] public CinemachineCamera cam;
 
     [SerializeField] CinemachineCamera viewCam;
@@ -16,15 +20,17 @@ public class MenuView : MonoBehaviour
         TryGetComponent(out _canvasGroup);
     }
 
-    public async void Enable()
+    public virtual async void Enable()
     {
         viewCam.enabled = true;
+        OnEnable?.Invoke();
         await _canvasGroup.Show();
     }
 
-    public async void Disable()
+    public virtual async void Disable()
     {
         await _canvasGroup.Hide();
+        OnDisable?.Invoke();
         viewCam.enabled = false;
     }
 

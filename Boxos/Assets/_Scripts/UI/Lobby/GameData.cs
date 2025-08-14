@@ -23,7 +23,9 @@ public class GameData : MonoBehaviour
     }
     #endregion
 
-    public PlayerProfile playerData;
+    public event Action OnProfileChanged;
+
+    public PlayerProfile playerProfile;
 
     private void Awake()
     {
@@ -34,9 +36,16 @@ public class GameData : MonoBehaviour
 
         DontDestroyOnLoad(this);
     }
+
+    public void ChangePlayerProfile(PlayerProfile profile)
+    {
+        playerProfile = profile;
+        OnProfileChanged?.Invoke();
+    }
+
 }
 
-[Serializable] // A RETIRER
+[Serializable]
 public struct PlayerProfile
 {
     public ProsthesisData rightArmData;
