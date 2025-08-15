@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 4342759707255465224}
   - component: {fileID: 3441310137719523105}
   - component: {fileID: 8665757854933262846}
+  - component: {fileID: 7870641954159261103}
   m_Layer: 5
   m_Name: ProsthesisUI
   m_TagString: Untagged
@@ -170,6 +171,26 @@ MonoBehaviour:
   _image: {fileID: 3549967760211546499}
   _name: {fileID: 7674390999828571158}
   _smallDesc: {fileID: 661895259881713797}
+--- !u!114 &7870641954159261103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4785036970949033719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &6728975728312844993
 GameObject:
   m_ObjectHideFlags: 0

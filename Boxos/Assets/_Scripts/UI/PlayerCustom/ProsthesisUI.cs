@@ -11,8 +11,9 @@ public class ProsthesisUI : DraggableUI
     [SerializeField] TMP_Text _name;
     [SerializeField] TMP_Text _smallDesc;
 
-    private void Start()
+    override protected void Start()
     {
+        base.Start();
         _image.sprite = data.sprite;
         _name.text = data.name;
         _smallDesc.text = data.smallDescription;

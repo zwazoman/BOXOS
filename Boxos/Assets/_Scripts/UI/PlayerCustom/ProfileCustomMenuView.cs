@@ -21,4 +21,10 @@ public class ProfileCustomMenuView : MenuView
         rightSlot.SetData(emptyProsthesis);
         leftSlot.SetData(emptyProsthesis);
     }
+
+    public void SaveProfile()
+    {
+        SaveManager.Instance.SaveProfile(playerProfile);
+    }
+
 }

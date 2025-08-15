@@ -1,15 +1,22 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    Vector3 _intialPos;
-    Transform _initialParent;
+    Vector3 _intiialPos;
+    RectTransform _rectTransform;
+
+    protected virtual void Start()
+    {
+        TryGetComponent(out _rectTransform);
+    }
 
     public virtual void OnBeginDrag(PointerEventData eventData)
     {
-        _initialParent = transform;
+        _intiialPos = _rectTransform.anchoredPosition;
+
     }
 
     public virtual void OnDrag(PointerEventData eventData)
@@ -19,6 +26,6 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public virtual void OnEndDrag(PointerEventData eventData)
     {
-        transform.SetParent(_initialParent, false);
+        _rectTransform.anchoredPosition = _intiialPos;
     }
 }

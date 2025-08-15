@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 public class ProfileSelection : MonoBehaviour
 {
-    public List<PlayerProfile> profiles = new();
-
     [Header("Parameters")]
     [SerializeField] GameObject _emptyProfilePrefab;
     [SerializeField] GameObject _newProfilePrefab;
@@ -12,17 +10,12 @@ public class ProfileSelection : MonoBehaviour
     [Header("References")]
     [SerializeField] Transform _profilesPanel;
 
-    private void Start()
-    {
-        //récupérer les données sauvegardées et les stocker dans profiles
-    }
-
     private void OnEnable()
     {
-        GenerateProfiles();
+        GenerateProfiles(SaveManager.Instance.ReadProfiles());
     }
 
-    public void GenerateProfiles()
+    public void GenerateProfiles(List<PlayerProfile> profiles)
     {
         foreach (PlayerProfile playerProfile in profiles)
         {
