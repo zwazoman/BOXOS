@@ -2,6 +2,8 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 
 public class SaveManager : MonoBehaviour
 {
@@ -22,7 +24,7 @@ public class SaveManager : MonoBehaviour
     }
     #endregion
 
-    List<PlayerProfile> profiles;
+    List<PlayerProfile> profiles = new();
 
     string profileSavePath;
 
@@ -37,11 +39,13 @@ public class SaveManager : MonoBehaviour
     private void Start()
     {
         profileSavePath = Application.persistentDataPath + "/Profiles";
+        print(Application.persistentDataPath);
         profiles = ReadProfiles();
     }
 
     public void SaveProfile(PlayerProfile profile)
     {
+        print("save");
         profiles.Add(profile);
         SaveProfiles();
     }
@@ -52,26 +56,34 @@ public class SaveManager : MonoBehaviour
             profiles.Remove(profile);
         SaveProfiles();
     }
+    void SaveProfiles()
+    {
+        SavableList<PlayerProfile> savable = new();
+        savable.list = profiles;
+
+        File.WriteAllText(profileSavePath, JsonUtility.ToJson(savable));
+    }
 
     public List<PlayerProfile> ReadProfiles()
     {
-        List<PlayerProfile> profiles = new();
-
-        if(File.Exists(profileSavePath))
-            profiles = JsonUtility.FromJson<List<PlayerProfile>>(profileSavePath);
+        print("read");
+        if (File.Exists(profileSavePath))
+        {
+            profiles = JsonUtility.FromJson<SavableList<PlayerProfile>>(File.ReadAllText(profileSavePath)).list;
+        }
 
         return profiles;
     }
 
     public void ClearProfiles()
     {
+        print("clear");
         File.Delete(profileSavePath);
     }
+}
 
-    void SaveProfiles()
-    {
-        string json = JsonUtility.ToJson(profiles);
-
-        File.WriteAllText(profileSavePath, json);
-    }
+[Serializable]
+public class SavableList<T>
+{
+    public List<T> list = new();
 }
