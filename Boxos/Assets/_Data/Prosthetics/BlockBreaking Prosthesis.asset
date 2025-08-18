@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: BlockBreaking Prosthesis
   m_EditorClassIdentifier: 
   actionData: {fileID: 11400000, guid: 23bbf46b54d8287428829393d940b9a2, type: 2}
+  prefab: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 220fcf547bbcf8c41af2ad59cd3e1851, type: 3}
+  smallDescription: Vertical punch that goes through block
+  largeDescription: 

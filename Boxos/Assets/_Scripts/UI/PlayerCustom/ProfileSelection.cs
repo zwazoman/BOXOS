@@ -6,16 +6,24 @@ public class ProfileSelection : MonoBehaviour
     [Header("Parameters")]
     [SerializeField] GameObject _emptyProfilePrefab;
     [SerializeField] GameObject _newProfilePrefab;
+    [SerializeField] int _maxProfilesAmount = 4;
 
     [Header("References")]
     [SerializeField] Transform _profilesPanel;
+
+    List<Profile> _uiProfiles = new();
 
     private void OnEnable()
     {
         GenerateProfiles(SaveManager.Instance.ReadProfiles());
     }
 
-    public void GenerateProfiles(List<PlayerProfile> profiles)
+    private void OnDisable()
+    {
+        DeleteProfiles();
+    }
+
+    void GenerateProfiles(List<PlayerProfile> profiles)
     {
         foreach (PlayerProfile playerProfile in profiles)
         {
@@ -23,8 +31,20 @@ public class ProfileSelection : MonoBehaviour
             Profile profile; 
             Instantiate(_emptyProfilePrefab, _profilesPanel).TryGetComponent(out profile);
             profile.FillProfile(playerProfile);
+            _uiProfiles.Add(profile);
         }
 
-        Instantiate(_newProfilePrefab, _profilesPanel);
+        if(profiles.Count < _maxProfilesAmount)
+            _uiProfiles.Add(Instantiate(_newProfilePrefab, _profilesPanel).GetComponent<Profile>());
+    }
+
+    void DeleteProfiles()
+    {
+        foreach(Profile profile in _uiProfiles)
+        {
+            Destroy(profile.gameObject);
+        }
+
+        _uiProfiles.Clear();
     }
 }

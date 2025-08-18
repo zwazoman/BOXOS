@@ -24,7 +24,7 @@ public class SaveManager : MonoBehaviour
     }
     #endregion
 
-    List<PlayerProfile> profiles = new();
+    [HideInInspector] public List<PlayerProfile> profiles = new();
 
     string profileSavePath;
 
@@ -39,25 +39,36 @@ public class SaveManager : MonoBehaviour
     private void Start()
     {
         profileSavePath = Application.persistentDataPath + "/Profiles";
-        print(Application.persistentDataPath);
-        profiles = ReadProfiles();
     }
 
-    public void SaveProfile(PlayerProfile profile)
+    public void AddProfile(PlayerProfile profile)
     {
-        print("save");
         profiles.Add(profile);
+    }
+
+    public void SaveProfile(PlayerProfile playerProfile, PlayerProfile? oldProfile)
+    {
+        if (oldProfile.HasValue && profiles.Contains(oldProfile.Value))
+        {
+            profiles.Remove(oldProfile.Value);
+        }
+
+        AddProfile(playerProfile);
         SaveProfiles();
     }
 
     public void RemoveProfile(PlayerProfile profile)
     {
-        if(profiles.Contains(profile))
+        if (profiles.Contains(profile))
             profiles.Remove(profile);
         SaveProfiles();
     }
-    void SaveProfiles()
+
+
+    public void SaveProfiles()
     {
+        profiles.Reverse();
+
         SavableList<PlayerProfile> savable = new();
         savable.list = profiles;
 
@@ -66,18 +77,15 @@ public class SaveManager : MonoBehaviour
 
     public List<PlayerProfile> ReadProfiles()
     {
-        print("read");
         if (File.Exists(profileSavePath))
         {
             profiles = JsonUtility.FromJson<SavableList<PlayerProfile>>(File.ReadAllText(profileSavePath)).list;
         }
-
         return profiles;
     }
 
     public void ClearProfiles()
     {
-        print("clear");
         File.Delete(profileSavePath);
     }
 }

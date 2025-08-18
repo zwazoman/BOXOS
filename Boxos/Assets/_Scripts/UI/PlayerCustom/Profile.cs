@@ -1,9 +1,17 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Profile : MonoBehaviour
 {
     [HideInInspector] public ProfileSelection _profileSelection;
     [HideInInspector] public PlayerProfile playerProfile;
+
+    [HideInInspector] public int index;
+
+    [SerializeField] TMP_Text _nameText;
+
+    Button selectButton;
 
     private void Start()
     {
@@ -14,7 +22,7 @@ public class Profile : MonoBehaviour
     {
         playerProfile = profile;
 
-        //mettre a jour les visuels de con
+        _nameText.text = profile.profileName;
     }
 
     //buttons
@@ -33,8 +41,18 @@ public class Profile : MonoBehaviour
 
     public void CreateProfile()
     {
-        ViewSwap.Instance.profileCustomisation.CreateProfile();
-        ViewSwap.Instance.SwapTo(ViewSwap.Instance.profileCustomisation);
-        _profileSelection.gameObject.SetActive(false);
+        playerProfile = new();
+        playerProfile.leftArmData = ViewSwap.Instance.profileCustomisation.emptyProsthesis;
+        playerProfile.rightArmData = ViewSwap.Instance.profileCustomisation.emptyProsthesis;
+        playerProfile.profileName = "NewProfile " + SaveManager.Instance.profiles.Count;
+
+        //SaveManager.Instance.AddProfile(playerProfile);
+        EditProfile();
+    }
+
+    public void DeleteProfile()
+    {
+        SaveManager.Instance.RemoveProfile(playerProfile);
+        Destroy(gameObject);
     }
 }

@@ -8,6 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 772916209310821827, guid: b57ca6b55251f16499154a2f3bd36e12, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 772916209310821827, guid: b57ca6b55251f16499154a2f3bd36e12, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9913637
+      objectReference: {fileID: 0}
+    - target: {fileID: 772916209310821827, guid: b57ca6b55251f16499154a2f3bd36e12, type: 3}
+      propertyPath: m_Color.r
+      value: 0.1273585
+      objectReference: {fileID: 0}
+    - target: {fileID: 862217649263122695, guid: b57ca6b55251f16499154a2f3bd36e12, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CreateProfile
+      objectReference: {fileID: 0}
     - target: {fileID: 1846973788080916536, guid: b57ca6b55251f16499154a2f3bd36e12, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -136,9 +152,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewProfile
       objectReference: {fileID: 0}
+    - target: {fileID: 9214102516558311766, guid: b57ca6b55251f16499154a2f3bd36e12, type: 3}
+      propertyPath: _nameText
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 493706829699855171, guid: b57ca6b55251f16499154a2f3bd36e12, type: 3}
+    - {fileID: 1710147060159601161, guid: b57ca6b55251f16499154a2f3bd36e12, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b57ca6b55251f16499154a2f3bd36e12, type: 3}

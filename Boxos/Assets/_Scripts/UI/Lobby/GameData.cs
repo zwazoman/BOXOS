@@ -48,6 +48,8 @@ public class GameData : MonoBehaviour
 [Serializable]
 public struct PlayerProfile
 {
+    public string profileName;
+
     public ProsthesisData rightArmData;
     public ProsthesisData leftArmData;
 }
