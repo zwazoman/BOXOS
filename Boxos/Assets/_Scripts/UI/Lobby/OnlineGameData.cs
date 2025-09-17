@@ -23,7 +23,7 @@ public class GameData : MonoBehaviour
     }
     #endregion
 
-    public event Action OnProfileChanged;
+    public event Action<PlayerProfile> OnProfileChanged;
 
     public PlayerProfile playerProfile;
 
@@ -40,7 +40,7 @@ public class GameData : MonoBehaviour
     public void ChangePlayerProfile(PlayerProfile profile)
     {
         playerProfile = profile;
-        OnProfileChanged?.Invoke();
+        OnProfileChanged?.Invoke(profile);
     }
 
 }

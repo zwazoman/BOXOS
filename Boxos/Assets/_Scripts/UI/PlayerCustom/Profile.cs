@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Profile : MonoBehaviour
 {
-    [HideInInspector] public ProfileSelection _profileSelection;
+    [HideInInspector] public ProfilesHandler _profileSelection;
     [HideInInspector] public PlayerProfile playerProfile;
 
     [HideInInspector] public int index;
@@ -15,7 +15,7 @@ public class Profile : MonoBehaviour
 
     private void Start()
     {
-        _profileSelection = GetComponentInParent<ProfileSelection>();
+        _profileSelection = GetComponentInParent<ProfilesHandler>();
     }
 
     public void FillProfile(PlayerProfile profile)

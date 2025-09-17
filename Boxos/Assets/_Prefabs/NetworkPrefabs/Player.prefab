@@ -1979,49 +1979,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1239666991925224087, guid: 8ad9c191676dba940b51fe8b7a17c28a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6126678143931083261}
-    - targetCorrespondingSourceObject: {fileID: 1239666991925224087, guid: 8ad9c191676dba940b51fe8b7a17c28a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1542676509716416303}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ad9c191676dba940b51fe8b7a17c28a, type: 3}
---- !u!1 &7118964448443782216 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1239666991925224087, guid: 8ad9c191676dba940b51fe8b7a17c28a, type: 3}
-  m_PrefabInstance: {fileID: 8358552252844783327}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6126678143931083261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7118964448443782216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
---- !u!114 &1542676509716416303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7118964448443782216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efe58df89b5b74a97a123b5ed2b70422, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"nest":{"source":"Macro","macro":null,"embed":null}}'
-    _objectReferences: []
 --- !u!114 &7161319801387934753 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1197276455699501822, guid: 8ad9c191676dba940b51fe8b7a17c28a, type: 3}

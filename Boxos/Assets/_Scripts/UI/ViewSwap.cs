@@ -42,6 +42,10 @@ public class ViewSwap : MonoBehaviour
 
     private void Start()
     {
+        mainMenu.Disable();
+        profileCustomisation.Disable();
+        lobby.Disable();
+
         SwapTo(mainMenu);
     }
 

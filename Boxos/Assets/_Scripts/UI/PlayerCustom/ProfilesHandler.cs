@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ProfileSelection : MonoBehaviour
+public class ProfilesHandler : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField] GameObject _emptyProfilePrefab;
