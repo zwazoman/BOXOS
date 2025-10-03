@@ -5,7 +5,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : NetworkIdentity
+public class OnlinePlayer : NetworkIdentity
 {
     #region Events
 

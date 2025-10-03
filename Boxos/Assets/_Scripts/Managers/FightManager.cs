@@ -25,7 +25,7 @@ public class FightManager : MonoBehaviour
 
     [SerializeField] public NetworkManager networkManager;
 
-    [HideInInspector] public Player opponent;
+    [HideInInspector] public OnlinePlayer opponent;
     [HideInInspector] public PlayerID opponentId;
 
     private void Awake()

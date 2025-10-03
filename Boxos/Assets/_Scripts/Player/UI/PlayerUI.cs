@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerUI : NetworkBehaviour
 {
-    [SerializeField] Player _player;
+    [SerializeField] OnlinePlayer _player;
 
     [Header("Owner Section")]
 
@@ -21,7 +21,7 @@ public class PlayerUI : NetworkBehaviour
     private void Awake()
     {
         if(_player == null)
-            _player = GetComponentInParent<Player>();
+            _player = GetComponentInParent<OnlinePlayer>();
     }
 
     private void Start()

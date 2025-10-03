@@ -31,7 +31,7 @@ public class Arm : NetworkIdentity
 
     #endregion
 
-    [SerializeField] public Player player;
+    [SerializeField] public OnlinePlayer player;
     [SerializeField] public ArmSide side;
     [SerializeField] public NetworkAnimator animator;
     [SerializeField] public ArmStateMachine stateMachine;
@@ -45,7 +45,7 @@ public class Arm : NetworkIdentity
         if (animator == null)
             TryGetComponent(out animator);
         if (player == null)
-            GetComponentInParent<Player>();
+            GetComponentInParent<OnlinePlayer>();
         if(stateMachine == null)
             TryGetComponent(out stateMachine);
         if(inputs == null)
