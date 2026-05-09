@@ -26,4 +26,5 @@ airhorm qui nique l'audio du mec en face (filtre audio)
 
 Defense:
 
+defense des deux cotés
 recharge de heat
